@@ -27,7 +27,7 @@ Feature: Policy Management View
     @TEST-156
     Scenario: A user can view previous Policy details
         Given user has navigated to the "Previous Policy" tab
-        And click view 
+        And click view
         Then the previous Policy is displayed
 
     @TEST-157

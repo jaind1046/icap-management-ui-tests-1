@@ -9,8 +9,8 @@ Feature: Transaction / ICAP History View
         When the user selects "Request History" in the navigation panel
         Then they are taken to the "Request History Page"
 
-@TEST-163_164_165_180
-    Scenario Outline: A user is able to filter the risks log  
+    @TEST-163_164_165_180
+    Scenario Outline: A user is able to filter the risks log
         Given user has navigated to the "Request History" page
         When the user has clicked on the Add Filter button
         And add a filter selection as <filter>
@@ -22,9 +22,9 @@ Feature: Transaction / ICAP History View
             | FileID_123            | 123          |
             | FileType_docx         | docx         |
             | FileType_Word         | Word         |
-          
 
-@TEST-166
+
+    @TEST-166
     Scenario Outline: A user is able to change the number of files displayed on the page
         Given user has navigated to the "Request History" page
         When user has clicked on the "Items Shown" drop down
@@ -45,9 +45,9 @@ Feature: Transaction / ICAP History View
         And the files processed for the selected period are displayed
         And the date range for the selected period is displayed in the Date/Time field as <dateRamge>
         Examples:
-            | customRange | dateRamge   |
-            | 12 hours    |             |
-            |             |             |
+            | customRange | dateRamge |
+            | 12 hours    |           |
+            |             |           |
 
 
     @TEST-169
@@ -59,18 +59,18 @@ Feature: Transaction / ICAP History View
 
 
     @TEST-179
-    Scenario: Validate requests log view using a combination of multiple filters
+    Scenario Outline: Validate requests log view using a combination of multiple filters
         Given user has navigated to the "Request History" page
         When the user has clicked on the Add Filter button
         And add multiple filter selections as <filterOne>, <filterTwo>, <filterThree> and apply
         Then the result list shows files with the applied filtertypes <filteredFile>
         Examples:
-            | filterOne             | filterTwo  | filterThree | filteredFile |
-            | fileOutcome_sanitised |            |             |              |
-            | fileOutcome_dangerous |            |             |              |
-            | FileID_123            |            |             |              |
-            | FileType_docx         |            |             |              |
-            | FileType_Word         |            |             |              |
+            | filterOne             | filterTwo | filterThree | filteredFile |
+            | fileOutcome_sanitised |           |             |              |
+            | fileOutcome_dangerous |           |             |              |
+            | FileID_123            |           |             |              |
+            | FileType_docx         |           |             |              |
+            | FileType_Word         |           |             |              |
 
 
     @TEST-
