@@ -66,3 +66,37 @@ Feature: Policy Management View
         And there are more than 10 policies in the history
         When "Items Shown" is changed to 25
         Then up to 25 previous policies are displayed
+
+    @TEST-183
+    Scenario: A user can change the outcome of Un-processable files
+        Given user has navigated to the "Current Policy" page
+        When user changes the route for un-processable file types to <un-processable route>
+        And the save button is selected
+        Then the un-processable file type route is updated
+        And an un-processable file is directed according to <un-processable file outcome>
+        Example:
+            | un-processable route  | un-processable file outcome                               |
+            | Relay                 | Unmodified file relayed                                   |
+            | Block                 | Original file blocked, and error report recieved          |
+            | Refer                 | The file is sent along the "non-compliant file service"   |
+
+    @TEST-187
+    Scenario: A user can change the outcome of Glasswall Blocked files
+        Given user has navigated to the "Current Policy" page
+        When user changes the route for Glasswall Blocked Files to <Glasswall Blocked route>
+        And the save button is selected
+        Then the Glasswall Blocked file type route is updated
+        And an Glasswall Blocked file is directed according to <Glasswall Blocked file outcome>
+        Example:
+            | Glasswall Blocked route   | Glasswall Blocked file outcome                            |
+            | Relay                     | Unmodified file relayed                                   |
+            | Block                     | Original file blocked, and error report recieved          |
+            | Refer                     | The file is sent along the "non-compliant file service"   |
+
+    @TEST-188
+    Scenario: A user can cancel any updates that they have done to the policy by pressing cancel
+        Given user has navigated to the "Current Policy" page
+        And user has updated sections of the current policy
+        When the user presses the "Cancel button"
+        Then the changes are undone
+        And the Current policy defaults to the latest saved policy
