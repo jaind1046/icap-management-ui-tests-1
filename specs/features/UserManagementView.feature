@@ -41,4 +41,3 @@ Feature: User Management View
             |      |       |      |
         Then the expected validation error is displayed
         And the record is not saved
-        

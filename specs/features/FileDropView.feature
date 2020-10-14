@@ -1,9 +1,9 @@
 Feature: FileDropView
 
-    Background: 
+    Background:
         Given the user has logged into the ui
 
-    
+
     @TEST-175
     Scenario: A user can navigate to the File Drop Service page
         When the user clicks on "File Drop" on the navigation bar

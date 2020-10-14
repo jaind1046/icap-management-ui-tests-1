@@ -73,7 +73,7 @@ Feature: Transaction / ICAP History View
             | FileType_Word         |           |             |              |
 
     @TEST-184
-    Scenario: A user cannot filter the date range to a time greater than 24 hours
+    Scenario Outline: A user cannot filter the date range to a time greater than 24 hours
         Given user has navigated to the "Request History" page
         When user has clicked on Date/Time
         And user select a custom range as <customRange> and apply
