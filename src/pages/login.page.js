@@ -38,7 +38,7 @@ module.exports = {
    */
   setEmailAddress(value) {
     const element = this.fields.email;
-    I.fillField(element, value);
+    I.fillField(element, value); 
   },
 
   /*

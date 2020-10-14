@@ -65,13 +65,13 @@ Feature: Transaction / ICAP History View
         And add multiple filter selections as <filterOne>, <filterTwo>, <filterThree> and apply
         Then the result list shows files with the applied filtertypes <filteredFile>
         Examples:
-            | filterOne             | filterTwo  | filterThree | filteredFile |
-            | fileOutcome_sanitised |            |             |              |
-            | fileOutcome_dangerous |            |             |              |
-            | FileID_123            |            |             |              |
-            | FileType_docx         |            |             |              |
-            | FileType_Word         |            |             |              |
-        
+            | filterOne             | filterTwo | filterThree | filteredFile |
+            | fileOutcome_sanitised |           |             |              |
+            | fileOutcome_dangerous |           |             |              |
+            | FileID_123            |           |             |              |
+            | FileType_docx         |           |             |              |
+            | FileType_Word         |           |             |              |
+
     @TEST-184
     Scenario: A user cannot filter the date range to a time greater than 24 hours
         Given user has navigated to the "Request History" page
@@ -80,9 +80,9 @@ Feature: Transaction / ICAP History View
         Then the expected validation error is displayed
         And the date range is not updated
         Examples:
-            | customRange | dateRamge   |   
-            | 25 hours    |             |
-            |             |             |
+            | customRange | dateRamge |
+            | 25 hours    |           |
+            |             |           |
 
 
 
@@ -92,7 +92,7 @@ Feature: Transaction / ICAP History View
         And has a <filterOne> and <filterTwo> applied
         When user removes <filterOne>
         Then the filter is updated
-        And the result list shows files with the applied filtertypes <filteredFile> 
+        And the result list shows files with the applied filtertypes <filteredFile>
 
     @TEST-190
     Scenario Outline: A user is able to update the time frame for request history

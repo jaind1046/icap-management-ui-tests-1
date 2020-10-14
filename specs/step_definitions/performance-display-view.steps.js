@@ -10,9 +10,9 @@ Given('the user has logged into the ui', () => {
 });
 
 When('the user clicks on Dashboard in the navigation panel', () => {
-   // I.enterValidCredential();
+   
 });
 
 Then('the user is taken to the Dashboard page', () => {
-    //I.seeElement('#mainMenu');
+   
 });

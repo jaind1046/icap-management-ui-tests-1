@@ -3,7 +3,7 @@ Feature: User Management View
 
     Background: Login
 
-@TEST-171
+    @TEST-171
     Scenario: A user can add a new user to the ui
         Given user has logged into the ui
         And user has navigated to the Users page
@@ -16,7 +16,7 @@ Feature: User Management View
     Scenario: An admin user can delete another user from the page
         Given user has logged into the ui
         And user has navigated to the Users page
-        When user deletes a existing user 
+        When user deletes a existing user
             | name | email | role |
             |      |       |      |
         Then The user record is no longer available
@@ -41,3 +41,4 @@ Feature: User Management View
             |      |       |      |
         Then the expected validation error is displayed
         And the record is not saved
+        
