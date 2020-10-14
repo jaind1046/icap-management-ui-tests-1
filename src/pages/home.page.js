@@ -1,50 +1,42 @@
-const {
-  I
-} = inject();
+const { I } = inject();
 
 module.exports = {
+  //Locators
 
-  //Locators   
-
-  fields: {
-
-  },
+  fields: {},
   buttons: {
-    accountPopupToggle: `button[id='accountPopupToggle']`,
-    logout: `a[class*='log-out-button']`,
+    accountPopupToggle: "",
+    logout: "",
   },
   sections: {
-    menu: '#mainMenu',
+    menu: `section[class*='Toolbar_Toolbar__1M58_']`,
   },
   links: {
-    transactionLog: `a[class*='transaction-log-link']`,
-    fileReleaseRequests: `a[class*='file-release-link']`,
-    policies: `a[class*='policies-link']`,
-    configuration: `a[class*='config-link']`,
-    users: '#mainMenu > .nav > ul > li > .users-link'
+    dashboard: `a[href*='dashboard'] > div > p`,
+    fileDrop: `a[class*='NavigationItem_active__mP0BB'] > div`,
+    requestsHistory: `a[href*='request-history'] > div`,
+    policy: `a[href*='policy'] > div`,
+    configuration: `a[href*='configuration'] > div`,
+    users: `a[href*='users'] > div`,
   },
-  lists: {
-    tenants: `div[class="tenant-menu-icon"]`
-  },
-
 
   //Methods
   /*
    * MenuLinks
    * ***************************************************************
    */
-  clickTransactionLog() {
-    const element = this.links.transactionLog;
+  clickRequestsHistory() {
+    const element = this.links.requestsHistory;
     I.click(element);
   },
 
-  clickFileReleaseRequests() {
-    const element = this.links.fileReleaseRequests;
+  clickFileDrop() {
+    const element = this.links.fileDrop;
     I.click(element);
   },
 
   clickPolicy() {
-    const element = this.links.policies;
+    const element = this.links.policy;
     I.click(element);
   },
 
@@ -66,40 +58,4 @@ module.exports = {
     const element = this.buttons.accountPopupToggle;
     I.click(element);
   },
-
-  /*
-   * TenantList
-   * ***************************************************************
-   */
-  getTenant(tenant) {
-    return ("//button[contains(text(),'" + tenant + "')]")
-
-  },
-  openTenantList() {
-    const element = this.lists.tenants;
-    I.click(element);
-  },
-
-  selectTenant(tenant) {
-    const element = this.getTenant(tenant);
-    I.click(element);
-  },
-
-  getTenantName() {
-    I.waitForPageLoad()
-    I.grabTextFrom(this.lists.tenants)
-
-  },
-
-  selectRequiredTenant(tenant) {
-    openTenantList()
-    selectTenant(tenant)
-  },
-
-
-
-
-
-
-
-}
+};

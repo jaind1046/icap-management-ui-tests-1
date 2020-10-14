@@ -9,16 +9,12 @@ module.exports = {
         Dashboard_lineChart: `div[class*='Dashboard_lineChart__Tw9kQ'] > div > canvas`,
         totalfilesprocessed: `div[class*='Dashboard_innerTop__dMQgj']`,
         },
-
-    buttons: {
-        
-    },
     calendar: {
         datetime_left: `input[id='datetime-local-left']`,
         datetime_right: `input[id='datetime-local-right']`,
     },
 
-
+//Methods
 
 /*
  * Datetime
