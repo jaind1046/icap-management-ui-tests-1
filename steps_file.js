@@ -1,10 +1,15 @@
-// in this file you can append custom step methods to 'I' object
+
+const homePage = require('./src/pages/home.page.js')
+const loginPage = require('./src/pages/login.page.js')
 
 module.exports = function() {
   return actor({
 
-    // Define custom steps here, use 'this' to access default methods of I.
-    // It is recommended to place a general 'login' function here.
-
+    loginNoPwd: function () {
+      this.amOnPage('http://localhost:3000')
+      loginPage.clickLogIn();
+      
+    },
+    
   });
 }

@@ -15,8 +15,7 @@ Feature:
         When user makes a time selection with <time>
         And click apply button
         Then the requests for the selected <time> are displayed
-        And the date range for the selected period is displayed in the Date/Time field as <dateRamge>
-
+        And the date range for the selected period is displayed in the Date/Time field as <dateRange>
         Examples:
             | time     | dateRange |
             | 12 Hours |           |
@@ -31,8 +30,7 @@ Feature:
         When user makes a new time <time> selection
         And click apply button
         Then the requests for the selected <time> are displayed
-        And the date range for the selected period is displayed in the Date/Time field as <dateRamge>
-
+        And the date range for the selected period is displayed in the Date/Time field as <dateRange>
         Examples:
             | time     | dateRange |
             | 12 Hours |           |
