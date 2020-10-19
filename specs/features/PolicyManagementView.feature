@@ -40,8 +40,12 @@ Feature: Policy Management View
     Scenario: A user can change the number of items displayed on a page
         Given user has navigated to the "Policy History" page
         And there are more than 10 policies in the history
-        When "Items Shown" is changed to 25
-        Then up to 25 previous policies are displayed
+        When "Items Shown" is changed to <itemCount>
+        Then up to <fileCount> previous policies are displayed
+        Examples:
+        | itemCount | fileCount |
+        | 25        | 25        |
+        | 100       | 100       |
 
     @TEST-188
     Scenario: A user can cancel any updates that they have done to the policy by pressing cancel
