@@ -42,3 +42,9 @@ Feature:
         Given user has navigated to the Dashboard page
         When the user clicks on <fileOutcome> on <chart>
         Then the chart is updated to remove <fileOutcome>
+        Examples:
+            | chart         | fileOutcome   |
+            | pie chart     | Safe          |
+            | pie chart     | Blocked       |
+            | line graph    | Safe          |
+            | line graph    | Blocked       |
