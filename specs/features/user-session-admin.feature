@@ -1,7 +1,8 @@
-Feature: User Settings
+Feature: user-session-admin
+    As a admin I need to validate that user can successfully logout or change a password in order to confirm that the solution works as expected
 
     Background:
-        Given I have logged into the ui
+        Given I am logged into the ui
 
     @TEST-
     Scenario: I am able to log out of the ui
@@ -14,5 +15,6 @@ Feature: User Settings
         When I fill in <CurrentPassword>, <NewPassword>, <ConfirmNewPassword>, and click Save
         And I log out
         Then the next time I log in, the Password I have to use is <NewPassword>
-        | CurrentPassword | NewPassword   | ConfirmNewPassword |
-        | OldPassword1?   | NewPassword2) | NewPassword2)      |
+        Examples:
+            | CurrentPassword | NewPassword   | ConfirmNewPassword |
+            | OldPassword1?   | NewPassword2) | NewPassword2)      |

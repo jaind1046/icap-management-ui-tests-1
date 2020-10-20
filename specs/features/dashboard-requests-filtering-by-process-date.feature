@@ -1,13 +1,10 @@
-Feature:
+Feature: dashboard-requests-filtering-by-process-date
+    As a admin I need to validate file requests filtering by a date period in order to confirm that the solution works as expected
 
     Background:
-        Given I have logged into the ui
+        Given I am logged into the ui
+        Given I have navigated to the Dashboard page
 
-
-    @TEST-150
-    Scenario: I am able to navigate to the dashboard
-        When I click on Dashboard in the navigation panel
-        Then I am taken to the Dashboard page
 
     @TEST-151
     Scenario Outline: I am able to filter the dashboard requests by time
@@ -33,15 +30,3 @@ Feature:
             | 12 Hours |           |
             | 12 Hours |           |
             | 12 Hours |           |
-
-    @TEST-192
-    Scenario: I can remove file-outcomes from the filters on the charts
-        Given I have navigated to the Dashboard page
-        When I click on <fileOutcome> on <chart>
-        Then the chart is updated to remove <fileOutcome>
-        Examples:
-            | chart         | fileOutcome   |
-            | pie chart     | Safe          |
-            | pie chart     | Blocked       |
-            | line graph    | Safe          |
-            | line graph    | Blocked       |

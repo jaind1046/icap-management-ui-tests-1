@@ -1,7 +1,8 @@
-Feature: Master Content Management Policy Editing - Failure Settings Feature 581
+Feature: non-compliant-files-routing-mechanism
+    As a admin I need to validate the routing mechanism for non-compliant files in order to confirm that the solution works as expected
 
     Background:
-        Given I have logged into the ui
+        Given I am logged into the ui
 
     @TEST-158
     Scenario: I can update the non-compliant routes API URL
@@ -14,12 +15,6 @@ Feature: Master Content Management Policy Editing - Failure Settings Feature 581
         Given I have navigated to the Current Policy page and have entered an invalid URL into the API URL box
         When I click save
         Then the API URL is not updated and an error message is displayed
-
-    @TEST-160
-    Scenario: I can delete the API URL
-        Given I have navigated to the Current Policy page
-        When I click the delete button and the deletion confirm button
-        Then the API URL line is deleted and a confirmation message is displayed
 
     @TEST-187
     Scenario Outline: I can change the outcome of Glasswall Blocked files
@@ -44,5 +39,3 @@ Feature: Master Content Management Policy Editing - Failure Settings Feature 581
             | Relay                | Unmodified file relayed                                 |
             | Block                | Original file blocked, and error report recieved        |
             | Refer                | The file is sent along the "non-compliant file service" |
-
-
