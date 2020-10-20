@@ -1,20 +1,18 @@
 Feature: User Settings
 
     Background:
-        Given the user has logged into the ui
+        Given I have logged into the ui
 
     @TEST-
-    Scenario: A user is able to log out of the ui
-        When the user hovers over their profile
-        And selects Log Out
-        Then the user is taken to the Login Screen
+    Scenario: I am able to log out of the ui
+        When I hover over my profile and select Log Out
+        Then I am taken to the Login Screen
 
     @TEST-
-    Scenario: A user is able to update their password
-        Given the user hovers over their profile
-        And selects Change Password
-        When the user fills in Current Password, New Password, Confirm New Password
-        And clicks Save
-        And the user logs out
-        Then the next time the user logs in the Password they have to use is the new Password
-        
+    Scenario Outline: I am able to update my password
+        Given I hover over my profile and select Change Password
+        When I fill in <CurrentPassword>, <NewPassword>, <ConfirmNewPassword>, and click Save
+        And I log out
+        Then the next time I log in, the Password I have to use is <NewPassword>
+        | CurrentPassword | NewPassword   | ConfirmNewPassword |
+        | OldPassword1?   | NewPassword2) | NewPassword2)      |

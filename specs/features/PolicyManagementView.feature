@@ -1,28 +1,25 @@
 Feature: Policy Management View
 
     Background:
-        Given the user has logged into the ui
+        Given I have logged into the ui
 
 
     @TEST-153
-    Scenario: A user selecting the "Current Policy" in the navigation panel will be taken to the current policy page
-        When the user clicks on Current Policy in the navigation panel
-        Then the user is taken to the current policy page
+    Scenario: Selecting the "Current Policy" in the navigation panel will take me to the current policy page
+        When I click on Current Policy in the navigation panel
+        Then I am taken to the current policy page
 
     @TEST-154
-    Scenario: A user selecting the "Policy History" in the navigation panel will be taken to the policy history page
-        When the user clicks on Policy History in the navigation panel
-        Then the user is taken to the Policy History page
-        And the Policy History page is displayed
+    Scenario: Selecting the "Policy History" in the navigation panel will be take me to the policy history page
+        When I click on Policy History in the navigation panel
+        Then I am taken to the Policy History page
 
     @TEST-155
-    Scenario: A user is able to change part of the policy from Allow to Sanitise and the policy can be saved with all changes
-        Given the user has logged into the ui
-        And has navigated to the Current Policy page
+    Scenario Outline: I am able to change part of the policy and the policy can be saved with all changes
+        Given I have navigated to the Current Policy page
         And has changed one of the <ContentFlags> for <fileType> from <FlagType1> to <FlagType2>
         When the Save Changes button is clicked
-        Then the changes are saved
-        And the previous policy can now be located in the Policy history page
+        Then the changes are saved and the previous policy can now be located in the Policy history page
         Examples:
             | fileType   | ContentFlags    | FlagType1 | FlagType2 |
             | Word       | Embedded Files  | Sanitise  | Disallow  |
@@ -31,21 +28,20 @@ Feature: Policy Management View
             | PDF        | Acroform        | Sanitise  | Disallow  |
 
     @TEST-156
-    Scenario: A user can view previous Policy details
-        Given user has navigated to the Previous Policy tab
-        And click view
+    Scenario: I can view previous Policy details
+        Given I have navigated to the Previous Policy tab
+        When I click view on a previous policy
         Then the previous Policy is displayed
 
     @TEST-157
-    Scenario:A user can activate a previous policy
-        When the activate button is clicked
+    Scenario: I can activate a previous policy
+        Given I have navigated to the Current Policy page
+        When I click activate on a previous policy
         Then the previous Policy is activated
-        And the successful activation message is displayed
 
     @TEST-161
-    Scenario: A user can change the number of items displayed on a page
-        Given user has navigated to the Policy History page
-        And there are more than 10 policies in the history
+    Scenario Outline: I can change the number of items displayed on a page
+        Given I have navigated to the Policy History page and there are more than 10 policies in the history
         When Items Shown is changed to <itemCount>
         Then up to <fileCount> previous policies are displayed
         Examples:
@@ -54,9 +50,7 @@ Feature: Policy Management View
         | 100       | 100       |
 
     @TEST-188
-    Scenario: A user can cancel any updates that they have done to the policy by pressing cancel
-        Given user has navigated to the Current Policy page
-        And user has updated sections of the current policy
-        When the user presses the Cancel button
-        Then the changes are undone
-        And the Current policy defaults to the latest saved policy
+    Scenario: I can cancel any updates that they have done to the policy by pressing cancel
+        Given I have navigated to the Current Policy page and have updated sections of the current policy
+        When I press Cancel
+        Then the changes are undone and the Current policy defaults to the latest saved policy
