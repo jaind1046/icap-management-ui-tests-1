@@ -25,6 +25,11 @@ module.exports = {
    * MenuLinks
    * ***************************************************************
    */
+
+  clickDashboard() {
+    const element = this.links.dashboard;
+    I.click(element);
+  },
   clickRequestsHistory() {
     const element = this.links.requestsHistory;
     I.click(element);
