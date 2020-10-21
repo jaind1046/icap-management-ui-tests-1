@@ -12,7 +12,7 @@ Feature: request-history-filtering-by-risk-outcome
         Examples:
             | filter                | filteredFile |
             | fileOutcome_sanitised | sanitised    |
-            | fileOutcome_dangerous | safe         |
-            | FileID_123            | 123          |
-            | FileType_docx         | docx         |
-            | FileType_Word         | Word         |
+            | fileOutcome_dangerous | dangerous    |
+            | fileOutcome_safe      | safe         |
+            | fileOutcome_blocked   | blocked      |
+            | fileOutcome_checked   | checked      |

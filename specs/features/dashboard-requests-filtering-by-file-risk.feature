@@ -11,8 +11,14 @@ Feature: dashboard-requests-filtering-by-file-risk
         When I click on <fileOutcome> on <chart>
         Then the chart is updated to remove <fileOutcome>
         Examples:
-            | chart      | fileOutcome |
-            | pie chart  | Safe        |
-            | pie chart  | Blocked     |
-            | line graph | Safe        |
-            | line graph | Blocked     |
+            | chart      | fileOutcome  |
+            | pie chart  | Safe         |
+            | pie chart  | Blocked      |
+            | pie chart  | Dangerous    |
+            | pie chart  | Unclassified |
+            | line graph | Safe         |
+            | line graph | Blocked      |
+            | line graph | Dangerous    |
+            | line graph | Checked      |
+            | line graph | Unclassified |
+
