@@ -11,9 +11,11 @@ Feature: request-history-filtering-by-date
         When I click on Date/Time and select a custom range as <customRange>
         Then the files processed for the selected period are displayed and <dateRange> is displayed in the Date/Time field
         Examples:
-            | customRange | dateRange |
-            | 12 hours    |           |
-            | 3  hours    |           |
+            | time         | dateRange                           |
+            | 1 Hours      | 21/09/2020 10:00 - 21/09/2020 11:00 |
+            | 12 Hours     | 20/09/2020 23:00 - 21/09/2020 11:00 |
+            | 24 Hours     | 20/09/2020 11:00 - 22/09/2020 11:00 |
+            | Custom Range | 21/09/2020 10:30 - 21/09/2020 11:00 |
 
 
 
@@ -23,8 +25,8 @@ Feature: request-history-filtering-by-date
         When I has click on Date/Time and select a custom range as <customRange> and apply
         Then the expected validation error is displayed and the date range is not updated
         Examples:
-            | customRange | dateRange |
-            | 25 hours    |           |
+            | customRange | dateRange                           |
+            | 25 hours    | 20/09/2020 10:00 - 22/09/2020 11:00 |
 
     @TEST-190
     Scenario Outline: I am able to update the time frame for request history
@@ -32,7 +34,8 @@ Feature: request-history-filtering-by-date
         When I make a new time <time> selection and click apply button
         Then the files processed for time <time> are displayed and the <dateRange> for the selected period is displayed in the Date/Time field
         Examples:
-            | time     | dateRange |
-            | 12 Hours |           |
-            | 12 Hours |           |
-            | 12 Hours |           |
+            | time         | dateRange                           |
+            | 1 Hours      | 21/09/2020 10:00 - 21/09/2020 11:00 |
+            | 12 Hours     | 20/09/2020 23:00 - 21/09/2020 11:00 |
+            | 24 Hours     | 20/09/2020 11:00 - 22/09/2020 11:00 |
+            | Custom Range | 21/09/2020 10:30 - 21/09/2020 11:00 |

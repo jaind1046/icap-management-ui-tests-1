@@ -19,13 +19,10 @@ Feature: request-history-log
         And add multiple filter selections as <filterOne>, <filterTwo>, <filterThree>
         Then the result list shows files with the applied filtertypes <filteredFile>
         Examples:
-            | filterOne             | filterTwo | filterThree | filteredFile |
-            | fileOutcome_sanitised |           |             |              |
-            | fileOutcome_dangerous |           |             |              |
-            | FileID_123            |           |             |              |
-            | FileType_docx         |           |             |              |
-            | FileType_Word         |           |             |              |
-
+            | filterOne             | filterTwo        | filterThree   | filteredFile       |
+            | fileOutcome_sanitised | fileType_docx    | fileId_123    | sanitised_docx_123 |
+            | fileOutcome_dangerous | fileType_ppt     |               | dangerous_ppt      |
+            | FileID_123            | fileOutcome_safe | fileType_xlsx | 123_safe_xlsx      |
 
     @TEST-189
     Scenario: I can remove individual filters
@@ -34,6 +31,6 @@ Feature: request-history-log
         When I remove <filterOne>
         Then the filter is updated and the result list shows files with the applied filtertypes
         Examples:
-            | filterOne     | filterTwo             | filteredFile |
-            | FileType_docx | fileOutcome_sanitised |              |
-            | FileType_Word | FileType_Word         |              |
+            | filterOne        | filterTwo             | filteredFile |
+            | FileType_docx    | fileOutcome_sanitised | sanitised    |
+            | FileOutcome_Safe | FileType_docx         | docx         |

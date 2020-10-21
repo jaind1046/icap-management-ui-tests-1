@@ -5,7 +5,7 @@ Feature: user-records-admin
         Given I am logged into the ui
 
     @TEST-171
-    Scenario Outline: I can add a new user to the ui
+    Scenario: I can add a new user to the ui
         Given I have logged into the ui and navigated to the Users page
         When I add a new user with a valid <email>
             | name    | email                    |
@@ -14,7 +14,7 @@ Feature: user-records-admin
         Then The new user record is saved
 
     @TEST-172
-    Scenario Outline: I can delete another user from the page
+    Scenario: I can delete another user from the page
         Given I have logged into the ui and navigated to the Users page
         When I delete an existing user <name>
             | name    | email                    |
@@ -23,7 +23,7 @@ Feature: user-records-admin
 
 
     @TEST-185
-    Scenario Outline: A new user cannot be added with a invalid email
+    Scenario: A new user cannot be added with a invalid email
         Given I have logged into the ui and navigated to the Users page
         When I add a new user with a invalid <email>
             | name         | email             |
@@ -32,7 +32,7 @@ Feature: user-records-admin
         Then the record is not saved and the expected validation error is displayed
 
     @TEST-186
-    Scenario Outline: A duplicate user cannot be added
+    Scenario: A duplicate user cannot be added
         Given I have logged into the ui and navigated to the Users page
         When I add a new user with <email> that is already used
             | name    | email                    |
