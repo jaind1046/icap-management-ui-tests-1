@@ -28,7 +28,7 @@ Feature: request-history-log
 
 
     @TEST-189
-    Scenario: I can remove individual filters
+    Scenario Outline: I can remove individual filters
         Given I navigated to the Request History page
         And <filterOne> and <filterTwo> are applied
         When I remove <filterOne>

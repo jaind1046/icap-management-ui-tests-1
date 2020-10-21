@@ -6,7 +6,7 @@ Feature: dashboard-requests-filtering-by-file-risk
 
 
     @TEST-192
-    Scenario: I can remove file-outcomes from the filters on the charts
+    Scenario Outline: I can remove file-outcomes from the filters on the charts
         Given I have navigated to the Dashboard page
         When I click on <fileOutcome> on <chart>
         Then the chart is updated to remove <fileOutcome>
