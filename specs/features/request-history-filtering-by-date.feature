@@ -27,15 +27,3 @@ Feature: request-history-filtering-by-date
         Examples:
             | customRange | dateRange                           |
             | 25 hours    | 20/09/2020 10:00 - 22/09/2020 11:00 |
-
-    @TEST-190
-    Scenario Outline: I am able to update the time frame for request history
-        Given I have navigated to the Request History page and a previous time selection is applied
-        When I make a new time <time> selection and click apply button
-        Then the files processed for time <time> are displayed and the <dateRange> for the selected period is displayed in the Date/Time field
-        Examples:
-            | time         | dateRange                           |
-            | 1 Hours      | 21/09/2020 10:00 - 21/09/2020 11:00 |
-            | 12 Hours     | 20/09/2020 23:00 - 21/09/2020 11:00 |
-            | 24 Hours     | 20/09/2020 11:00 - 22/09/2020 11:00 |
-            | Custom Range | 21/09/2020 10:30 - 21/09/2020 11:00 |
