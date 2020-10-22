@@ -13,7 +13,7 @@ Feature: file-drop-file-processing
         And I can view more detailed results with file attibutes <fileName> and <type>
         Examples:
             | supportedFile        | fileName    | type |
-            | src/data/issues.docx | issues.docx | docx |
+            | src/data/input/issues.docx | issues.docx | docx |
 
     @TEST-182
     Scenario Outline: An error message is produced when file drop is unable to process a file
@@ -21,11 +21,7 @@ Feature: file-drop-file-processing
         Then the expected validation error is displayed as <error>
         Examples:
             | unsupportedFile       | error                                                                  |
-            | src/data/icaptest.ps1 | Please use a supported file type                                       |
-            | src/data/40MB.docx    | This free service is currently limited to a maximum file size of 3.5MB |
+            | src/data/input/icaptest.ps1 | Please use a supported file type |
+            | src/data/input/40MB.docx | This free service is currently limited to a maximum file size of 3.5MB |
 
-    @TEST-
-    Scenario: I can download successfully processed files
-        When I click on Download Processed File
-        Then I have the file is successfully downloaded
-        And I can successfully open the downloaded file
+    

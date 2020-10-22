@@ -13,7 +13,8 @@ exports.config = {
         chrome: {
           args: ['--no-sandbox', '--window-size=1536,826'],
         }
-      }
+      },
+      FileSystem: {}
   },
   include: {
     I: './steps_file.js',
