@@ -30,7 +30,7 @@ exports.config = {
   bootstrap: null,
   gherkin: {
     features: './specs/features/*.feature',
-    steps: './specs/step_definitions/*.steps.js'
+    steps: './specs/step_definitions/*.js'
   },
   mocha: {},
   name: 'icap-management-ui-tests',

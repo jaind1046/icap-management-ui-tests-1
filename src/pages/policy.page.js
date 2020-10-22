@@ -86,6 +86,11 @@ module.exports = {
     I.click(element);
   },
 
+  clickHistoryTab() {
+    const element = this.tabs.history;
+    I.click(element);
+  },
+
   // Pagination
 
   clickFirst() {

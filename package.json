@@ -17,5 +17,8 @@
         "codeceptjs": "^3.0.0",
         "faker": "^5.1.0",
         "puppeteer": "^5.3.1"
+    },
+    "dependencies": {
+        "uuid": "^8.3.1"
     }
 }
