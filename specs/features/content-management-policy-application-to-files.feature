@@ -9,7 +9,7 @@ Feature: content-management-policy-application-to-files
         Given I have applied the sanitise content management policy
         When I process <File>
         Then <File> is returned with <FileHash>
-        Example:
+        Examples:
             | File | FileHash |
 
     @TEST-
