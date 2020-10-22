@@ -142,4 +142,18 @@ module.exports = {
     const element = this.buttons.go;
     I.click(element);
   },
+
+  /*
+   * Opening file details
+   * ***************************************************************
+   */
+
+   getFileRecord(fileId) {
+     return "//tr[contains(., '" + fileId + "')]"
+   },
+
+   openFileRecord(fileId) {
+     I.click(this.getFileRecord(fileId))
+   }
+
 };

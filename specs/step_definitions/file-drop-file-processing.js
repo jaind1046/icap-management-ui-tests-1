@@ -2,7 +2,7 @@
 
 var assert = require("assert");
 
-const { I,filedropPage } = inject();
+const { I, filedropPage } = inject();
 
 Given("I am logged into the ui", () => {
   I.loginNoPwd();
@@ -11,19 +11,31 @@ Given("I am logged into the ui", () => {
 });
 
 Given("I have navigated to the FileDrop page", () => {
-    I.goToFileDrop();
+  I.goToFileDrop();
 });
 
-When("I click Select a file and choose a supported file", () => {
-    //filedropPage.clickSelectFile();
-    I.attachFile(filedropPage.buttons.fileInput, 'src/data/issues.docx');
+When(
+  /^I click Select a file and choose a supported file (.*)$/,
+  (supportedFile) => {
+    I.attachFile(filedropPage.buttons.fileInput, supportedFile);
+  }
+);
+
+Then("the File is processed by the file drop service", () => {
+  I.seeElement(filedropPage.buttons.viewresult);
 });
 
-Then("the File is processed by the file drop service", () => {});
+Then(/^I can view more detailed results with file attibutes (.*) and (.*)$/, (fileName, type) => {
+    I.seeElement(filedropPage.sections.analysisReport);
+    I.seeInSource(fileName, type);
+  }
+);
+ 
+When(/^I click Select a file and choose non processable file(.*)$/, (unsupportedFile) => {
+    I.attachFile(filedropPage.buttons.fileInput, unsupportedFile);
+  }
+);
 
-When("I hover over my profile and select Log Out", () => {});
-
-Then("I can view more detailed results", () => {
-  //I.seeElement("");
+Then(/^the expected validation error is displayed as (.*)$/, (error) => {
+  I.seeInSource(error);
 });
-
