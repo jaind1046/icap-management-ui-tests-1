@@ -31,7 +31,7 @@ Then(/^I can view more detailed results with file attibutes (.*) and (.*)$/, (fi
   }
 );
  
-When(/^I click Select a non processable file into file drop (.*)$/, (unsupportedFile) => {
+When(/^I click Select a file and choose non processable file(.*)$/, (unsupportedFile) => {
     I.attachFile(filedropPage.buttons.fileInput, unsupportedFile);
   }
 );

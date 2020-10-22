@@ -17,7 +17,7 @@ Feature: file-drop-file-processing
 
     @TEST-182
     Scenario Outline: An error message is produced when file drop is unable to process a file
-        When I click Select a non processable file into file drop <unsupportedFile>
+        When I click Select a file and choose non processable file <unsupportedFile>
         Then the expected validation error is displayed as <error>
         Examples:
             | unsupportedFile       | error                                                                  |
