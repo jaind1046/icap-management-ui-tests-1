@@ -14,7 +14,10 @@ exports.config = {
           args: ['--no-sandbox', '--window-size=1536,826'],
         }
       },
-      FileSystem: {}
+      FileSystem: {},
+      AssertWrapper: {
+        require: "codeceptjs-assert"
+      }
   },
   include: {
     I: './steps_file.js',
