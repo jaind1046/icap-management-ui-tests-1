@@ -8,7 +8,6 @@ const {
 Given("I am logged into the ui", () => {
     I.loginNoPwd();
     I.wait(5);
-    //pause();
 });
 
 Given("I have navigated to the File Drop page", () => {
