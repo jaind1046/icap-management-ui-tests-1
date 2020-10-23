@@ -17,7 +17,10 @@ exports.config = {
       FileSystem: {},
       AssertWrapper: {
         require: "codeceptjs-assert"
-      }
+      },
+    AssertWrapper : {
+      require: "codeceptjs-assert"
+    }	  
   },
   include: {
     I: './steps_file.js',
