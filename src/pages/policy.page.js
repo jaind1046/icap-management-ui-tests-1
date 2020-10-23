@@ -180,28 +180,28 @@ module.exports = {
     I.seeElement(this.fields.contentFlags)
   },
 
-  clickSanitiseForAllFlagForDoc(docType) {
+  clickSanitiseForAllFlag(docType) {
     const elements = this.fields[docType].sanitise
     for (let element in elements) {
       I.click(elements[element])
     }
   },
 
-  assertSanitiseForAllFlagForDoc(docType) {
+  assertSanitiseForAllFlag(docType) {
     const elements = this.fields[docType].sanitise
     for (let element in elements) {
       this.assertElementChecked(elements[element])
     }
   },
 
-  clickDisallowForAllFlagForDoc(docType) {
+  clickDisallowForAllFlag(docType) {
     const elements = this.fields[docType].disallow
     for (let element in elements) {
       I.click(elements[element])
     }
   },
 
-  assertDisallowForAllFlagForDoc(docType) {
+  assertDisallowForAllFlag(docType) {
     const elements = this.fields[docType].disallow
     for (let element in elements) {
       this.assertElementChecked(elements[element])
@@ -218,6 +218,14 @@ module.exports = {
 
   clickDeleteApiUrl() {
     I.click(this.svg.deleteApiUrl)
+  },
+
+  clickOnCurrentPolicyTab() {
+    I.click(this.buttons.policy.current)
+  },
+
+  enterTextInApiUrl(text) {
+    I.fillField(this.fields.validateApiUrlInput, text)
   },
 
   /*
@@ -239,15 +247,19 @@ module.exports = {
     I.click(element);
   },
 
-  assertHistoryPolicyPage() {
-    I.seeElement(this.table.innerContent)
-  },
-
   assertNumberOfOpenTab(expectedTabCount) {
     const numberOfOpenTabs = I.grabNumberOfOpenTabs()
     numberOfOpenTabs.then((numberTabs) => {
       I.assertEqual(numberTabs, expectedTabCount, 'Expected and actual tab count is not same')
     })
+  },
+
+  clickOnHistoryPolicyTab() {
+    I.click(this.buttons.policy.history)
+  },
+
+  assertHistoryPolicyPage() {
+    I.seeElement(this.table.innerContent)
   },
 
   // Pagination
