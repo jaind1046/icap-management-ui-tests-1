@@ -18,7 +18,7 @@ Given("I have navigated to the FileDrop page", () => {
 });
 
 When(/^I click Select a file and choose a supported file (.*)$/,(supportedFile) => {
-    I.upload(supportedFile);
+    I.uploadFile(supportedFile);
   }
 );
 
@@ -33,7 +33,8 @@ Then(/^I can view more detailed results with file attibutes (.*) and (.*)$/, (fi
 );
  
 When(/^I click Select a file and choose non processable file(.*)$/, (unsupportedFile) => {
-    I.upload(unsupportedFile);
+    let file = unsupportedFile.trim();
+    I.uploadFile(file);
   }
 );
 
