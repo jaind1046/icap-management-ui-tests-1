@@ -14,6 +14,7 @@
         "@codeceptjs/configure": "^0.6.0",
         "@codeceptjs/examples": "^1.2.1",
         "@codeceptjs/ui": "^0.4.1",
+        "codeceptjs-assert": "^0.0.4",
         "codeceptjs": "^3.0.0",
         "faker": "^5.1.0",
         "puppeteer": "^5.3.1"
