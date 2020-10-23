@@ -13,6 +13,10 @@ exports.config = {
         chrome: {
           args: ['--no-sandbox', '--window-size=1536,826'],
         }
+      },
+      FileSystem: {},
+      AssertWrapper: {
+        require: "codeceptjs-assert"
       }
   },
   include: {

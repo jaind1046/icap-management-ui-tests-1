@@ -1,7 +1,7 @@
 const homePage = require("./src/pages/home.page.js");
 const loginPage = require("./src/pages/login.page.js");
 const policyPage = require("./src/pages/policy.page.js");
-const fileDropPage = require("./src/pages/file-drop.page.js");
+const filedropPage = require("./src/pages/file-drop.page.js");
 
 module.exports = function () {
   return actor({
@@ -31,7 +31,7 @@ module.exports = function () {
 
     goToFileDrop: function () {
       homePage.clickFileDrop();
-      I.seeElement(fileDropPage.buttons.fileSelectButton)
+      I.seeElement(filedropPage.buttons.fileSelectButton)
     },
 
     goToUsers: function () {
@@ -50,5 +50,9 @@ module.exports = function () {
       homePage.clickPolicy();
       policyPage.clickHistoryTab();
     },
+
+    uploadFile: function (file){
+      this.attachFile(filedropPage.buttons.fileInput, file)
+    }
   });
 };
