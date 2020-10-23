@@ -9,6 +9,94 @@ module.exports = {
   },
   fields: {
     domainNameInput: `div[class*='Input_Input__17Nwp'] > input`,
+    pageHeading: `h1[class*='Main_pageHeading']`,
+    contentFlags: `//p[text()='Content Flags']`,
+    word: {
+      sanitise: {
+        dynamicDataExchange: `label[for='word-id-1sanitise']`,
+        embeddedFiles: `label[for='word-id-2sanitise']`,
+        embeddedFiles2: `label[for='word-id-3sanitise']`,
+        externalHyperlinks: `label[for='word-id-4sanitise']`,
+        internalHyperlinks: `label[for='word-id-5sanitise']`,
+        macros: `label[for='word-id-6sanitise']`,
+        metadata: `label[for='word-id-7sanitise']`,
+        reviewComments: `label[for='word-id-8sanitise']`
+      },
+      disallow: {
+        dynamicDataExchange: `label[for='word-id-1disallow']`,
+        embeddedFiles: `label[for='word-id-2disallow']`,
+        embeddedFiles2: `label[for='word-id-3disallow']`,
+        externalHyperlinks: `label[for='word-id-4disallow']`,
+        internalHyperlinks: `label[for='word-id-5disallow']`,
+        macros: `label[for='word-id-6disallow']`,
+        metadata: `label[for='word-id-7disallow']`,
+        reviewComments: `label[for='word-id-8disallow']`
+      }
+    },
+    excel: {
+      sanitise: {
+        dynamicDataExchange: `label[for='excel-id-1sanitise']`,
+        embeddedFiles: `label[for='excel-id-2sanitise']`,
+        embeddedFiles2: `label[for='excel-id-3sanitise']`,
+        externalHyperlinks: `label[for='excel-id-4sanitise']`,
+        internalHyperlinks: `label[for='excel-id-5sanitise']`,
+        macros: `label[for='excel-id-6sanitise']`,
+        metadata: `label[for='excel-id-7sanitise']`,
+        reviewComments: `label[for='excel-id-8sanitise']`
+      },
+      disallow: {
+        dynamicDataExchange: `label[for='excel-id-1disallow']`,
+        embeddedFiles: `label[for='excel-id-2disallow']`,
+        embeddedFiles2: `label[for='excel-id-3disallow']`,
+        internalHyperlinks: `label[for='excel-id-5disallow']`,
+        macros: `label[for='excel-id-6disallow']`,
+        metadata: `label[for='excel-id-7disallow']`,
+        reviewComments: `label[for='excel-id-8disallow']`,
+      }
+    },
+    powerpoint: {
+      sanitise: {
+        embeddedFiles: `label[for='powerpoint-id-1sanitise']`,
+        embeddedImages: `label[for='powerpoint-id-2sanitise']`,
+        externalHyperlinks: `label[for='powerpoint-id-3sanitise']`,
+        internalHyperlinks: `label[for='powerpoint-id-3sanitise']`,
+        macros: `label[for='powerpoint-id-5sanitise']`,
+        metadata: `label[for='powerpoint-id-6sanitise']`,
+        reviewComments: `label[for='powerpoint-id-7sanitise']`
+      },
+      disallow: {
+        embeddedFiles: `label[for='powerpoint-id-1disallow']`,
+        embeddedImages: `label[for='powerpoint-id-2disallow']`,
+        externalHyperlinks: `label[for='powerpoint-id-3disallow']`,
+        internalHyperlinks: `label[for='powerpoint-id-4disallow']`,
+        macros: `label[for='powerpoint-id-5disallow']`,
+        metadata: `label[for='powerpoint-id-6disallow']`,
+        reviewComments: `label[for='powerpoint-id-7disallow']`
+      }
+    },
+    pdf: {
+      sanitise: {
+        acroform: `label[for='pdf-id-1sanitise']`,
+        actionsAll: `label[for='pdf-id-2sanitise']`,
+        embeddedFiles: `label[for='pdf-id-3sanitise']`,
+        embeddedImages: `label[for='pdf-id-4sanitise']`,
+        externalHyperlinks: `label[for='pdf-id-5sanitise']`,
+        internalHyperlinks: `label[for='pdf-id-6sanitise']`,
+        javascript: `label[for='pdf-id-7sanitise']`,
+        metadata: `label[for='pdf-id-8sanitise']`
+      },
+      disallow: {
+        acroform: `label[for='pdf-id-1disallow']`,
+        actionsAll: `label[for='pdf-id-2disallow']`,
+        embeddedFiles: `label[for='pdf-id-3disallow']`,
+        embeddedImages: `label[for='pdf-id-4disallow']`,
+        externalHyperlinks: `label[for='pdf-id-5disallow']`,
+        internalHyperlinks: `label[for='pdf-id-6disallow']`,
+        javascript: `label[for='pdf-id-7disallow']`,
+        metadata: `label[for='pdf-id-8disallow']`
+      }
+    },
+    validateApiUrlInput: `div[class*='Input_Input__SNRl4'] > input`
   },
   checkboxes: {
     unprocessedFileRelay: "",
@@ -19,8 +107,12 @@ module.exports = {
     blockedFileRefer: "",
   },
   buttons: {
-    cancelChanges: "",
-    saveChanges: "",
+    cancelChanges: `//button[text()='Cancel Changes']`,
+    saveChanges: `//button[text()='Save Changes']`,
+    policy : {
+      current: `//button[text()='Current']`,
+      history: `//button[text()='History']`
+    },
     view: "",
     activate: "",
     gotoPage: "",
@@ -35,6 +127,18 @@ module.exports = {
     powerPointContentFlags: `div[class*='Current_inner__1pjYU'] > section:nth-of-type(3) > div`,
     pdfContentFlags: `div[class*='Current_inner__1pjYU'] > section:nth-of-type(4) > div`,
   },
+  links: {
+    policy: `a[href='/policy']`
+  },
+  table: {
+    innerContent: `div[class*='Tab_innerContent__1vzeV']`,
+    viewPolicyFirst: `//tbody/tr[1]/th/button[text()='View']`,
+    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`
+  },
+  svg: {
+    deleteApiUrl: `svg[id=Layer_1]`,
+    validateApiUrl: `div[class*='DomainField_validated__2FsbB'] > svg`
+  },
 
   //Methods
 
@@ -47,14 +151,14 @@ module.exports = {
   },
 
   setContentFlagRule(type, rule) {
-    const container = null;
-    if (type == "Word") {
+    let container = null;
+    if (type === "Word") {
       container = this.containers.wordContentFlags;
-    } else if (type == "Excel") {
+    } else if (type === "Excel") {
       container = this.containers.excelContentFlags;
-    } else if (type == "PowerPoint") {
+    } else if (type === "PowerPoint") {
       container = this.containers.powerPointContentFlags;
-    } else if (type == "Pdf") {
+    } else if (type === "Pdf") {
       container = this.containers.pdfContentFlags;
     }
     I.click(container);
@@ -70,6 +174,50 @@ module.exports = {
   clickSaveChanges() {
     const element = this.buttons.saveChanges;
     I.click(element);
+  },
+
+  assertCurrentPolicyPage() {
+    I.seeElement(this.fields.contentFlags)
+  },
+
+  clickSanitiseForAllFlagForDoc(docType) {
+    const elements = this.fields[docType].sanitise
+    for (let element in elements) {
+      I.click(elements[element])
+    }
+  },
+
+  assertSanitiseForAllFlagForDoc(docType) {
+    const elements = this.fields[docType].sanitise
+    for (let element in elements) {
+      this.assertElementChecked(elements[element])
+    }
+  },
+
+  clickDisallowForAllFlagForDoc(docType) {
+    const elements = this.fields[docType].disallow
+    for (let element in elements) {
+      I.click(elements[element])
+    }
+  },
+
+  assertDisallowForAllFlagForDoc(docType) {
+    const elements = this.fields[docType].disallow
+    for (let element in elements) {
+      this.assertElementChecked(elements[element])
+    }
+  },
+
+  assertElementChecked(element) {
+      I.seeAttributesOnElements(element, 'checked')
+  },
+
+  clickSaveApiUrl() {
+    I.click(this.svg.validateApiUrl)
+  },
+
+  clickDeleteApiUrl() {
+    I.click(this.svg.deleteApiUrl)
   },
 
   /*
@@ -91,6 +239,17 @@ module.exports = {
     I.click(element);
   },
 
+  assertHistoryPolicyPage() {
+    I.seeElement(this.table.innerContent)
+  },
+
+  assertNumberOfOpenTab(expectedTabCount) {
+    const numberOfOpenTabs = I.grabNumberOfOpenTabs()
+    numberOfOpenTabs.then((numberTabs) => {
+      I.assertEqual(numberTabs, expectedTabCount, 'Expected and actual tab count is not same')
+    })
+  },
+
   // Pagination
 
   clickFirst() {
@@ -108,7 +267,7 @@ module.exports = {
     I.click(element);
   },
 
-  clickPrevious() {
+  clickNext() {
     const element = this.buttons.nextPage;
     I.click(element);
   },
@@ -148,12 +307,12 @@ module.exports = {
     I.click(element);
   },
 
-  setBlockedFileAsRelay() {
+  setBlockedFileAsBlock() {
     const element = this.checkboxes.blockedFileBlock;
     I.click(element);
   },
 
-  setBlockedFileAsRelay() {
+  setBlockedFileAsRefer() {
     const element = this.checkboxes.unprocessedFileRefer;
     I.click(element);
   },
