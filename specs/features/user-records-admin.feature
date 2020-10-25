@@ -17,7 +17,7 @@ Feature: user-records-admin
     @TEST-172
     Scenario Outline: I can delete another user from the page
         Given I have logged into the ui and navigated to the Users page
-        When I delete an existing user <name>
+        When I delete an existing user '<name>'
         Then The user record is no longer available
         Examples:
             | name    | email                    |
@@ -27,7 +27,7 @@ Feature: user-records-admin
     @TEST-185
     Scenario Outline: A new user cannot be added with a invalid email
         Given I have logged into the ui and navigated to the Users page
-        When I add a new user with a invalid <email>
+        When I add a new user with a invalid '<email>'
         Then the record is not saved and the expected validation error is displayed
         Examples:
             | name         | email             |
@@ -37,7 +37,7 @@ Feature: user-records-admin
     @TEST-186
     Scenario Outline: A duplicate user cannot be added
         Given I have logged into the ui and navigated to the Users page
-        When I add a new user with <email> that is already used
+        When I add a new user with '<email>' that is already used
         Then the expected validation error is displayed and the record is not saved
         Examples:
             | name    | email                    |

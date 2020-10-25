@@ -12,7 +12,7 @@ Given('I hover over my profile and select Change Password', () => {
 When('I log out', () => {
     homePage.clickLogout();
 });
-Then('the next time I log in, the Password I have to use is (.*)', (newPassword) => {
+Then('the next time I log in, the Password I have to use is {string}', (newPassword) => {
     loginPage.loginWith(env.qa.email, env.qa.email);
     I.seeElement(loginPage.fields.loginError);
     loginPage.loginWith(env.qa.email, newPassword);
@@ -25,9 +25,8 @@ When('I hover over my profile and select Log Out', () => {
 Then('I am taken to the Login Screen', () => {
     I.seeElement(loginPage.fields.email);
 });
-When(/^I fill in (.*), (.*), (.*), and click Save$/, function (currentPassword, newPassword, confirmNewPassword) {
+When('I fill in {string}, {string}, {string}, and click Save',  (currentPassword, newPassword, confirmNewPassword) => {
     homePage.changePassword(currentPassword, newPassword, confirmNewPassword);
-
 });
 Given('I am logged into the ui', () => {
     I.loginNoPwd();
