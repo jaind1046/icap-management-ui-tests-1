@@ -1,5 +1,3 @@
-
-let fs = require('fs');
 const {
     I,
     filedropPage
@@ -41,7 +39,7 @@ Then(/^the notification message is displayed as(.*)$/, (successfulProcess) => {
 });
 
 Then(/^I see the list of sanitised active contents with expected(.*)$/, (activeContent) => {
-    I.see(activeContent.trim(),filedropPage.sections.activeContentView)
+    I.see(activeContent.trim(), filedropPage.sections.activeContentView)
 });
 
 Then(/^I see the list of objects and structures repaired with expected(.*)$/, (repairedObject) => {
