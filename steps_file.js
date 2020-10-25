@@ -51,8 +51,33 @@ module.exports = function () {
       policyPage.clickHistoryTab();
     },
 
-    uploadFile: function (file){
+    uploadFile: function (file) {
       this.attachFile(filedropPage.buttons.fileInput, file)
-    }
-  });
+    },
+
+        uploadFileByType: function (fileType) {
+            let path = null;
+            switch (fileType) {
+                case ('Safe_file'):
+                    path = 'src/data/input/types/safe_file.xlsx';
+                    break;
+                case ('Blocked_file'):
+                    path = 'src/data/input/types/blocked_file.doc';
+                    break;
+                    //todo: add file
+                case ('Dangerous_file'):
+                    path = 'src/data/input/types/dangerous_file.doc';
+                    break;
+                    //todo: add file
+                case ('Unclassified_file'):
+                    path = 'src/data/input/types/unclassified_file.doc';
+                    break;
+                default:
+                    throw 'There is not such file type.'
+            }
+            this.uploadFile(path);
+        }
+
+
+    });
 };

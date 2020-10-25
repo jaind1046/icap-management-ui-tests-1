@@ -16,6 +16,17 @@ module.exports = {
 
 //Methods
 
+    /*
+     * Getters
+     * ***************************************************************
+     */
+
+    async getTotalFileNumber() {
+        const total = this.sections.totalfilesprocessed;
+        let totalText = await I.grabTextFrom(total);
+        return totalText;
+    },
+
 /*
  * Datetime
  * ***************************************************************
