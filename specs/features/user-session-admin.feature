@@ -12,9 +12,9 @@ Feature: user-session-admin
     @TEST-
     Scenario Outline: I am able to update my password
         Given I hover over my profile and select Change Password
-        When I fill in <CurrentPassword>, <NewPassword>, <ConfirmNewPassword>, and click Save
+        When I fill in '<CurrentPassword>', '<NewPassword>', '<ConfirmNewPassword>', and click Save
         And I log out
-        Then the next time I log in, the Password I have to use is <NewPassword>
+        Then the next time I log in, the Password I have to use is '<NewPassword>'
         Examples:
             | CurrentPassword | NewPassword   | ConfirmNewPassword |
             | OldPassword1?   | NewPassword2) | NewPassword2)      |
