@@ -77,8 +77,8 @@ module.exports = {
         const dateTo = array[3];
         const timeTo = array[4];
 
-        I.seeTextEquals(dateFrom + " " + convertTimeFrom24To12(timeFrom), this.inputs.datetimeFrom);
-        I.seeTextEquals(dateTo + " " + convertTimeFrom24To12(timeTo), this.inputs.datetimeTo);
+        I.seeTextEquals(dateFrom + " " + this.convertTimeFrom24To12(timeFrom), this.inputs.datetimeFrom);
+        I.seeTextEquals(dateTo + " " + this.convertTimeFrom24To12(timeTo), this.inputs.datetimeTo);
 
     },
 
