@@ -162,9 +162,8 @@ module.exports = {
             I.seeInField(filterValue, filteredFile);
         } else {
             //todo: write for multiple filters
-            for (let value in res) {
-
-            }
+            // for (let value in res) {
+            // }
         }
     },
 
