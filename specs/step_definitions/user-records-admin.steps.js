@@ -1,5 +1,4 @@
-//<reference path="./steps.d.ts" />
-
+//<reference path="../../src/utils/steps_file.js" />
 
 const {
     I,

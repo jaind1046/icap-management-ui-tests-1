@@ -80,4 +80,4 @@ module.exports = function () {
             this.uploadFile(path);
         }
     });
-}
+};
