@@ -1,7 +1,7 @@
-//<reference path="./steps.d.ts" />
+//<reference path="../../src/utils/steps.d.ts" />
 
 
-const {I} = inject();
+const {I, requesthistoryPage, homePage} = inject();
 
 Given('I have navigated to the Request History page', () => {
     homePage.clickRequestsHistory();
