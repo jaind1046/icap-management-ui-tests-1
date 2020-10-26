@@ -12,19 +12,18 @@ exports.config = {
         chrome: {
           args: ['--no-sandbox', '--window-size=1536,826'],
         }
-      },
-      FileSystem: {},
-     
-    AssertWrapper : {
-      require: "codeceptjs-assert"
     },
-
+    FileSystem: {},
+    AssertWrapper : {
+     require: "codeceptjs-assert"
+    },
     ChaiWrapper: {
-      require: "codeceptjs-chai"
+     require: "codeceptjs-chai"
     }
   },
   include: {
     I: './src/utils/steps_file.js',
+    env: './credentials.js',
     homePage: './src/pages/home.page.js',
     loginPage: './src/pages/login.page.js',
     configurationsPage: './src/pages/configurations.page.js',

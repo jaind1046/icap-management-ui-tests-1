@@ -2,7 +2,7 @@ Feature: Content Management Policy Editing
     As a admin I need to validate that policy content flags can be edited in order to confirm that the solution works as expected
 
     Background:
-        Given I am logged into the ui
+        Given I am logged into the portal
         Given I am on current policy screen
 
 
@@ -31,3 +31,16 @@ Feature: Content Management Policy Editing
             | Excel      | Review Comments | Disallow |
             | Powerpoint | Embedded Images | Disallow |
             | PDF        | Acroform        | Sanitise |
+
+    @TEST-Change-all-content-flag-for-all-doc-type
+    Scenario Outline: A user is able to change the content flags to sanitise for word in policy page
+        When the user change all the flag for <fileType> to sanitise on policy page
+        Then all flags of the <fileType> is changed to sanitise
+        When the user change all the flag for <fileType> to disallow on policy page
+        Then all flags of the <fileType> is changed to disallow
+        Examples:
+            | fileType   |
+            | Word       |
+            | Excel      |
+            | Powerpoint |
+            | PDF        |

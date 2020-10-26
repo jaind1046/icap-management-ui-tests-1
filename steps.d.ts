@@ -1,4 +1,5 @@
 /// <reference types='codeceptjs' />
+type env = typeof import('./credentials.js');
 type steps_file = typeof import('./src/utils/steps_file.js');
 type homePage = typeof import('./src/pages/home.page.js');
 type loginPage = typeof import('./src/pages/login.page.js');
@@ -11,7 +12,7 @@ type requesthistoryPage = typeof import('./src/pages/request-history.page.js');
 type usersPage = typeof import('./src/pages/users.page.js');
 
 declare namespace CodeceptJS {
-  interface SupportObject { I: I, homePage: homePage, loginPage: loginPage, configurationsPage: configurationsPage, dashboardPage: dashboardPage, filedropPage: filedropPage, passwordResetPage: passwordResetPage, policyPage: policyPage, requesthistoryPage: requesthistoryPage, usersPage: usersPage }
+  interface SupportObject { I: I, env: env, homePage: homePage, loginPage: loginPage, configurationsPage: configurationsPage, dashboardPage: dashboardPage, filedropPage: filedropPage, passwordResetPage: passwordResetPage, policyPage: policyPage, requesthistoryPage: requesthistoryPage, usersPage: usersPage }
   interface Methods extends Puppeteer {}
   interface I extends ReturnType<steps_file> {}
   namespace Translation {
