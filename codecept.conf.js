@@ -3,11 +3,10 @@ const { setHeadlessWhen } = require('@codeceptjs/configure');
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: './*_test.js',
   output: './output',
   helpers: {
     Puppeteer: {
-      url: 'http://localhost:3000',
+      url: 'http://localhost:8080',
       show: true,
       windowSize: '1536 x 826',
         chrome: {
@@ -15,15 +14,17 @@ exports.config = {
         }
       },
       FileSystem: {},
-      AssertWrapper: {
-        require: "codeceptjs-assert"
-      },
+     
     AssertWrapper : {
       require: "codeceptjs-assert"
-    }	  
+    },
+
+    ChaiWrapper: {
+      require: "codeceptjs-chai"
+    }
   },
   include: {
-    I: './steps_file.js',
+    I: './src/utils/steps_file.js',
     homePage: './src/pages/home.page.js',
     loginPage: './src/pages/login.page.js',
     configurationsPage: './src/pages/configurations.page.js',
@@ -37,7 +38,7 @@ exports.config = {
   bootstrap: null,
   gherkin: {
     features: './specs/features/*.feature',
-    steps: './specs/step_definitions/*.js'
+    steps:    './specs/step_definitions/*.steps.js'
   },
   mocha: {},
   name: 'icap-management-ui-tests',
@@ -45,16 +46,15 @@ exports.config = {
     allure: {},
     pauseOnFail: {},
     retryFailedStep: {
-      enabled: true
+      enabled: false
     },
-    tryTo: {
-      enabled: true
-    },
+   
     screenshotOnFail: {
       enabled: true
     },
     autoDelay: {
       enabled: true
     },
+ 
   }
 }

@@ -8,20 +8,21 @@ Feature: file-drop-file-processing
         And I have navigated to the FileDrop page
 
     @TEST-176
-    Scenario Outline: I can load a file into the file drop service
+    Scenario Outline: I can process a file through the file drop service
         When I click Select a file and choose a supported file <supportedFile>
-        Then the File is processed by the file drop service
-        And I can view more detailed results with file attibutes <fileName> and <type>
+        Then the File is processed with the process status displayed as <processStatus>
+        And I can view more detailed results with file attributes <fileName> and <fileType>
         Examples:
-            | supportedFile              | fileName    | type |
-            | src/data/input/issues.docx | issues.docx | docx |
+            | supportedFile              | fileName    | fileType | processStatus                |
+            | src/data/input/issues.docx | issues.docx | docx     | Your file has been processed |
+            | src/data/input/file2.pdf   | file2.pdf   | pdf      | Your file has been processed |
 
     @TEST-182
     Scenario Outline: An error message is produced when file drop is unable to process a file
-        When I click Select a file and choose non processable file <unsupportedFile>
+        When I click Select a file and choose non processable file <file>
         Then the expected validation error is displayed as <error>
         Examples:
-            | unsupportedFile             | error                                                                  |
+            | file                        | error                                                                  |
             | src/data/input/icaptest.ps1 | Please use a supported file type                                       |
             | src/data/input/40MB.docx    | This free service is currently limited to a maximum file size of 3.5MB |
 

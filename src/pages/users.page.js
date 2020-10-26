@@ -9,6 +9,7 @@ module.exports = {
     fields: {
         newUserNameField: `div[class*='Input_Input__17Nwp'] > input`,
         newUserEmailField: `div[class*='User_tr__ppbfc'] > div:nth-of-type(2)`,
+        errorMessage: ""
     },
     buttons: {
         addUser: `div[class*='Users_header__2gDwu'] > button`,
@@ -55,6 +56,16 @@ module.exports = {
         this.clickSaveUsersButton();
     },
 
+    deleteUser(userName) {
+        let deleteButton = document
+            .getElementsByClassName(this.findUserByName(userName))[0]
+            .getElementsByTagName("SVG")
+            .namedItem("Layer_1");
+        I.click(deleteButton);
+
+
+    },
+
     getUserRecord(n) {
         let element = null;
         const rows = locate(`//*[@id="usersTable2"]/tbody/tr`);
@@ -81,7 +92,26 @@ module.exports = {
         })
         //    let userRowEmail = locate(`div[class*='Users_table__'] > div[class*='User_User__'] > div > div:nth-child(2)`);
         //   let userEmail = I.grabTextFrom(userRowEmail);
+        return locate(`div[class*='` + className + `']`);
+    },
+
+    findUserByName(name) {
+        let className = null;
+        const rowArray = document.querySelectorAll(`div[class*='Users_table__'] > div[class*='User_User__']`);
+        rowArray.forEach(row => {
+            console.log('Observing row : ', row);
+            let rowClassName = row.className;
+            // this locator is written here `div[class*='Users_table__'] > div[class*='User_User__'] > div > div:nth-child(1) > div > input[type=text]`
+            let rowUserName = row.firstChild.childNodes.item(1).firstChild.textContent;
+            if (rowUserName === name) {
+                className = rowClassName;
+            }
+        })
         return className;
+    },
+
+    findRowWithUserName(name) {
+        return `div[class*='`+name+`']`;
     }
 
 }
