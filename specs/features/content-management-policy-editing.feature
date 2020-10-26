@@ -13,24 +13,29 @@ Feature: Content Management Policy Editing
 
 
     @TEST-188
-    Scenario: A user can cancel any updates that they have done to the policy by pressing cancel
-        When user has updated sections of the current policy
+    Scenario Outline: A user can cancel any updates that they have done to the policy by pressing cancel
+        When I change one of the <ContentFlags> for required file types <fileType> to <FlagType>
         When the user presses the Cancel button
-        Then the changes are undone
-        And the Current policy defaults to the latest saved policy
-
-
-    @TEST-155
-    Scenario Outline: I can edit policy content flags
-        When I change one of the <ContentFlags> for required file types <fileType> and save
-        Then the changes are saved
-        And the previous policy can now be located in the Policy history page
+        Then the Current policy defaults to the latest saved policy
         Examples:
             | fileType   | ContentFlags    | FlagType |
             | Word       | Embedded Files  | Sanitise |
             | Excel      | Review Comments | Disallow |
             | Powerpoint | Embedded Images | Disallow |
             | PDF        | Acroform        | Sanitise |
+
+
+    @TEST-155
+    Scenario Outline: I can edit policy content flags
+        When I change one of the <ContentFlags> for required file types <fileType> to <FlagType>
+        When the user presses the Save button
+        Then <ContentFlags> for required file types <fileType> is set to <FlagType>
+        When I click on the previous policy button
+        Then the previous policy can now be located in the Policy history page
+        Examples:
+            | fileType   | ContentFlags    | FlagType |
+            | Word       | Embedded Files  | Sanitise |
+
 
     @TEST-Change-all-content-flag-for-all-doc-type
     Scenario Outline: A user is able to change the content flags to sanitise for word in policy page

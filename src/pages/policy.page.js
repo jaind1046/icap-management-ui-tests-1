@@ -187,11 +187,21 @@ module.exports = {
     }
   },
 
+  setFlagTypeForGivenContentFlagsForGivenDocType(contentFlags, fileType, flagType) {
+    const element = this.fields[docType][FlagType][contentFlag]
+    I.click(element)
+  },
+
   assertSanitiseForAllFlag(docType) {
     const elements = this.fields[docType].sanitise
     for (let element in elements) {
       this.assertElementChecked(elements[element])
     }
+  },
+
+  assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlags, fileType, flagType) {
+    const element = this.fields[docType][FlagType][contentFlag]
+    this.assertElementChecked(element)
   },
 
   clickDisallowForAllFlag(docType) {
@@ -208,7 +218,7 @@ module.exports = {
     }
   },
 
-  // Uncommnet this assertion when functionality work fine.
+  // TODO Uncomment this assertion when functionality work fine.
   assertElementChecked(element) {
       // I.seeAttributesOnElements(element, 'checked')
   },
