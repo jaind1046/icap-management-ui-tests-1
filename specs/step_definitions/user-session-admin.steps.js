@@ -1,6 +1,3 @@
-//<reference path="./steps.d.ts" />
-
-
 const {I} = inject();
 
 
