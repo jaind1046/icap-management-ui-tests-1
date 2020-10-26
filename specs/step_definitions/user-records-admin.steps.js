@@ -1,7 +1,10 @@
 //<reference path="./steps.d.ts" />
 
 
-const {I, usersPage, homePage} = inject();
+const {
+    I,
+    homePage, usersPage
+} = inject();
 let user;
 let userEmail;
 let userName;

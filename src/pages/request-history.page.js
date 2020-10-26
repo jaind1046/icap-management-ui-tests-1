@@ -1,13 +1,26 @@
-const { I } = inject();
+const MyHelper = require("../utils/helper");
+var moment = require('moment');
+const {
+  I
+} = inject();
 
 module.exports = {
-  //Locators
+  //Locators  
 
   fields: {
     inputFilterFileID: `div[id='inputFilterTransactionID'] > input`,
     customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
+    datetimeFrom: 'datetime-local-left',
+    //`input[id='datetime-local-left']`,
+    datetimeTo: `input[id='datetime-local-right']`,
+    from: `div[class='jss3']`,
+
   },
   buttons: {
+    dateTime: `//button[contains(.,'Date/Time')]`,
+    time_1hour: 'button:nth-child(1) > p',
+    time_12hours: 'button:nth-child(2) > p',
+    time_24hours: 'button:nth-child(3) > p',
     addFilter: `button[class*='Button_button__1V1sR']`,
     fileTypeMenu: "",
     fileOutcomeMenu: "",
@@ -23,6 +36,9 @@ module.exports = {
     firstPage: "",
     nextPage: "",
     lastPage: "",
+  },
+  table: {
+    historyTable: `div[class*='RequestHistory_wrapTable__13V_o']`,
   },
   checkboxes: {
     fileTypeDoc: "",
@@ -71,6 +87,76 @@ module.exports = {
     const element = this.calendar.dateTimePicker;
     I.fillField(element, value);
   },
+
+  openTimeMenu() {
+    const element = this.buttons.dateTime;
+    I.click(element);
+  },
+
+  selectTimePeriod(period) {
+    if (period == '1 Hour') {
+      I.click(this.buttons.time_1hour)
+    } else if (period == '12 Hours') {
+      I.click(this.buttons.time_12hours)
+    } else if (period == '24 Hours') {
+      I.click(this.buttons.time_24hours)
+    }
+
+  },
+
+  getTimeFrom() {
+    const element = this.fields.datetimeFrom;
+    I.grabValueFrom(element);
+
+  },
+
+  async getTimeTo() {
+    const element = this.fields.datetimeTo;
+    let timeTo = await I.grabTextFrom(this.fields.datetimeTo);
+    return timeTo;
+  },
+
+  setTimeFrom(dateFrom) {
+    const element = this.fields.datetimeFrom;
+    I.fillField(element, dateFrom);
+  },
+
+  setTimeTo(dateTo) {
+    const element = this.fields.datetimeTo;
+    I.fillField(element, dateTo);
+  },
+
+  assertAccurateTimeFromIsSet(datetimeFrom) {
+    let x = document.getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value);
+    if (datetimeFrom == '1 hour earlier') {
+      I.seeTextEquals(this.getPreviousHour(), x)
+    } else if (period == '12 hours earlier') {
+      I.see(MyHelper.getPrevious12Hour(), this.fields.datetimeFrom)
+    } else if (period == '24 hours earlier') {
+      I.see(MyHelper.getPrevious24Hour(), this.fields.datetimeFrom)
+    }
+  },
+
+  checkAccurateTime() {
+    let timeFrom = document
+    getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value)
+    I.seeTextEquals(this.getPreviousHour(), timeFrom)
+  },
+
+  getPreviousHour() {
+    var now = moment().utc(true);
+    var previousHour = now.subtract(1, 'h').format(String).slice(0, -1);
+    return previousHour;
+  },
+
+  assertAccurateTimeToIsSet(datetimeTo) {
+    var currentTime = moment().utc(true).format().slice(0, -1);
+    let x = document.getElementById(this.fields.datetimeTo).ATTRIBUTE_NODE(value);
+    if (datetimeTo == 'current time') {
+      I.seeTextEquals(currentTime, x);
+    }
+  },
+
 
   /*
    * AddingFilter
@@ -148,12 +234,12 @@ module.exports = {
    * ***************************************************************
    */
 
-   getFileRecord(fileId) {
-     return "//tr[contains(., '" + fileId + "')]"
-   },
+  getFileRecord(fileId) {
+    return "//tr[contains(., '" + fileId + "')]"
+  },
 
-   openFileRecord(fileId) {
-     I.click(this.getFileRecord(fileId))
-   }
+  openFileRecord(fileId) {
+    I.click(this.getFileRecord(fileId))
+  }
 
 };

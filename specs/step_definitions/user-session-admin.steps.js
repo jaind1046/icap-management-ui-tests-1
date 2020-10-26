@@ -27,6 +27,7 @@ Then('I am taken to the Login Screen', () => {
 });
 When('I fill in {string}, {string}, {string}, and click Save', (currentPassword, newPassword, confirmNewPassword) => {
     homePage.changePassword(currentPassword, newPassword, confirmNewPassword);
+
 });
 Given('I am logged into the ui', () => {
     I.loginNoPwd();

@@ -3,7 +3,7 @@ Feature: file-drop-file-process-result-view
 
     Background:
         Given I am logged into the ui
-        Given I have navigated to the File Drop page
+        And I have navigated to the File Drop page
 
     @TEST-177
     Scenario Outline: I can download the full analysis report of a processed file
@@ -11,38 +11,34 @@ Feature: file-drop-file-process-result-view
         When I view result and click on Download Analysis Report
         Then The full analysis report is downloaded and available as <analysisReport>
         Examples:
-            | supportedFile              | analysisReport                  |
+            | supportedFile              | analysisReport  |
             | src/data/input/issues.docx | issues.docx.xml |
 
-    Scenario Outline: I can view the details of a file that has been processed by the file drop service
-        When I process a supported file <supportedFile>
-        Then The results shows the file attibutes <fileName>, <type> and <fileSize>
+    @sanitisation
+    Scenario Outline: I can see the result of a repaired file with the issues removed
+        When I process a supported sanitisation file <activeContentFile> with remedy items
+        Then the notification message is displayed as <successfulProcess>
+        And I see the list of sanitised active contents with expected <activeContent>
+        And I see the list of objects and structures repaired with expected <repairedObject>
         Examples:
-            | supportedFile              | fileName    | type | fileSize |
-            | src/data/input/issues.docx | issues.docx | docx | 11603    |
+            | activeContentFile         | activeContent                              | repairedObject      | successfulProcess                    |
+            | src/data/input/file1.docx | Internal Hyperlinks present in CT_Bookmark | APP segment removed | Your Safe, Regenerated File Is Ready |
 
-    Scenario Outline: I can view the issues removed on a processed file
-        When I process a supported file <supportedFile> with sanitisation and remedy items
-        Then I see report on sanitised active content <activeContentList>
-        And I see report on objects and structures repaired <repairedObjectsList>
+    @noremedy
+    Scenario Outline: I can see the result of a unrepaired file with the list of structural issues not removed
+        When I process a supported file <fileWithIssues> with structural Issues
+        Then the notification message is displayed as <unsuccessfulError>
+        And I see the list of objects and structures not repaired <nonrepairedObject>
         Examples:
-            | supportedFile             | activeContentList                   | repairedObjectsList               |
-            | src/data/input/file1.docx | src/data/input/file1-active-content | src/data/input/file1-remedy-items |
+            | fileWithIssues           | nonrepairedObject    | unsuccessfulError                               |
+            | src/data/input/file2.pdf | Non-conforming image | Unable to protect file due to structural issues |
 
-
-    Scenario Outline: I can view the unrepaired structural issues on a processed file
-        When I process a supported file <supportedFile> with structural Issues
-        Then I see report on objects and structures not repaired <nonrepairedObjectsList>
-        Examples:
-            | supportedFile             | nonrepairedObjectsList                          |
-            | src/data/input/file2.docx | src/data/input/file2-norepair-structural-issues |
-
-
+    @fileDownload
     Scenario Outline: I can download successfully processed files
         Given I have processed a supported file <supportedFile>
-        When I click on Download Processed File
+        When I view result and click on Download Processed File
         Then I have the file successfully downloaded as <downloadedFileName>
         And I can successfully open the downloaded file
         Examples:
-            | supportedFile              | downloadedFileName          |
-            | src/data/input/issues.docx | src/data/output/issues.docx |
+            | supportedFile              | downloadedFileName |
+            | src/data/input/issues.docx | issues.docx        |
