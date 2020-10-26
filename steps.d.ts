@@ -1,6 +1,6 @@
 /// <reference types='codeceptjs' />
-type steps_file = typeof import('./steps_file.js');
 type env = typeof import('./credentials.js');
+type steps_file = typeof import('./src/utils/steps_file.js');
 type homePage = typeof import('./src/pages/home.page.js');
 type loginPage = typeof import('./src/pages/login.page.js');
 type configurationsPage = typeof import('./src/pages/configurations.page.js');

@@ -1,5 +1,3 @@
-//<reference path="./steps.d.ts" />
-
 var assert = require("assert");
 const faker = require("faker");
 
