@@ -1,5 +1,6 @@
+//<reference path="../../src/utils/steps_file.js" />
 
-const {I} = inject();
+const {I, loginPage} = inject();
 
 
 Given('I am logged into the ui', () => {
