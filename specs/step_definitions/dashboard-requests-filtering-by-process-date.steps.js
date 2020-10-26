@@ -1,8 +1,9 @@
 //<reference path="../../src/utils/steps_file.js" />
 
+
 const {I, dashboardPage, homePage} = inject();
 
-let dateFrom = dashboardPage.inputs.datetimeFrom;
+let datetimeFrom = dashboardPage.inputs.datetimeFrom;
 let datetimeTo = dashboardPage.inputs.datetimeTo;
 
 let filterValueFrom;
