@@ -6,7 +6,7 @@ exports.config = {
   output: './output',
   helpers: {
     Puppeteer: {
-      url: 'http://localhost:3000',
+      url: 'http://localhost:8080',
       show: true,
       windowSize: '1536 x 826',
         chrome: {
@@ -46,16 +46,15 @@ exports.config = {
     allure: {},
     pauseOnFail: {},
     retryFailedStep: {
-      enabled: true
+      enabled: false
     },
-    tryTo: {
-      enabled: true
-    },
+   
     screenshotOnFail: {
       enabled: true
     },
     autoDelay: {
       enabled: true
     },
+ 
   }
 }

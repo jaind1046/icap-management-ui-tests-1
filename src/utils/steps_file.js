@@ -6,12 +6,13 @@ const filedropPage = require("../pages/file-drop.page.js");
 module.exports = function () {
   return actor({
     onLoginPage: function () {
-      this.amOnPage("http://localhost:3000");
+      this.amOnPage("http://localhost:8080");
     },
 
     loginNoPwd: function () {
       this.onLoginPage();
       loginPage.clickLogIn();
+       this.wait(5);
     },
 
     enterValidCredential: function () {

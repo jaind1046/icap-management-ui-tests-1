@@ -1,7 +1,10 @@
 //<reference path="./steps.d.ts" />
 
 
-const {I} = inject();
+const {
+    I,
+    homePage, usersPage
+} = inject();
 let user;
 let userEmail;
 let userName;
@@ -27,14 +30,14 @@ Given('I have logged into the ui and navigated to the Users page', () => {
     I.loginNoPwd();
     homePage.clickUsers();
 });
-When('I add a new user with a valid ${string}', (email) => {
+When(/^I add a new user with a valid (.*)$/, (email) => {
     userEmail = email;
     usersPage.addUser('', email, '');
 });
 Then('The new user record is saved', () => {
     I.seeElement(usersPage.findUserByEmail(userEmail));
 });
-When('I delete an existing user ${string}', (name) => {
+When(/^I delete an existing user (.*)$/, (name) => {
     userName = name;
     usersPage.deleteUser(userName)
 });

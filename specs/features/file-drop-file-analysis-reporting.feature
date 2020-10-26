@@ -6,7 +6,7 @@ Feature: file-drop-file-analysis-reporting
         And I have navigated to the File Drop page
 
     @TEST-178
-    Scenario: I can download the full XML analysis report for a file
+    Scenario Outline: I can download the full XML analysis report for a file
         Given I have processed a supported file <supportedFile>
         When I click on XML
         Then the full XML report <xmlFile> is downloaded
@@ -15,7 +15,7 @@ Feature: file-drop-file-analysis-reporting
             | src/data/input/file1.docx | file1.xml |
 
     @TEST-181
-    Scenario: I can download the full PDF analysis report for a file
+    Scenario Outline: I can download the full PDF analysis report for a file
         Given I have processed a supported file <supportedFile>
         When I click on PDF
         Then the full pdf report <pdfFile> is downloaded
