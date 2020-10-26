@@ -15,15 +15,13 @@ exports.config = {
         }
       },
       FileSystem: {},
-      AssertWrapper: {
+      AssertWrapper : {
         require: "codeceptjs-assert"
-      },
-    AssertWrapper : {
-      require: "codeceptjs-assert"
-    }	  
+      }
   },
   include: {
     I: './steps_file.js',
+    env: './credentials.js',
     homePage: './src/pages/home.page.js',
     loginPage: './src/pages/login.page.js',
     configurationsPage: './src/pages/configurations.page.js',
