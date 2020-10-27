@@ -1,6 +1,10 @@
 //<reference path="../../src/utils/steps_file.js" />
 
-const {I, dashboardPage} = inject();
+const {
+    I,
+    dashboardPage,
+    homePage
+} = inject();
 
 let totalNumber;
 

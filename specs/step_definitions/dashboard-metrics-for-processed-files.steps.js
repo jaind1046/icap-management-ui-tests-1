@@ -3,20 +3,20 @@
 const {I, loginPage} = inject();
 
 
-Given('I am logged into the ui', () => {
-    I.onLoginPage();
+Given('', () => {
+    
 });
 
-When('I provide my user credentials via the login form', () => {
-    I.enterValidCredential();
+When('', () => {
+    
 });
 
-Then('I should successfully access home page', () => {
-    I.seeElement('#mainMenu');
+Then('', () => {
+    
 });
-When('I enter valid username & invalid password', () => {
-    I.enterInvalidPassword();
+When('', () => {
+    
 });
-Then('The error shows Incorrect username or password, please try again is displayed', () => {
-    I.seeElement(loginPage.fields.loginError);
+Then('', () => {
+    
 });

@@ -10,9 +10,8 @@ module.exports = {
   fields: {
     inputFilterFileID: `div[id='inputFilterTransactionID'] > input`,
     customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
-    datetimeFrom: 'datetime-local-left',
-    //`input[id='datetime-local-left']`,
-    datetimeTo: `input[id='datetime-local-right']`,
+    datetimeFrom: `#datetime-local-left`,
+    datetimeTo: `#datetime-local-right`,
     from: `div[class='jss3']`,
   },
   options: {
@@ -125,37 +124,56 @@ module.exports = {
     return timeTo;
   },
 
-  setTimeFrom(dateFrom) {
-    const element = this.fields.datetimeFrom;
-    I.fillField(element, dateFrom);
-  },
-
   setTimeTo(dateTo) {
     const element = this.fields.datetimeTo;
-    I.fillField(element, dateTo);
+    I.click(element)
+     if (dateTo == 'current time') {
+       I.type(getCurrentTime());
+     } else {
+       I.type(dateTo);
+     }
   },
+
+  setTimeFrom(dateFrom) {
+    const element = this.fields.datetimeFrom;
+    I.click(element)
+    if (dateFrom == '1 hour earlier') {
+    I.type(getPastPeriod(1));
+  } else if (dateFrom == '6 hours earlier') {
+    I.type(getPastPeriod(6));
+  } else if (dateFrom == '24 hours earlier') {
+    I.type(getPastPeriod(24));
+  }else {
+    I.type(dateFrom);
+  }
+},
 
   assertAccurateTimeFromIsSet(datetimeFrom) {
     let x = document.getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value);
     if (datetimeFrom == '1 hour earlier') {
-      I.seeTextEquals(this.getPreviousHour(), x)
+      I.seeTextEquals(this.getPastPeriod(1), x)
     } else if (period == '12 hours earlier') {
-      I.see(MyHelper.getPrevious12Hour(), this.fields.datetimeFrom)
+      I.see(MyHelper.getPastPeriod(12), this.fields.datetimeFrom)
     } else if (period == '24 hours earlier') {
-      I.see(MyHelper.getPrevious24Hour(), this.fields.datetimeFrom)
+      I.see(MyHelper.getPastPeriod(24), this.fields.datetimeFrom)
     }
   },
 
   checkAccurateTime() {
     let timeFrom = document
     getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value)
-    I.seeTextEquals(this.getPreviousHour(), timeFrom)
+    I.seeTextEquals(this.getPastPeriod(1), timeFrom)
   },
 
-  getPreviousHour() {
+  getCurrentTime() {
+    var currentTime = moment().utc(true).format().slice(0, -1);
+    return currentTime;
+  },
+
+  getPastPeriod(time) {
     var now = moment().utc(true);
-    var previousHour = now.subtract(1, 'h').format(String).slice(0, -1);
-    return previousHour;
+    var pastPeriod = now.subtract(time, 'h').format(String).slice(0, -1);
+    return pastPeriod;
   },
 
   assertAccurateTimeToIsSet(datetimeTo) {

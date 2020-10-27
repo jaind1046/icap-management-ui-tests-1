@@ -8,7 +8,6 @@ Feature: dashboard-requests-filtering-by-process-date
 
     @TEST-151
     Scenario Outline: I am able to filter the dashboard requests by time
-        Given I have navigated to the Dashboard page
         When I make a time selection with '<time>' and click apply
         Then the requests for the selected '<time>' are displayed
         And the date range for the selected period is displayed in the Date/Time field as '<dateRange>'

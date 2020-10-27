@@ -8,5 +8,5 @@ Feature: request-history-file-detail-view
     Scenario: I am able to view more detail on a file
         Given I have navigated to the Request History page
         When I click on a file
-        Then a box with the file ID at the top will be displayed
+        Then the file detail view opens with the ID displayed at the top
         And issue items, sanitisation items, remedy items, and the content management policy details are available to be viewed
