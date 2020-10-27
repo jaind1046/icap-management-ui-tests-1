@@ -19,10 +19,10 @@ Feature: Content Management Policy Editing
         Then the Current policy defaults to the latest saved policy
         Examples:
             | fileType   | ContentFlags    | FlagType |
-            | Word       | Embedded Files  | Sanitise |
-            | Excel      | Review Comments | Disallow |
-            | Powerpoint | Embedded Images | Disallow |
-            | PDF        | Acroform        | Sanitise |
+            | word       | embeddedFiles   | sanitise |
+            | excel      | reviewComments  | disallow |
+            | powerpoint | embeddedImages  | disallow |
+            | pdf        | acroform        | sanitise |
 
 
     @TEST-155
@@ -34,10 +34,10 @@ Feature: Content Management Policy Editing
         Then the previous policy can now be located in the Policy history page
         Examples:
             | fileType   | ContentFlags    | FlagType |
-            | Word       | Embedded Files  | Sanitise |
-            | Excel      | Review Comments | Disallow |
-            | Powerpoint | Embedded Images | Disallow |
-            | PDF        | Acroform        | Sanitise |
+            | word       | embeddedFiles   | sanitise |
+            | excel      | reviewComments  | disallow |
+            | powerpoint | embeddedImages  | disallow |
+            | pdf        | acroform        | sanitise |
 
 
     @TEST-Change-all-content-flag-for-all-doc-type
@@ -48,7 +48,7 @@ Feature: Content Management Policy Editing
         Then all flags of the <fileType> is changed to disallow
         Examples:
             | fileType   |
-            | Word       |
-            | Excel      |
-            | Powerpoint |
-            | PDF        |
+            | word       |
+            | excel      |
+            | powerpoint |
+            | pdf        |

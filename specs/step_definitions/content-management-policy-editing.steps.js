@@ -6,28 +6,6 @@ const {
     env
 } = inject();
 
-const fileTypeFieldTypeMap = {
-    Word : 'word',
-    Excel: 'excel',
-    Powerpoint: 'powerpoint',
-    PDF: 'pdf'
-}
-
-const flagTypeFieldTypeMap = {
-    Sanitise : 'sanitise',
-    Disallow: 'disallow'
-}
-
-const contentFlagTypeFieldTypeMap = {
-    'Embedded Files' : 'embeddedFiles',
-    'Review Comments': 'reviewComments',
-    'Embedded Images': 'embeddedImages',
-    'Acroform': 'acroform',
-    'External Hyperlinks': 'externalHyperlinks',
-    'Internal Hyperlinks': 'internalHyperlinks',
-    'Actions All': 'actionsAll'
-}
-
 Given('I am logged into the portal', () => {
     I.onLoginPage()
     I.wait(2)
@@ -39,33 +17,29 @@ Given('I am on current policy screen', () => {
 });
 
 When(/^I change one of the (.*) for required file types (.*) to (.*)$/, (contentFlag, fileType, flagType) => {
-    policyPage.setFlagTypeForGivenContentFlagsForGivenDocType(contentFlagTypeFieldTypeMap[contentFlag],
-        fileTypeFieldTypeMap[fileType],
-        flagTypeFieldTypeMap[flagType])
+    policyPage.setFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
 });
 
 Then(/^(.*) for required file types (.*) is set to (.*)$/, (contentFlag, fileType, flagType) => {
-    policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlagTypeFieldTypeMap[contentFlag],
-        fileTypeFieldTypeMap[fileType],
-        flagTypeFieldTypeMap[flagType])
+    policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
 });
 
 When(/^I change all the flag for (.*) to sanitise on policy page$/, (fileType) => {
-    policyPage.clickSanitiseForAllFlag(fileTypeFieldTypeMap[fileType])
+    policyPage.clickSanitiseForAllFlag(fileType)
     policyPage.clickSaveChanges()
 });
 
 Then(/^all flags of the (.*) is changed to sanitise$/, (fileType) => {
-    policyPage.assertSanitiseForAllFlag(fileTypeFieldTypeMap[fileType])
+    policyPage.assertSanitiseForAllFlag(fileType)
 });
 
 When(/^I change all the flag for (.*) to disallow on policy page$/, (fileType) => {
-    policyPage.clickDisallowForAllFlag(fileTypeFieldTypeMap[fileType])
+    policyPage.clickDisallowForAllFlag(fileType)
     policyPage.clickSaveChanges()
 });
 
 Then(/^all flags of the (.*) is changed to disallow$/, (fileType) => {
-    policyPage.assertDisallowForAllFlag(fileTypeFieldTypeMap[fileType])
+    policyPage.assertDisallowForAllFlag(fileType)
 });
 
 When('I click on Current Policy in the navigation panel', () => {
