@@ -35,6 +35,9 @@ Feature: Content Management Policy Editing
         Examples:
             | fileType   | ContentFlags    | FlagType |
             | Word       | Embedded Files  | Sanitise |
+            | Excel      | Review Comments | Disallow |
+            | Powerpoint | Embedded Images | Disallow |
+            | PDF        | Acroform        | Sanitise |
 
 
     @TEST-Change-all-content-flag-for-all-doc-type

@@ -47,7 +47,7 @@ Then(/^(.*) for required file types (.*) is set to (.*)$/, (contentFlag, fileTyp
         flagTypeFieldTypeMap[flagType])
 });
 
-When(/^the user change all the flag for (.*) to sanitise on policy page$/, (fileType) => {
+When(/^I change all the flag for (.*) to sanitise on policy page$/, (fileType) => {
     policyPage.clickSanitiseForAllFlag(fileTypeFieldTypeMap[fileType])
     policyPage.clickSaveChanges()
 });
@@ -56,7 +56,7 @@ Then(/^all flags of the (.*) is changed to sanitise$/, (fileType) => {
     policyPage.assertSanitiseForAllFlag(fileTypeFieldTypeMap[fileType])
 });
 
-When(/^the user change all the flag for (.*) to disallow on policy page$/, (fileType) => {
+When(/^I change all the flag for (.*) to disallow on policy page$/, (fileType) => {
     policyPage.clickDisallowForAllFlag(fileTypeFieldTypeMap[fileType])
     policyPage.clickSaveChanges()
 });
@@ -65,19 +65,19 @@ Then(/^all flags of the (.*) is changed to disallow$/, (fileType) => {
     policyPage.assertDisallowForAllFlag(fileTypeFieldTypeMap[fileType])
 });
 
-When('the user clicks on Current Policy in the navigation panel', () => {
+When('I click on Current Policy in the navigation panel', () => {
     policyPage.clickOnCurrentPolicyTab()
 });
 
-Then('the user is taken to the current policy page', () => {
+Then('I am taken to the current policy page', () => {
     policyPage.assertCurrentPolicyPage()
 });
 
-When('the user presses the Cancel button', () => {
+When('I press the Cancel button', () => {
     policyPage.clickCancelChanges()
 });
 
-When('the user presses the Save button', () => {
+When('I press the Save button', () => {
     policyPage.clickSaveChanges()
 });
 
@@ -85,7 +85,7 @@ When('I click on the previous policy button', () => {
     policyPage.clickPrevious()
 });
 
-When('user click the delete button', () => {
+When('I click the delete button', () => {
     policyPage.clickDeleteApiUrl()
 });
 
