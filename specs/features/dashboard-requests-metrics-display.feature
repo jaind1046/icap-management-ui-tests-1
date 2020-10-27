@@ -7,9 +7,9 @@ Feature: dashboard-requests-metrics-display
 
     @TEST-
     Scenario Outline: Processing a file increases the count for the number of files processed
-        When I process a <file>
+        When I process a '<file>'
         Then the Total Files processed will increase by 1
-        And <fileOutcome> on the graphs will increase by 1
+        And '<fileOutcome>' on the graphs will increase by 1
         Examples:
             | file              | fileOutcome  |
             | Safe_file         | Safe         |
