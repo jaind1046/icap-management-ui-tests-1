@@ -153,9 +153,9 @@ module.exports = {
     if (datetimeFrom == '1 hour earlier') {
       I.seeTextEquals(this.getPastPeriod(1), x)
     } else if (period == '12 hours earlier') {
-      I.see(MyHelper.getPastPeriod(12), this.fields.datetimeFrom)
+      I.see(this.getPastPeriod(12), this.fields.datetimeFrom)
     } else if (period == '24 hours earlier') {
-      I.see(MyHelper.getPastPeriod(24), this.fields.datetimeFrom)
+      I.see(this.getPastPeriod(24), this.fields.datetimeFrom)
     }
   },
 
