@@ -24,7 +24,7 @@ module.exports = {
         time_1hour: 'button:nth-child(1) > p',
         time_12hours: 'button:nth-child(2) > p',
         time_24hours: 'button:nth-child(3) > p',
-        addFilter: `button[class*='Button_button__1V1sR']`,
+        addFilter: `button[class*='Filters_addFilter__']`,
         deleteAppliedFilter: `button[class^='SelectedFilter_buttonClose__']`,
         fileTypeMenu: "",
         fileOutcomeMenu: "",
@@ -178,6 +178,7 @@ module.exports = {
     clickMoreFiltersButton() {
         const element = this.buttons.moreFilters;
         I.click(element);
+        I.wait(2);
     },
 
     setFileOutcome(outcome) {
@@ -237,6 +238,7 @@ module.exports = {
             default:
                 throw "there is no such element";
         }
+        I.wait(5);
     },
 
     checkFilters(filteredFile) {

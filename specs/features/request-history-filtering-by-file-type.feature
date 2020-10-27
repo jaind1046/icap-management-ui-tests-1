@@ -8,8 +8,8 @@ Feature: request-history-filtering-by-file-type
     Scenario Outline: I am able to filter the risks log
         Given I have navigated to the Request History page
         When I click on the More Filters button
-        And I click on the Add Filter button and add a filter selection as <filter>
-        Then the result list only shows filtered files as <filteredFile>
+        And I click on the Add Filter button and add a filter selection as '<filter>'
+        Then the result list only shows filtered files as '<filteredFile>'
         Examples:
             | filter        | filteredFile |
             | fileType_DOC  | DOC          |
