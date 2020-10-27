@@ -134,7 +134,8 @@ module.exports = {
   table: {
     innerContent: `div[class*='Tab_innerContent__1vzeV']`,
     viewPolicyFirst: `//tbody/tr[1]/th/button[text()='View']`,
-    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`
+    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`,
+    tableRows: `tbody.MuiTableBody-root > tr`
   },
   svg: {
     deleteApiUrl: `svg[id=Layer_1]`,
@@ -263,6 +264,13 @@ module.exports = {
     const numberOfOpenTabs = I.grabNumberOfOpenTabs()
     numberOfOpenTabs.then((numberTabs) => {
       I.assertEqual(numberTabs, expectedTabCount, 'Expected and actual tab count is not same')
+    })
+  },
+
+  assertNumberOfRecordsOfPolicy(count) {
+    const numberOfRowsInTable = I.grabNumberOfVisibleElements(this.table.tableRows)
+    numberOfRowsInTable.then((numberOfRows) => {
+      I.assert((numberOfRows > count), true)
     })
   },
 
