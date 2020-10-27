@@ -2,8 +2,8 @@ Feature: content-management-policy-history
     As a admin I need to view and search the policy history in order to confirm that the solution works as expected
 
     Background:
-        Given I am logged into the ui
-        Given I have navigated to the Policy page
+        Given I am logged into the portal
+        Given I am on current policy screen
 
 
     @TEST-161

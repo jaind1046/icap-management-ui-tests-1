@@ -48,6 +48,7 @@ module.exports = {
         dynamicDataExchange: `label[for='excel-id-1disallow']`,
         embeddedFiles: `label[for='excel-id-2disallow']`,
         embeddedFiles2: `label[for='excel-id-3disallow']`,
+        externalHyperlinks: `label[for='excel-id-4disallow']`,
         internalHyperlinks: `label[for='excel-id-5disallow']`,
         macros: `label[for='excel-id-6disallow']`,
         metadata: `label[for='excel-id-7disallow']`,
@@ -133,7 +134,8 @@ module.exports = {
   table: {
     innerContent: `div[class*='Tab_innerContent__1vzeV']`,
     viewPolicyFirst: `//tbody/tr[1]/th/button[text()='View']`,
-    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`
+    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`,
+    tableRows: `tbody.MuiTableBody-root > tr`
   },
   svg: {
     deleteApiUrl: `svg[id=Layer_1]`,
@@ -187,11 +189,21 @@ module.exports = {
     }
   },
 
+  setFlagTypeForGivenContentFlagsForGivenDocType(contentFlags, fileType, flagType) {
+    const element = this.fields[fileType][flagType][contentFlags]
+    I.click(element)
+  },
+
   assertSanitiseForAllFlag(docType) {
     const elements = this.fields[docType].sanitise
     for (let element in elements) {
       this.assertElementChecked(elements[element])
     }
+  },
+
+  assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlags, fileType, flagType) {
+    const element = this.fields[fileType][flagType][contentFlags]
+    this.assertElementChecked(element)
   },
 
   clickDisallowForAllFlag(docType) {
@@ -208,7 +220,7 @@ module.exports = {
     }
   },
 
-  // Uncommnet this assertion when functionality work fine.
+  // TODO Uncomment this assertion when functionality work fine.
   assertElementChecked(element) {
       // I.seeAttributesOnElements(element, 'checked')
   },
@@ -252,6 +264,13 @@ module.exports = {
     const numberOfOpenTabs = I.grabNumberOfOpenTabs()
     numberOfOpenTabs.then((numberTabs) => {
       I.assertEqual(numberTabs, expectedTabCount, 'Expected and actual tab count is not same')
+    })
+  },
+
+  assertNumberOfRecordsOfPolicy(count) {
+    const numberOfRowsInTable = I.grabNumberOfVisibleElements(this.table.tableRows)
+    numberOfRowsInTable.then((numberOfRows) => {
+      I.assert((numberOfRows > count), true)
     })
   },
 
@@ -328,5 +347,5 @@ module.exports = {
   setBlockedFileAsRefer() {
     const element = this.checkboxes.unprocessedFileRefer;
     I.click(element);
-  },
+  }
 };
