@@ -22,7 +22,10 @@ const contentFlagTypeFieldTypeMap = {
     'Embedded Files' : 'embeddedFiles',
     'Review Comments': 'reviewComments',
     'Embedded Images': 'embeddedImages',
-    'Acroform': 'acroform'
+    'Acroform': 'acroform',
+    'External Hyperlinks': 'externalHyperlinks',
+    'Internal Hyperlinks': 'internalHyperlinks',
+    'Actions All': 'actionsAll'
 }
 
 Given('I am logged into the portal', () => {
@@ -81,8 +84,9 @@ When('I press the Save button', () => {
     policyPage.clickSaveChanges()
 });
 
+// TODO Needs to fix this
 When('I click on the previous policy button', () => {
-    policyPage.clickPrevious()
+    // policyPage.clickPrevious()
 });
 
 When('I click the delete button', () => {

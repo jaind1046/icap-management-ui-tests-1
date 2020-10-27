@@ -48,6 +48,7 @@ module.exports = {
         dynamicDataExchange: `label[for='excel-id-1disallow']`,
         embeddedFiles: `label[for='excel-id-2disallow']`,
         embeddedFiles2: `label[for='excel-id-3disallow']`,
+        externalHyperlinks: `label[for='excel-id-4disallow']`,
         internalHyperlinks: `label[for='excel-id-5disallow']`,
         macros: `label[for='excel-id-6disallow']`,
         metadata: `label[for='excel-id-7disallow']`,
@@ -188,7 +189,7 @@ module.exports = {
   },
 
   setFlagTypeForGivenContentFlagsForGivenDocType(contentFlags, fileType, flagType) {
-    const element = this.fields[docType][FlagType][contentFlag]
+    const element = this.fields[fileType][flagType][contentFlags]
     I.click(element)
   },
 
@@ -200,7 +201,7 @@ module.exports = {
   },
 
   assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlags, fileType, flagType) {
-    const element = this.fields[docType][FlagType][contentFlag]
+    const element = this.fields[fileType][flagType][contentFlags]
     this.assertElementChecked(element)
   },
 
@@ -338,5 +339,5 @@ module.exports = {
   setBlockedFileAsRefer() {
     const element = this.checkboxes.unprocessedFileRefer;
     I.click(element);
-  },
+  }
 };
