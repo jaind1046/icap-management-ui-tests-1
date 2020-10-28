@@ -1,7 +1,4 @@
-//<reference path="../../src/utils/steps_file.js" />
-
-
-const {I, dashboardPage, homePage} = inject();
+const {I, dashboardPage} = inject();
 
 let datetimeFrom = dashboardPage.inputs.datetimeFrom;
 let datetimeTo = dashboardPage.inputs.datetimeTo;

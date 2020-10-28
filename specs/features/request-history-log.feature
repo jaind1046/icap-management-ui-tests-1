@@ -36,10 +36,10 @@ Feature: request-history-log
             | FileOutcome_Safe | FileType_docx         | docx         |
 
     @TEST-163_164_165_180
-    Scenario Outline: I am able to filter the risks log
+    Scenario Outline: I can filter the log using file id
         Given I have navigated to the Request History page
-        When I click on the Add Filter button and add a filter selection as '<filter>'
-        Then the result list shows all files as '<filteredFile>'
+        When I click on the Add Filter button and add a file id filter as '<filter>'
+        Then the result list only shows the filtered file as '<filteredFile>'
         Examples:
             | filter     | filteredFile |
             | fileId_123 | 123          |
