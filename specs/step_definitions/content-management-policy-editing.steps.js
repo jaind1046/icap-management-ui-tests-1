@@ -6,17 +6,9 @@ const {
     env
 } = inject();
 
-const fileTypeFieldTypeMap = {
-    Word : 'word',
-    Excel: 'excel',
-    Powerpoint: 'powerpoint',
-    PDF: 'pdf'
-}
-
 Given('I am logged into the portal', () => {
-    I.onLoginPage();
+    I.onLoginPage()
     I.wait(2)
-    console.log(env.qa)
     loginPage.loginWith(env.qa.email, env.qa.password);
 });
 
@@ -24,37 +16,54 @@ Given('I am on current policy screen', () => {
     homePage.clickPolicy()
 });
 
-When(/^the user change all the flag for (.*) to sanitise on policy page$/, (fileType) => {
-    policyPage.clickSanitiseForAllFlag(fileTypeFieldTypeMap[fileType])
+When(/^I change one of the (.*) for required file types (.*) to (.*)$/, (contentFlag, fileType, flagType) => {
+    policyPage.setFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
+});
+
+Then(/^(.*) for required file types (.*) is set to (.*)$/, (contentFlag, fileType, flagType) => {
+    policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
+});
+
+When(/^I change all the flag for (.*) to sanitise on policy page$/, (fileType) => {
+    policyPage.clickSanitiseForAllFlag(fileType)
     policyPage.clickSaveChanges()
 });
 
 Then(/^all flags of the (.*) is changed to sanitise$/, (fileType) => {
-    policyPage.assertSanitiseForAllFlag(fileTypeFieldTypeMap[fileType])
+    policyPage.assertSanitiseForAllFlag(fileType)
 });
 
-When(/^the user change all the flag for (.*) to disallow on policy page$/, (fileType) => {
-    policyPage.clickDisallowForAllFlag(fileTypeFieldTypeMap[fileType])
+When(/^I change all the flag for (.*) to disallow on policy page$/, (fileType) => {
+    policyPage.clickDisallowForAllFlag(fileType)
     policyPage.clickSaveChanges()
 });
 
 Then(/^all flags of the (.*) is changed to disallow$/, (fileType) => {
-    policyPage.assertDisallowForAllFlag(fileTypeFieldTypeMap[fileType])
+    policyPage.assertDisallowForAllFlag(fileType)
 });
 
-When('I click view on a previous policy', () => {
+When('I click on Current Policy in the navigation panel', () => {
     policyPage.clickOnCurrentPolicyTab()
 });
 
-Then('the user is taken to the current policy page', () => {
+Then('I am taken to the current policy page', () => {
     policyPage.assertCurrentPolicyPage()
 });
 
-When('the user presses the Cancel button', () => {
+When('I press the Cancel button', () => {
     policyPage.clickCancelChanges()
 });
 
-When('user click the delete button', () => {
+When('I press the Save button', () => {
+    policyPage.clickSaveChanges()
+});
+
+// TODO Needs to fix this
+When('I click on the previous policy button', () => {
+    // policyPage.clickPrevious()
+});
+
+When('I click the delete button', () => {
     policyPage.clickDeleteApiUrl()
 });
 
@@ -68,4 +77,12 @@ When('I have entered an valid URL into the "API URL" box', () => {
 
 When('the save button is selected', () => {
     policyPage.clickSaveApiUrl()
+});
+
+// TODO while working on previous policy screen
+Then('the previous policy can now be located in the Policy history page', () => {
+});
+
+// TODO How we will make sure this
+Then('the Current policy defaults to the latest saved policy', () => {
 });
