@@ -7,7 +7,8 @@ Feature: request-history-filtering-by-risk-outcome
     @TEST-163_164_165_180
     Scenario Outline: I can filter the log by file risks
         Given I have navigated to the Request History page
-        When I click on the Add Filter button and add a risk filter as '<filter>'
+        When I click on the More Filters button
+        And I click on the Add Filter button and add a risk filter as '<filter>'
         Then the result list only shows filtered files with the selected risk as '<filteredFile>'
         Examples:
             | filter                | filteredFile |

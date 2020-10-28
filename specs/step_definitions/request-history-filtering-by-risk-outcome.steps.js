@@ -1,3 +1,5 @@
+//<reference path="../../src/utils/steps.d.ts" />
+
 const {I, requesthistoryPage} = inject();
 
 When('I click on the Add Filter button and add a risk filter as {string}', (filter) => {
