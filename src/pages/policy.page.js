@@ -246,12 +246,12 @@ module.exports = {
    * ***************************************************************
    */
   clickView() {
-    const element = this.buttons.view;
+    const element = this.table.viewPolicyFirst;
     I.click(element);
   },
 
   clickActivate() {
-    const element = this.buttons.activate;
+    const element = this.table.activatePolicyFirst;
     I.click(element);
   },
 

@@ -2,8 +2,8 @@ Feature: content-management-previous-policy
     As a admin I need to view, validate the accuracy of and activate previous policy details in order to confirm that the solution works as expected
 
     Background:
-        Given I am logged into the ui
-        Given I have navigated to the Policy page
+        Given I am logged into the portal
+        Given I am on current policy screen
 
     @TEST-154
     Scenario: Selecting the "Policy History" in the navigation panel will be take me to the policy history page
@@ -13,12 +13,12 @@ Feature: content-management-previous-policy
 
     @TEST-156
     Scenario: I can view previous Policy details
-        Given I have navigated to the Previous Policy tab
+        Given I click on Policy History in the navigation panel
         When I click view on a previous policy
         Then the previous Policy is displayed
 
     @TEST-157
     Scenario: I can activate a previous policy
-        Given I have navigated to the Current Policy page
+        Given I click on Policy History in the navigation panel
         When I click activate on a previous policy
         Then the previous Policy is activated
