@@ -286,6 +286,12 @@ module.exports = {
             I.seeInField(row + '> td:nth-child(3)', filteredFile);
         }
     },
+    checkFileRiskValues(filteredFile) {
+        const table = document.getElementsByTagName('table')
+        for (let row in table.tBodies[0].rows) {
+            I.seeInField(row + '> td:nth-child(4)', filteredFile);
+        }
+    },
 
     /*
      * Pagination
