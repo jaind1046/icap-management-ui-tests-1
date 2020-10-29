@@ -9,7 +9,7 @@ Given('the user clicks on Policy History in the navigation panel', () => {
     policyPage.clickOnHistoryPolicyTab()
 });
 
-When('I click on Policy History in the navigation panel', () => {
+When('Given I am on the Policy History page', () => {
     policyPage.clickOnHistoryPolicyTab()
 });
 

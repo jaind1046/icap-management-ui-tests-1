@@ -115,14 +115,14 @@ module.exports = {
       history: `//button[text()='History']`
     },
     view: "",
+    viewPolicyFirst: `//tbody/tr[1]/th/button[text()='View']`,
     activate: "",
+    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`,
     gotoPage: "",
     previousPage: "",
     firstPage: "",
     nextPage: "",
     lastPage: "",
-    viewPolicyFirst: `//tbody/tr[1]/th/button[text()='View']`,
-    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`
   },
   containers: {
     wordContentFlags: `div[class*='Current_inner__1pjYU'] > section:nth-of-type(1) > div`,
