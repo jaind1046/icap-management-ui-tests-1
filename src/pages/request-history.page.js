@@ -1,5 +1,5 @@
 const MyHelper = require("../utils/helper");
-var moment = require('moment');
+let moment = require('moment');
 const {
   I
 } = inject();
@@ -79,7 +79,6 @@ module.exports = {
     sanitisationItemsBanner: `div[class*='FileInfo_inner__1NnWT'] > div:nth-of-type(3)`,
     remedyItemsBanner: `div[class*='FileInfo_inner__1NnWT'] > div:nth-of-type(4)`,
     fileDetailModal: `section[class*='Modal_Modal__9Stj1']`,
-    modalHeader: `section[class*='FileInfo_FileInfo__1Z457'] > header`
   },
 
   //Methods
@@ -104,32 +103,28 @@ module.exports = {
   },
 
   selectTimePeriod(period) {
-    if (period == '1 Hour') {
+    if (period === '1 Hour') {
       I.click(this.buttons.time_1hour)
-    } else if (period == '12 Hours') {
+    } else if (period === '12 Hours') {
       I.click(this.buttons.time_12hours)
-    } else if (period == '24 Hours') {
+    } else if (period === '24 Hours') {
       I.click(this.buttons.time_24hours)
     }
 
   },
 
-  getTimeFrom() {
-    const element = this.fields.datetimeFrom;
-    I.grabValueFrom(element);
-
+  async getTimeFrom() {
+    return await I.grabValueFrom(this.fields.datetimeFrom);
   },
 
   async getTimeTo() {
-    const element = this.fields.datetimeTo;
-    let timeTo = await I.grabTextFrom(this.fields.datetimeTo);
-    return timeTo;
+      return await I.grabTextFrom(this.fields.datetimeTo);
   },
 
   setTimeTo(dateTo) {
     const element = this.fields.datetimeTo;
     I.click(element)
-    if (dateTo == 'current time') {
+    if (dateTo === 'current time') {
       I.type(getCurrentTime());
     } else {
       I.type(dateTo);
@@ -139,11 +134,11 @@ module.exports = {
   setTimeFrom(dateFrom) {
     const element = this.fields.datetimeFrom;
     I.click(element)
-    if (dateFrom == '1 hour earlier') {
+    if (dateFrom === '1 hour earlier') {
       I.type(getPastPeriod(1));
-    } else if (dateFrom == '6 hours earlier') {
+    } else if (dateFrom === '6 hours earlier') {
       I.type(getPastPeriod(6));
-    } else if (dateFrom == '24 hours earlier') {
+    } else if (dateFrom === '24 hours earlier') {
       I.type(getPastPeriod(24));
     } else {
       I.type(dateFrom);
@@ -152,36 +147,35 @@ module.exports = {
 
   assertAccurateTimeFromIsSet(datetimeFrom) {
     let x = document.getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value);
-    if (datetimeFrom == '1 hour earlier') {
+    if (datetimeFrom === '1 hour earlier') {
       I.seeTextEquals(this.getPastPeriod(1), x)
-    } else if (period == '12 hours earlier') {
+    } else if (datetimeFrom === '12 hours earlier') {
       I.see(this.getPastPeriod(12), this.fields.datetimeFrom)
-    } else if (period == '24 hours earlier') {
+    } else if (datetimeFrom === '24 hours earlier') {
       I.see(this.getPastPeriod(24), this.fields.datetimeFrom)
     }
   },
 
   checkAccurateTime() {
-    let timeFrom = document
-    getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value)
+    let timeFrom = document.getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value);
     I.seeTextEquals(this.getPastPeriod(1), timeFrom)
   },
 
   getCurrentTime() {
-    var currentTime = moment().utc(true).format().slice(0, -1);
-    return currentTime;
+      let currentTime = moment().utc(true).format().slice(0, -1);
+      return currentTime;
   },
 
   getPastPeriod(time) {
-    var now = moment().utc(true);
-    var pastPeriod = now.subtract(time, 'h').format(String).slice(0, -1);
-    return pastPeriod;
+      const now = moment().utc(true);
+      const pastPeriod = now.subtract(time, 'h').format(String).slice(0, -1);
+      return pastPeriod;
   },
 
   assertAccurateTimeToIsSet(datetimeTo) {
-    var currentTime = moment().utc(true).format().slice(0, -1);
-    let x = document.getElementById(this.fields.datetimeTo).ATTRIBUTE_NODE(value);
-    if (datetimeTo == 'current time') {
+      const currentTime = moment().utc(true).format().slice(0, -1);
+      let x = document.getElementById(this.fields.datetimeTo).ATTRIBUTE_NODE(value);
+    if (datetimeTo === 'current time') {
       I.seeTextEquals(currentTime, x);
     }
   },
@@ -204,15 +198,15 @@ module.exports = {
     let outcomeType = null;
     const outcomeMenu = this.popup.filterFileOutcomes;
     I.click(outcomeMenu);
-    if (outcome = "safe") {
+    if (outcome === "safe") {
       outcomeType = this.buttons.fileOutcomeFilterSafe;
-    } else if (outcome = "dangerous") {
+    } else if (outcome === "dangerous") {
       outcomeType = this.buttons.fileOutcomeFilterDangerous;
-    } else if (outcome = "blocked") {
+    } else if (outcome === "blocked") {
       outcomeType = this.buttons.fileOutcomeFilterBlocked;
-    } else if (outcome = "checked") {
+    } else if (outcome === "checked") {
       outcomeType = this.buttons.fileOutcomeFilterChecked;
-    } else if (outcome = "unclassified") {
+    } else if (outcome === "unclassified") {
       outcomeType = this.buttons.fileOutcomeFilterUnclassified;
     }
     I.click(outcomeType);
@@ -338,7 +332,7 @@ module.exports = {
     I.click(element);
   },
 
-  clickPrevious() {
+  clickNext() {
     const element = this.buttons.nextPage;
     I.click(element);
   },
