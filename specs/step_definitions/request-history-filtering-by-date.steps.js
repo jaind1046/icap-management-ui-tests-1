@@ -31,5 +31,18 @@ Then('the files processed for the selected period are displayed', () => {
     //TODO
 });
 
+When(/^I select a valid (.*) and (.*)$/, (datetimeFrom, datetimeTo) => {
+    requesthistoryPage.setTimeFrom(datetimeFrom);
+    requesthistoryPage.setTimeTo(datetimeTo);
 
+});
+
+When(/^I select a custom over 24 hours range from (.*) to (.*)$/, (datetimeFrom, datetimeTo) => {
+    requesthistoryPage.setTimeFrom(datetimeFrom);
+    requesthistoryPage.setTimeTo(datetimeTo);
+});
+
+Then('the expected {string} is displayed', () => {
+    I.seeInSource('') //TODO
+});
 
