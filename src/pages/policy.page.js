@@ -115,7 +115,9 @@ module.exports = {
       history: `//button[text()='History']`
     },
     view: "",
+    viewPolicyFirst: `//tbody/tr[1]/th/button[text()='View']`,
     activate: "",
+    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`,
     gotoPage: "",
     previousPage: "",
     firstPage: "",
@@ -133,8 +135,6 @@ module.exports = {
   },
   table: {
     innerContent: `div[class*='Tab_innerContent__1vzeV']`,
-    viewPolicyFirst: `//tbody/tr[1]/th/button[text()='View']`,
-    activatePolicyFirst: `//tbody/tr[1]/th/button[text()='Activate']`,
     tableRows: `tbody.MuiTableBody-root > tr`
   },
   svg: {
@@ -246,12 +246,12 @@ module.exports = {
    * ***************************************************************
    */
   clickView() {
-    const element = this.buttons.view;
+    const element = this.buttons.viewPolicyFirst;
     I.click(element);
   },
 
   clickActivate() {
-    const element = this.buttons.activate;
+    const element = this.buttons.activatePolicyFirst;
     I.click(element);
   },
 

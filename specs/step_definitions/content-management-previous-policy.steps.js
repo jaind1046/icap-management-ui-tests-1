@@ -14,3 +14,8 @@ When('I click view on a previous policy', () => {
 Then('the previous Policy is displayed', () => {
     policyPage.assertNumberOfOpenTab(2)
 });
+
+// TODO needs to finish when functionality available
+Then('the previous Policy is activated', () => {
+});
+
