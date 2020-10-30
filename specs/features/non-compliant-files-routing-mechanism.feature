@@ -19,21 +19,21 @@ Feature: non-compliant-files-routing-mechanism
     @TEST-187
     Scenario Outline: I can change the outcome of Glasswall Blocked files
         Given I have navigated to the Current Policy page
-        When I change the route for Glasswall Blocked Files to <Glasswall Blocked route> and save
+        When I change the route for Glasswall Blocked Files to '<Glasswall Blocked route>' and save
         Then the Glasswall Blocked file type route is updated
-        And an Glasswall Blocked file is directed according to <Glasswall Blocked file outcome>
+        And an Glasswall Blocked file is directed according to '<Glasswall Blocked file outcome>'
         Examples:
             | Glasswall Blocked route | Glasswall Blocked file outcome                          |
             | Relay                   | Unmodified file relayed                                 |
-            | Block                   | Original file blocked, and error report recieved        |
+            | Block                   | Original file blocked, and error report received        |
             | Refer                   | The file is sent along the "non-compliant file service" |
 
     @TEST-183
     Scenario Outline: I can change the outcome of Un-processable files
         Given I have navigated to the Current Policy page
-        When I change the route for un-processable file types to <un-processable route> and save
+        When I change the route for un-processable file types to '<un-processable route>' and save
         Then the un-processable file type route is updated
-        And an un-processable file is directed according to <un-processable file outcome>
+        And an un-processable file is directed according to '<un-processable file outcome>'
         Examples:
             | un-processable route | un-processable file outcome                             |
             | Relay                | Unmodified file relayed                                 |

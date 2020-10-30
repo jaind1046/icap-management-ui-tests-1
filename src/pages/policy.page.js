@@ -97,15 +97,15 @@ module.exports = {
         metadata: `label[for='pdf-id-8disallow']`
       }
     },
-    validateApiUrlInput: `div[class*='Input_Input__SNRl4'] > input`
+    validateApiUrlInput: `div[class*='Input_Input__'] > input`
   },
-  checkboxes: {
-    unprocessedFileRelay: "",
-    unprocessedFileBlock: "",
-    unprocessedFileRefer: "",
-    blockedFileRelay: "",
-    blockedFileBlock: "",
-    blockedFileRefer: "",
+  radiobuttons: {
+    unprocessedFileRelay: "#relay-Un-Processable-File-Types",
+    unprocessedFileBlock: "#block-Un-Processable-File-Types",
+    unprocessedFileRefer: "#refer-Un-Processable-File-Types",
+    blockedFileRelay: "#relay-Glasswall-Blocked-Files",
+    blockedFileBlock: "#block-Glasswall-Blocked-Files",
+    blockedFileRefer: "#refer-Glasswall-Blocked-Files",
   },
   buttons: {
     cancelChanges: `//button[text()='Cancel Changes']`,
@@ -320,32 +320,68 @@ module.exports = {
    */
 
   setUnprocessableFileAsRelay() {
-    const element = this.checkboxes.unprocessedFileRelay;
+    const element = this.radiobuttons.unprocessedFileRelay;
     I.click(element);
   },
 
   setUnprocessableFileAsBlock() {
-    const element = this.checkboxes.unprocessedFileBlock;
+    const element = this.radiobuttons.unprocessedFileBlock;
     I.click(element);
   },
 
   setUnprocessableFileAsRefer() {
-    const element = this.checkboxes.unprocessedFileRefer;
+    const element = this.radiobuttons.unprocessedFileRefer;
     I.click(element);
   },
 
   setBlockedFileAsRelay() {
-    const element = this.checkboxes.blockedFileRelay;
+    const element = this.radiobuttons.blockedFileRelay;
     I.click(element);
   },
 
   setBlockedFileAsBlock() {
-    const element = this.checkboxes.blockedFileBlock;
+    const element = this.radiobuttons.blockedFileBlock;
     I.click(element);
   },
 
   setBlockedFileAsRefer() {
-    const element = this.checkboxes.unprocessedFileRefer;
+    const element = this.radiobuttons.unprocessedFileRefer;
     I.click(element);
+  },
+  checkBlockedRouteRadio(glasswallBlockedRoute) {
+    let element;
+    switch (glasswallBlockedRoute) {
+      case ('Relay'):
+        element = this.radiobuttons.blockedFileRelay;
+        break;
+      case ('Block'):
+        element = this.radiobuttons.blockedFileBlock;
+        break;
+      case ('Refer'):
+        element = this.radiobuttons.blockedFileRefer;
+        break;
+      default:
+        throw "No such option";
+    }
+    I.checkOption(element);
+    return element;
+  },
+  checkUnprocessableRouteRadio(unprocessableRoute) {
+    let element;
+    switch (unprocessableRoute) {
+      case ('Relay'):
+        element = this.radiobuttons.unprocessedFileRelay;
+        break;
+      case ('Block'):
+        element = this.radiobuttons.unprocessedFileBlock;
+        break;
+      case ('Refer'):
+        element = this.radiobuttons.unprocessedFileRefer;
+        break;
+      default:
+        throw "No such option";
+    }
+    I.checkOption(element);
+    return element;
   }
 };
