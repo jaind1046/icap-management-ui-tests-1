@@ -37,7 +37,7 @@ exports.config = {
   bootstrap: null,
   gherkin: {
     features: './specs/features/*.feature',
-    steps:    './specs/step_definitions/*.steps.js'
+    steps: './specs/step_definitions/*.steps.js'
   },
   mocha: {},
   name: 'icap-management-ui-tests',
@@ -52,7 +52,9 @@ exports.config = {
       enabled: true
     },
     autoDelay: {
-      enabled: true
+      enabled: true,
+      delayBefore: 200,
+      delayAfter: 200
     },
  
   }
