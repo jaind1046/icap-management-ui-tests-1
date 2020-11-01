@@ -18,5 +18,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |          
-      npm install          
-      npx codeceptjs run --override '{"helpers": {"Puppeteer": {"show": false}}}' --steps
+          npm install          
+          npx codeceptjs run --override '{"helpers": {"Puppeteer": {"show": false}}}' --steps
+      env:
+        CI: true

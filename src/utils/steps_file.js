@@ -2,17 +2,18 @@ const homePage = require("../pages/home.page.js");
 const loginPage = require("../pages/login.page.js");
 const policyPage = require("../pages/policy.page.js");
 const filedropPage = require("../pages/file-drop.page.js");
+require('dotenv').config({path: '.env'});
 
 module.exports = function () {
     return actor({
         onLoginPage: function () {
-            this.amOnPage("https://k8-proxy.github.io/p-ui-wireframes/");
+            this.amOnPage("http://localhost:5692");
         },
 
         loginNoPwd: function () {
             this.onLoginPage();
             loginPage.clickLogIn();
-            this.wait(5);
+            this.waitForElement(homePage.sections.menu, 30)
         },
 
         enterValidCredential: function () {

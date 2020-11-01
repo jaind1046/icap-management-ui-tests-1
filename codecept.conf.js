@@ -1,4 +1,5 @@
 const { setHeadlessWhen } = require('@codeceptjs/configure');
+require('dotenv').config({path: '.env'});
 
 setHeadlessWhen(process.env.HEADLESS);
 
@@ -7,11 +8,11 @@ exports.config = {
   helpers: {
     Puppeteer: {
       url: 'http://localhost:8080',
-      show: true,
+      show: false,
       windowSize: '1536 x 826',
         chrome: {
           args: ['--no-sandbox', '--window-size=1536,826'],
-        }
+        },
     },
     FileSystem: {},
     AssertWrapper : {
