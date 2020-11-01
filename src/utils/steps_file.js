@@ -6,7 +6,7 @@ const filedropPage = require("../pages/file-drop.page.js");
 module.exports = function () {
     return actor({
         onLoginPage: function () {
-            this.amOnPage("http://localhost:3000");
+            this.amOnPage("https://k8-proxy.github.io/p-ui-wireframes/");
         },
 
         loginNoPwd: function () {
@@ -26,8 +26,8 @@ module.exports = function () {
             this.click(loginPage.clickForgotPasswordLink());
         },
 
-        goToDashboard: function () {
-            homePage.clickDashboard();
+        goToAnalytics: function () {
+            homePage.clickAnalytics();
         },
 
         goToFileDrop: function () {
@@ -54,7 +54,7 @@ module.exports = function () {
 
         uploadFile: function (file) {
             this.attachFile(filedropPage.buttons.fileInput, file)
-            this.wait(5);
+            this.waitForElement(filedropPage.sections.analysisReportView,30)
         },
 
         uploadFileByType: function (fileType) {
