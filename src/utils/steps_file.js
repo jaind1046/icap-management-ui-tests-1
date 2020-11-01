@@ -6,7 +6,7 @@ const filedropPage = require("../pages/file-drop.page.js");
 module.exports = function () {
     return actor({
         onLoginPage: function () {
-            this.amOnPage("http://localhost:8080");
+            this.amOnPage("http://localhost:3000");
         },
 
         loginNoPwd: function () {

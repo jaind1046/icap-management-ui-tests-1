@@ -1,5 +1,5 @@
 #!/bin/bash
 
 rm -r output 
-npx codeceptjs run --grep "@fileUpload" --plugins allure  
+npx codeceptjs run  --plugins allure  
 allure serve output

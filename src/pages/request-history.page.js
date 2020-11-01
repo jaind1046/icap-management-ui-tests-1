@@ -218,7 +218,8 @@ module.exports = {
   },
 
   setFileId(value) {
-    I.click(this.buttons.addFilter)
+    I.click(this.buttons.moreFilters);
+    I.click(this.buttons.addFilter);
     I.click(this.buttons.fileIdMenu);
     I.fillField(this.fields.inputFilterFileID, value);
   },
@@ -227,7 +228,6 @@ module.exports = {
     this.setFileId(fileId);
     I.click(this.buttons.fileIdAdd);
   },
-
 
   setFileType(value) {
     const checkboxLabel = value.toUpperCase();
