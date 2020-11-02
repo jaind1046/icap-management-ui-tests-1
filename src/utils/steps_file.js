@@ -7,13 +7,13 @@ require('dotenv').config({path: '.env'});
 module.exports = function () {
     return actor({
         onLoginPage: function () {
-            this.amOnPage("http://localhost:5692");
+            this.amOnPage("http://localhost:5431");
         },
 
         loginNoPwd: function () {
             this.onLoginPage();
             loginPage.clickLogIn();
-            this.waitForElement(homePage.sections.menu, 30)
+            this.wait(5)
         },
 
         enterValidCredential: function () {

@@ -7,19 +7,28 @@ Feature: dashboard-requests-filtering-by-file-risk
 
 
     @TEST-192
-    Scenario Outline: I can remove file-outcomes from the filters on the charts
-        Given I have navigated to the Dashboard page
-        When I click on <fileOutcome> on <chart>
-        Then the chart is updated to remove <fileOutcome>
+    Scenario Outline: I can filter the risk legend
+        Given I have navigated to the analytics page
+        When I filter in the file risk <fileRisk>
+        Then the chart is updated to only show the risk <filteredRisk>
         Examples:
-            | chart      | fileOutcome  |
-            | pie chart  | Safe         |
-            | pie chart  | Blocked      |
-            | pie chart  | Dangerous    |
-            | pie chart  | Unclassified |
-            | line graph | Safe         |
-            | line graph | Blocked      |
-            | line graph | Dangerous    |
-            | line graph | Checked      |
-            | line graph | Unclassified |
+            | fileRisk     | filteredRisk |
+            | Safe         | Safe         |
+            | Blocked      | Blocked      |
+            | Dangerous    | Dangerous    |
+            | Unclassified | Unclassified |
+
+
+# @TEST
+# Scenario Outline: I can remove file-outcomes from the filters on the charts
+#     Given I have navigated to the analytics page
+#     When I click from <chart> on <fileRisk>
+#     Then the chart is updated to remove <fileRisk>
+#     Examples:
+#         | chart      | fileOutcome  |
+#         | line graph | Safe         |
+#         | line graph | Blocked      |
+#         | line graph | Dangerous    |
+#         | line graph | Checked      |
+#         | line graph | Unclassified |
 

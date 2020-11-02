@@ -16,10 +16,10 @@ module.exports = {
         saveNewPassword: `button[class*='ChangePassword_button__2EU8P']`
     },
     sections: {
-        menu: `section[class*='Toolbar_Toolbar__1M58_']`,
+        menu: `section[class*='Toolbar_Toolbar__']`,
     },
     links: {
-        analytics: `a[href*='analytics'] > div > p`,
+        analytics: `//a[contains(.,'Analytics')]`,
         fileDrop: `a[href*='file-drop'] > div`,
         requestsHistory: `a[href*='request-history'] > div`,
         policy: `a[href*='policy'] > div`,
