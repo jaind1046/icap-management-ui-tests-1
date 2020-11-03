@@ -10,7 +10,7 @@ module.exports = {
   fields: {
     domainNameInput: `div[class*='Input_Input__17Nwp'] > input`,
     pageHeading: `h1[class*='Main_pageHeading']`,
-    contentFlags: `//p[text()='Content Flags']`,
+    contentFlags: `//h2[text()='Content Flags']`,
     word: {
       sanitise: {
         dynamicDataExchange: `label[for='word-id-1sanitise']`,
@@ -179,7 +179,7 @@ module.exports = {
   },
 
   assertCurrentPolicyPage() {
-    I.seeElement(this.fields.contentFlags)
+    I.seeElement(this.fields.wordContentFlags)
   },
 
   clickSanitiseForAllFlag(docType) {
@@ -261,9 +261,9 @@ module.exports = {
   },
 
   assertNumberOfOpenTab(expectedTabCount) {
-    const numberOfOpenTabs = I.grabNumberOfOpenTabs()
+    const numberOfOpenTabs = I.grabAllWindowHandles()
     numberOfOpenTabs.then((numberTabs) => {
-      I.assertEqual(numberTabs, expectedTabCount, 'Expected and actual tab count is not same')
+      I.assertEqual(numberTabs.length, expectedTabCount, 'Expected and actual tab count is not same')
     })
   },
 
