@@ -179,7 +179,7 @@ module.exports = {
   },
 
   assertCurrentPolicyPage() {
-    I.seeElement(this.fields.wordContentFlags)
+    I.seeElement(this.fields.contentFlags)
   },
 
   clickSanitiseForAllFlag(docType) {
