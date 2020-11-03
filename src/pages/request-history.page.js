@@ -8,7 +8,7 @@ module.exports = {
     //Locators
 
     fields: {
-        inputFilterFileID: `div[id='inputFilterTransactionID'] > input`,
+        inputFilterFileID: `input[name='fileId']`,
         customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
         datetimeFrom: `#datetime-local-left`,
         datetimeTo: `#datetime-local-right`,
@@ -17,7 +17,7 @@ module.exports = {
         countOfFiles: ""
     },
     buttons: {
-        filterArrow: `button[class*='Filters_arrow__3D5k3']`,
+        filterArrow: `button[class*='Filters_arrow__']`,
         moreFilters: `button[class*='Filters_moreFilters__']`,
         dateTime: `//button[contains(.,'Date/Time')]`,
         time_1hour: 'button:nth-child(1) > p',
@@ -33,7 +33,7 @@ module.exports = {
         fileOutcomeFilterAllowedByPolicy: "//span[contains(.,'Allowed By Policy')]",
         fileOutcomeFilterAllowedByNCFS: "//span[contains(.,'Allowed By NCFS')]",
         fileTypeMenuAdd: `div[class*='Filters_popup__'] > button:nth-child(1)`,
-        fileIdAdd: "//button[contains(.,'+ ADD')",
+        fileIdAdd: "//button[contains(.,'+ ADD')]",
         fileIdMenu: "button:nth-child(3) > p",
         gotoPage: "",
         previousPage: "",
@@ -223,7 +223,7 @@ module.exports = {
 
     setFileId(value) {
         I.waitForElement(this.buttons.moreFilters, 30)
-        I.click(this.buttons.filterArrow);
+        I.click(this.buttons.moreFilters);
         I.waitForElement(this.buttons.addFilter, 30)
         I.click(this.buttons.addFilter);
         I.click(this.buttons.fileIdMenu);
@@ -326,7 +326,7 @@ module.exports = {
         const res = filteredFile.split("_");
         if (res.length === 1) {
             //going to text in SelectedFilter_footer
-            const filterValue = this.containers.appliedFilters + 'div > div > span';
+            const filterValue = this.containers.appliedFilters + '> div > div > span';
             I.seeInField(filterValue, filteredFile);
         } else {
             //todo: write for multiple filters

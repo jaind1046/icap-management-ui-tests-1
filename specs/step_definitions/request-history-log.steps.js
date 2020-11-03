@@ -33,11 +33,11 @@ When('I remove {string}', (filterName) => {
     requesthistoryPage.removeAppliedFilter(filterName);
 });
 
-When('I click on the Add Filter button and add a filter selection as {string}', (filter) => {
+When('I click on the Add Filter button and add a file id filter as {string}', (filter) => {
     requesthistoryPage.addFilterWithValue(filter);
 });
 
-Then('the result list shows all files as {string}', (filteredFile) => {
+Then('the result list only shows the filtered file as {string}', (filteredFile) => {
     requesthistoryPage.checkFilters(filteredFile);
     requesthistoryPage.checkFileValues(filteredFile);
 });
