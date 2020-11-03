@@ -13,12 +13,9 @@ Feature: request-history-filtering-by-file-type
         Examples:
             | filter        | filteredFile |
             | fileType_DOC  | DOC          |
-            | fileType_DOT  | DOT          |
             | fileType_DOCX | DOCX         |
-            | fileType_DOCM | DOCM         |
             | fileType_XLSX | XLSX         |
             | fileType_XLS  | XLS          |
-            | fileType_XLSM | XLSM         |
             | fileType_PPT  | PPT          |
             | fileType_PPTX | PPTX         |
             | fileType_JPEG | JPEG         |
