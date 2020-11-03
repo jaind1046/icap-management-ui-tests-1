@@ -46,16 +46,23 @@ module.exports = {
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
     },
     checkboxes: {
-        fileTypeDoc: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(1) > div > label:nth-child(1) > span:nth-child(1) > span > input",
-        fileTypeDocx: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(1) > div > label:nth-child(2) > span:nth-child(1) > span > input",
-        fileTypeXlsx: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(2) > div > label:nth-child(1) > span:nth-child(1) > span > input",
-        fileTypeXls: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(2) > div > label:nth-child(2) > span:nth-child(1) > span > input",
-        fileTypePpt: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(3) > div > label:nth-child(1) > span:nth-child(1) > span > input",
-        fileTypePptx: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(3) > div > label:nth-child(2) > span:nth-child(1) > span > input",
-        fileTypePdf: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(4) > div > label > span:nth-child(1) > span > input",
-        fileTypePng: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(7) > div > label:nth-child(2) > span:nth-child(1) > span > input",
-        fileTypeGif: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(7) > div > label:nth-child(3) > span:nth-child(1) > span > input",
-        fileTypeJpeg: "div[class*='PopupFilter_inner__'] >  fieldset:nth-child(7) > div > label:nth-child(1) > span:nth-child(1) > span > input",
+        fileTypeDoc: `//span[contains(.,'doc')]/parent::label/span[1]/span/input`,
+        fileTypeDocx: `//span[contains(.,'docx')]/parent::label/span[1]/span/input`,
+        fileTypeXlsx: `//span[contains(.,'xlsx')]/parent::label/span[1]/span/input`,
+        fileTypeXls: `//span[contains(.,'xls')]/parent::label/span[1]/span/input`,
+        fileTypePpt: `//span[contains(.,'ppt')]/parent::label/span[1]/span/input`,
+        fileTypePptx: `//span[contains(.,'pptx')]/parent::label/span[1]/span/input`,
+        fileTypePdf: `//span[contains(.,'pdf')]/parent::label/span[1]/span/input`,
+        fileTypePng: `//span[contains(.,'png')]/parent::label/span[1]/span/input`,
+        fileTypeGif: `//span[contains(.,'gif')]/parent::label/span[1]/span/input`,
+        fileTypeJpeg: `//span[contains(.,'jpeg')]/parent::label/span[1]/span/input`,
+        fileTypeRtf: `//span[contains(.,'rtf')]/parent::label/span[1]/span/input`,
+        fileTypeWmf: `//span[contains(.,'wmf')]/parent::label/span[1]/span/input`,
+        fileTypeEmf: `//span[contains(.,'emf')]/parent::label/span[1]/span/input`,
+        fileTypePe: `//span[contains(.,'Pe')]/parent::label/span[1]/span/input`,
+        fileTypeMacho: `//span[contains(.,'Macho')]/parent::label/span[1]/span/input`,
+        fileTypeElf: `//span[contains(.,'Elf')]/parent::label/span[1]/span/input`,
+        fileTypeCoff: `//span[contains(.,'Coff')]/parent::label/span[1]/span/input`,
     },
     calendar: {
         dateTimePicker: "",
@@ -236,7 +243,7 @@ module.exports = {
             case 'DOC':
                 element = this.checkboxes.fileTypeDoc;
                 break;
-            case 'DOCS':
+            case 'DOCX':
                 element = this.checkboxes.fileTypeDocx;
                 break;
             case 'XLS':
@@ -245,10 +252,10 @@ module.exports = {
             case 'XLSX':
                 element = this.checkboxes.fileTypeXlsx;
                 break;
-            case 'PTT':
+            case 'PPT':
                 element = this.checkboxes.fileTypePpt;
                 break;
-            case 'PTTX':
+            case 'PPTX':
                 element = this.checkboxes.fileTypePptx;
                 break;
             case 'JPEG':
@@ -262,6 +269,27 @@ module.exports = {
                 break;
             case 'PDF':
                 element = this.checkboxes.fileTypePdf;
+                break;
+            case 'RTF':
+                element = this.checkboxes.fileTypeRtf;
+                break;
+            case 'WMF':
+                element = this.checkboxes.fileTypeWmf;
+                break;
+            case 'EMF':
+                element = this.checkboxes.fileTypeEmf;
+                break;
+            case 'PE':
+                element = this.checkboxes.fileTypePe;
+                break;
+            case 'ELF':
+                element = this.checkboxes.fileTypeElf;
+                break;
+            case 'COFF':
+                element = this.checkboxes.fileTypeCoff;
+                break;
+            case 'MACHO':
+                element = this.checkboxes.fileTypeMacho;
                 break;
         }
         I.checkOption(element);
