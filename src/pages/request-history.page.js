@@ -27,13 +27,13 @@ module.exports = {
         deleteAppliedFilter: `button[class^='SelectedFilter_buttonClose__']`,
         fileTypeMenu: "",
         fileOutcomeMenu: "",
-        fileOutcomeFilterSafe: "",
-        fileOutcomeFilterDangerous: "",
-        fileOutcomeFilterBlocked: "",
-        fileOutcomeFilterChecked: "",
-        fileOutcomeFilterUnclassified: "",
+        fileOutcomeFilterSafe: "//span[contains(.,'Safe')]",
+        fileOutcomeFilterBlockedByNCFS: "//span[contains(.,'Blocked By NCFS')]",
+        fileOutcomeFilterBlockedByPolicy: "//span[contains(.,'Blocked By Policy')]",
+        fileOutcomeFilterAllowedByPolicy: "//span[contains(.,'Allowed By Policy')]",
+        fileOutcomeFilterAllowedByNCFS: "//span[contains(.,'Allowed By NCFS')]",
         fileTypeMenuAdd: `div[class*='Filters_popup__'] > button:nth-child(1)`,
-        fileIdAdd: "",
+        fileIdAdd: "//button[contains(.,'+ ADD')",
         fileIdMenu: "button:nth-child(3) > p",
         gotoPage: "",
         previousPage: "",
@@ -204,14 +204,14 @@ module.exports = {
         I.click(outcomeMenu);
         if (outcome === "safe") {
             outcomeType = this.buttons.fileOutcomeFilterSafe;
-        } else if (outcome === "dangerous") {
-            outcomeType = this.buttons.fileOutcomeFilterDangerous;
-        } else if (outcome === "blocked") {
-            outcomeType = this.buttons.fileOutcomeFilterBlocked;
-        } else if (outcome === "checked") {
-            outcomeType = this.buttons.fileOutcomeFilterChecked;
-        } else if (outcome === "unclassified") {
-            outcomeType = this.buttons.fileOutcomeFilterUnclassified;
+        } else if (outcome === "allowedByNCFS") {
+            outcomeType = this.buttons.fileOutcomeFilterAllowedByNCFS;
+        } else if (outcome === "allowedByPolicy") {
+            outcomeType = this.buttons.fileOutcomeFilterAllowedByPolicy;
+        } else if (outcome === "blockedByPolicy") {
+            outcomeType = this.buttons.fileOutcomeFilterBlockedByPolicy;
+        } else if (outcome === "blockedByNCFS") {
+            outcomeType = this.buttons.fileOutcomeFilterBlockedByNCFS;
         }
         I.click(outcomeType);
     },
@@ -228,6 +228,7 @@ module.exports = {
         I.click(this.buttons.addFilter);
         I.click(this.buttons.fileIdMenu);
         I.fillField(this.fields.inputFilterFileID, value);
+        I.click(this.buttons.fileIdAdd);
     },
 
     filterByFileId(fileId) {
@@ -359,15 +360,23 @@ module.exports = {
         }
     },
     checkFileTypeValues(filteredFile) {
-        const table = document.getElementsByTagName('table')
-        for (let row in table.tBodies[0].rows) {
-            I.seeInField(row + '> td:nth-child(3)', filteredFile);
+        const table = document.getElementsByTagName('table');
+        if (I.see('No Transaction Data Found')) {
+            return;
+        } else {
+            for (let row in table.tBodies[0].rows) {
+                I.seeInField(row + '> td:nth-child(3)', filteredFile);
+            }
         }
     },
     checkFileRiskValues(filteredFile) {
-        const table = document.getElementsByTagName('table')
-        for (let row in table.tBodies[0].rows) {
-            I.seeInField(row + '> td:nth-child(4)', filteredFile);
+        const table = document.getElementsByTagName('table');
+        if (I.see('No Transaction Data Found')) {
+            return;
+        } else {
+            for (let row in table.tBodies[0].rows) {
+                I.seeInField(row + '> td:nth-child(4)', filteredFile);
+            }
         }
     },
 
