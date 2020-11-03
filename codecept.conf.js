@@ -10,9 +10,12 @@ exports.config = {
       url: 'http://localhost:5431',
       show: false,
       windowSize: '1536 x 826',
-        chrome: {
-          args: ['--no-sandbox', '--window-size=1536,826'],
-        },
+      chrome: {
+        args: ['--no-sandbox', '--window-size=1536,826'],
+      },
+      waitForNavigation: ["domcontentloaded", "networkidle0"],
+      waitForAction: 2000,
+      waitForTimeout: 60000
     },
     FileSystem: {},
     AssertWrapper : {
@@ -47,7 +50,7 @@ exports.config = {
     retryFailedStep: {
       enabled: false
     },
-   
+
     screenshotOnFail: {
       enabled: true
     },
@@ -56,6 +59,6 @@ exports.config = {
       delayBefore: 200,
       delayAfter: 200
     },
- 
+
   }
 }
