@@ -58,11 +58,6 @@ When(/^all flags of the (.*) is changed to (.*)$/, (fileType, flagType) => {
     }
 });
 
-// TODO Needs to fix this
-When('I click on the previous policy button', () => {
-    // policyPage.clickPrevious()
-});
-
 When('I click the delete button', () => {
     policyPage.clickDeleteApiUrl()
 });
@@ -79,10 +74,6 @@ When('the save button is selected', () => {
     policyPage.clickSaveApiUrl()
 });
 
-// TODO while working on previous policy screen
-Then('the previous policy can now be located in the Policy history page', () => {
-});
-
-// TODO How we will make sure this
-Then('the Current policy defaults to the latest saved policy', () => {
+Then(/^(.*) for file types (.*) defaults to (.*)$/, (contentFlag, fileType, flagType) => {
+    policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
 });

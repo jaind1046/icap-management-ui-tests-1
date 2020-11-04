@@ -15,12 +15,12 @@ Feature: Content Management Policy Editing
 
     @TEST-188
     Scenario Outline: A user can cancel any updates that they have done to the policy by pressing cancel
-        When I change one of the <ContentFlags> for required file types <FileType> to <FlagType>
+        When I change one of the <ContentFlags> for required file types <FileType> to <ChangedFlagType>
         When I press the Cancel button
-        Then the Current policy defaults to the latest saved policy
+        Then <ContentFlags> for file types <FileType> defaults to <CurrentFlagType>
         Examples:
-            | FileType   | ContentFlags    | FlagType |
-            | word       | embeddedFiles   | sanitise |
+            | FileType   | ContentFlags    | CurrentFlagType    | ChangedFlagType |
+            | word       | embeddedFiles   | disallow           | sanitise        |
 
 
 
