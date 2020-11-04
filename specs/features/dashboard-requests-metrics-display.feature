@@ -13,19 +13,19 @@ Feature: dashboard-requests-metrics-display
         When I process a '<file>' through the icap server
         Then the risk sector '<risk>' is available and shows the count updated by '<increasedValue>'
         Examples:
-            | file              | risk         | increasedValue |
-            | Safe_file         | Safe         | 1              |
-            | Malicious_file    | Blocked      | 1              |
-            | Malware_file      | Dangerous    | 1              |
-            | Unclassified_file | Unclassified | 1              |
+            | risk         | file              | increasedValue |
+            | Safe         | Safe_file         | 1              |
+            | Blocked      | Malicious_file    | 1              |
+            | Dangerous    | Malware_file      | 1              |
+            | Unclassified | Unclassified_file | 1              |
 
 
     Scenario Outline: The count of files requests processed is updated based on processing status
         Given I have confirmed the concurrent counts of total files requests processed
-        When I process a '<file>' through the icap server with an outcome as <fileOutcome>
-        Then the Total Files processed is increased by <TFUpdateByValue>
-        And the Total icap requests is increased by <TRUpdateByValue>
-        And the max files per second processed is increased by <MFUpdateByValue>
+        When I process a '<file>' through the icap server with an outcome as '<fileOutcome>'
+        Then the Total Files processed is increased by '<TFUpdateByValue>'
+        And the Total icap requests is increased by '<TRUpdateByValue>'
+        And the max files per second processed is increased by '<MFUpdateByValue>'
         Examples:
             | file              | fileOutcome  | TFUpdateByValue | TRUpdateByValue | MFUpdateByValue |
             | Safe_file         | Safe         | 1               | 1               | 1               |

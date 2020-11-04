@@ -140,7 +140,7 @@ module.exports = {
         let count = 0;
         let element = this.legend.rechart_sector;
         this.filterByRisk(element, risk);
-        within(element, () => {
+        within(element, async () => {
             try {
             count = await I.grabValueFrom(this.legend.label_+ risk)
             } catch (e) {
