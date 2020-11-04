@@ -1,3 +1,4 @@
+@request-history-filtering-by-risk-outcome
 Feature: request-history-filtering-by-risk-outcome
     As a admin I need to validate file requests history filtering by risk outcome in order to confirm that the solution works as expected
 
@@ -10,9 +11,9 @@ Feature: request-history-filtering-by-risk-outcome
         When I click on the Add Filter button and add a risk filter as '<filter>'
         Then the result list only shows filtered files with the selected risk as '<filteredFile>'
         Examples:
-            | filter                | filteredFile |
-            | fileOutcome_sanitised | sanitised    |
-            | fileOutcome_dangerous | dangerous    |
-            | fileOutcome_safe      | safe         |
-            | fileOutcome_blocked   | blocked      |
-            | fileOutcome_checked   | checked      |
+            | filter                      | filteredFile       |
+            | fileOutcome_blockedByPolicy | Blocked By Policy  |
+            | fileOutcome_blockedByNCFS   | Blocked By NCFS    |
+            | fileOutcome_safe            | safe               |
+            | fileOutcome_allowedByPolicy | Allowed By Policy  |
+            | fileOutcome_allowedByNCFS   | Allowed By NCFS    |

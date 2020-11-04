@@ -1,3 +1,4 @@
+@request-history-filtering-by-file-type
 Feature: request-history-filtering-by-file-type
     As a admin I need to validate file requests history filtering by file extension in order to confirm that the solution works as expected
 
@@ -12,18 +13,22 @@ Feature: request-history-filtering-by-file-type
         Examples:
             | filter        | filteredFile |
             | fileType_DOC  | DOC          |
-            | fileType_DOT  | DOT          |
             | fileType_DOCX | DOCX         |
-            | fileType_DOCM | DOCM         |
             | fileType_XLSX | XLSX         |
             | fileType_XLS  | XLS          |
-            | fileType_XLSM | XLSM         |
             | fileType_PPT  | PPT          |
             | fileType_PPTX | PPTX         |
             | fileType_JPEG | JPEG         |
             | fileType_PNG  | PNG          |
             | fileType_GIF  | GIF          |
+            | fileType_WMF  | WMF          |
+            | fileType_EMF  | EMF          |
             | fileType_PDF  | PDF          |
+            | fileType_RTF  | RTF          |
+            | fileType_PE   | PE           |
+            | fileType_MACHO| MACHO        |
+            | fileType_ELF  | ELF          |
+            | fileType_COFF | COFF         |
 
 
 

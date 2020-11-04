@@ -1,22 +1,46 @@
 const {
     I,
-    dashboardPage,
+    analyticsPage,
     homePage
 } = inject();
 
-let totalNumber;
+let totalFilesNumber;
+let icapRequests;
+let maxFilesPerSec;
+let riskMetricsCount;
 
 Given('I have navigated to the Dashboard page', () => {
-    homePage.clickDashboard();
-    totalNumber = dashboardPage.getTotalFileNumber();
+    I.goToAnalytics();
 });
-When('I process a {string}', (fileType) => {
-    I.uploadFileByType(fileType);
+
+Given('I have confirmed the concurrent counts of total files requests processed', () => {
+    totalFilesNumber = analyticsPage.getTotalFileNumber();
+    icapRequests = analyticsPage.getTotalIcapRequests();
+    maxFilesPerSec = analyticsPage.getMaxFileProcessed();
+});
+
+Given('I have confirmed the current risks counts for {string}', (risk) => {
+    riskMetricsCount = analyticsPage.getRiskMetricsCount(risk)
+});
+
+When('I process a {string} through the icap server', (file) => {
+    I.uploadFileByType(file);
     I.wait(3);
 });
-Then('the Total Files processed will increase by 1', () => {
-    I.seeInField(dashboardPage.sections.totalfilesprocessed, totalNumber + 1);
+
+Then('the Total Files processed is increased by {int}', (TFUpdateByValue) => {
+    I.seeInField(analyticsPage.sections.totalfilesprocessed, totalFilesNumber + TFUpdateByValue);
 });
-Then('{string} on the graphs will increase by 1', (fileOutcome) => {
-//todo: step should be re-written, because there is no way to get values from 'canvas' tag
+
+Then('the Total icap requests is reflected as {int}', (TRUpdateByValue) => {
+    I.seeInField(analyticsPage.sections.countIcapRequests, icapRequests + TRUpdateByValue);
+});
+
+Then('the max files per second processed is increased by {int}', (MFUpdateByValue) => {
+    I.seeInField(analyticsPage.sections.maxFilesProcessed, maxFilesPerSec + MFUpdateByValue);
+});
+
+Then('the risk sector is available and shows the count updated by {int}', (risk, increasedValue) => {
+    I.seeInField(analyticsPage.getRiskSector(risk), riskMetricsCount + increasedValue)
+
 });

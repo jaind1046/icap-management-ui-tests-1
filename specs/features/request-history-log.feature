@@ -1,6 +1,10 @@
+@request-history-log
 Feature: request-history-log
     As a admin I need to validate the file requests history log view using a fileId and a combination of multiple filters
     in order to confirm that the solution works as expected
+
+    Background:
+        Given I am logged into the ui
 
     @TEST-166
     Scenario Outline: I am able to change the number of files displayed on the page
@@ -35,7 +39,7 @@ Feature: request-history-log
             | FileType_docx    | fileOutcome_sanitised | sanitised    |
             | FileOutcome_Safe | FileType_docx         | docx         |
 
-    @TEST-163_164_165_180
+    @filterfileid
     Scenario Outline: I can filter the log using file id
         Given I have navigated to the Request History page
         When I click on the Add Filter button and add a file id filter as '<filter>'
