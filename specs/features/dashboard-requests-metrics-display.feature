@@ -4,18 +4,32 @@ Feature: dashboard-requests-metrics-display
 
     Background:
         Given I am logged into the ui
-        And I have navigated to the Dashboard page
+        And I have navigated to the Analytics page
+
 
     @TEST-
-    Scenario Outline: Processing a file increases the count for the number of files processed
-        When I process a '<file>'
-        Then the Total Files processed will increase by 1
-        And '<fileOutcome>' on the graphs will increase by 1
+    Scenario Outline: The file risk count is updated for every file processed based on the outcome
+        Given I have confirmed the current risks counts for '<risk>'
+        When I process a '<file>' through the icap server
+        Then the risk sector '<risk>' is available and shows the count updated by '<increasedValue>'
         Examples:
-            | file              | fileOutcome  |
-            | Safe_file         | Safe         |
-            | Blocked_file      | Blocked      |
-            | Dangerous_file    | Dangerous    |
-            | Unclassified_file | Uncalssified |
+            | file              | risk         | increasedValue |
+            | Safe_file         | Safe         | 1              |
+            | Malicious_file    | Blocked      | 1              |
+            | Malware_file      | Dangerous    | 1              |
+            | Unclassified_file | Unclassified | 1              |
 
+
+    Scenario Outline: The count of files requests processed is updated based on processing status
+        Given I have confirmed the concurrent counts of total files requests processed
+        When I process a '<file>' through the icap server with an outcome as <fileOutcome>
+        Then the Total Files processed is increased by <TFUpdateByValue>
+        And the Total icap requests is increased by <TRUpdateByValue>
+        And the max files per second processed is increased by <MFUpdateByValue>
+        Examples:
+            | file              | fileOutcome  | TFUpdateByValue | TRUpdateByValue | MFUpdateByValue |
+            | Safe_file         | Safe         | 1               | 1               | 1               |
+            | Malicious_file    | Blocked      | 0               | 1               | 0               |
+            | Malware_file      | Dangerous    | 0               | 1               | 0               |
+            | Unclassified_file | Unclassified | 0               | 1               | 1               |
 
