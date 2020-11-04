@@ -21,7 +21,7 @@ Feature: Content Management Policy Editing
         Examples:
             | fileType   | ContentFlags    | FlagType |
             | word       | embeddedFiles   | sanitise |
-          
+
 
 
     @TEST-155
@@ -31,12 +31,12 @@ Feature: Content Management Policy Editing
         Then <ContentFlags> for required file types <fileType> is set to <FlagType>
         When I click on the previous policy button
         Then the previous policy can now be located in the Policy history page
-        Examples:
-            | fileType   | ContentFlags    | FlagType |
-            | word       | embeddedFiles   | sanitise |
-            | excel      | reviewComments  | disallow |
-            | powerpoint | embeddedImages  | disallow |
-            | pdf        | acroform        | sanitise |
+        Examples:`
+            | fileType   | ContentFlags         | FlagType |
+            | word       | embeddedFiles        | sanitise |
+            | excel      | externalHyperlinks   | disallow |
+            | powerpoint | metadata             | disallow |
+            | pdf        | actionsAll           | sanitise |
 
 
     @TEST-Change-all-content-flag-for-all-doc-type
