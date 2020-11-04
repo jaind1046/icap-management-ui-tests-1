@@ -24,24 +24,6 @@ Then(/^(.*) for required file types (.*) is set to (.*)$/, (contentFlag, fileTyp
     policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
 });
 
-When(/^I change all the flag for (.*) to sanitise on policy page$/, (fileType) => {
-    policyPage.clickSanitiseForAllFlag(fileType)
-    policyPage.clickSaveChanges()
-});
-
-Then(/^all flags of the (.*) is changed to sanitise$/, (fileType) => {
-    policyPage.assertSanitiseForAllFlag(fileType)
-});
-
-When(/^I change all the flag for (.*) to disallow on policy page$/, (fileType) => {
-    policyPage.clickDisallowForAllFlag(fileType)
-    policyPage.clickSaveChanges()
-});
-
-Then(/^all flags of the (.*) is changed to disallow$/, (fileType) => {
-    policyPage.assertDisallowForAllFlag(fileType)
-});
-
 When('I click on Current Policy in the navigation panel', () => {
     policyPage.clickOnCurrentPolicyTab()
 });
@@ -56,6 +38,24 @@ When('I press the Cancel button', () => {
 
 When('I press the Save button', () => {
     policyPage.clickSaveChanges()
+});
+
+When(/^I change all the flag for (.*) to (.*) on policy page$/, (fileType, flagType) => {
+    if ( flagType === 'sanitise') {
+        policyPage.clickSanitiseForAllFlag(fileType)
+        policyPage.clickSaveChanges()
+    } else if (flagType === 'disallow') {
+        policyPage.clickDisallowForAllFlag(fileType)
+        policyPage.clickSaveChanges()
+    }
+});
+
+When(/^all flags of the (.*) is changed to (.*)$/, (fileType, flagType) => {
+    if ( flagType === 'sanitise') {
+        policyPage.assertSanitiseForAllFlag(fileType)
+    } else if (flagType === 'disallow') {
+        policyPage.assertDisallowForAllFlag(fileType)
+    }
 });
 
 // TODO Needs to fix this
