@@ -9,7 +9,7 @@ Feature: content-management-policy-application-to-files
     @TEST-
     Scenario Outline: Content Management policy is correct applied to processed files
         Given I set the policy action <policy> for a file type <fileType> 
-        When I process <File>
+        When I process file <File> through the icap server
         Then the file processing outcome is <fileOutcome>
         Examples:
            | File | fileType   | ContentFlags   | FlagType | fileOutcome | 

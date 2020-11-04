@@ -39,7 +39,7 @@ Feature: request-history-log
             | FileType_docx    | fileOutcome_sanitised | sanitised    |
             | FileOutcome_Safe | FileType_docx         | docx         |
 
-    @TEST-163_164_165_180
+    @filterfileid
     Scenario Outline: I can filter the log using file id
         Given I have navigated to the Request History page
         When I click on the Add Filter button and add a file id filter as '<filter>'
