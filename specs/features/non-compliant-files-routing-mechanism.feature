@@ -40,14 +40,14 @@ Feature: non-compliant-files-routing-mechanism
         When I submit a non compliant file <file> through the icap server
         And the file outcome status is blocked
         Then the response code received is <responseCode>
-        And the file outcome for the submitted file is <blockedFileOutcome>
+        And the file outcome for the submitted file is <fileOutcome>
         Examples:
-            | blockedPolicyAction | file    | responseCode | fileOutcome |
-            | Relay               | file    | 204          | Unmodified  |
-            | Block               | file    | 403          | HtmlReport  |
-            | Refer               | relay   | file         | 204         | Unmodified |
-            | Refer               | replace | file         | ''          | alternativeContent |
-            | Refer               | block   | file         | 403         | HtmlReport |
+            | blockedPolicyAction | NcfsDecision | file | responseCode | fileOutcome        |
+            | Relay               | NA           | file | 204          | Unmodified         |
+            | Block               | NA           | file | 403          | HtmlReport         |
+            | Refer               | relay        | file | 204          | Unmodified         |
+            | Refer               | replace      | file | ''           | alternativeContent |
+            | Refer               | block        | file | 403          | HtmlReport         |
 
 
     Scenario Outline: A set routing policy for unprocessable files is correctly applied
