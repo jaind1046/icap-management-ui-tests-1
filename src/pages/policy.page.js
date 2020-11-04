@@ -348,6 +348,7 @@ module.exports = {
     const element = this.radiobuttons.unprocessedFileRefer;
     I.click(element);
   },
+
   checkBlockedRouteRadio(glasswallBlockedRoute) {
     let element;
     switch (glasswallBlockedRoute) {
@@ -383,5 +384,20 @@ module.exports = {
     }
     I.checkOption(element);
     return element;
+  },
+  assertCheckedBlockedRadioButton(radioValue){
+    let radioElement = null;
+    switch (radioValue){
+      case ('Relay'):
+        radioElement = this.radiobuttons.blockedFileRelay;
+        break;
+      case ('Refer'):
+        radioElement = this.radiobuttons.blockedFileRefer;
+        break;
+      case ('Block'):
+        radioElement = this.radiobuttons.blockedFileBlock;
+        break;
+    }
+    I.seeCheckboxIsChecked(radioElement);
   }
 };

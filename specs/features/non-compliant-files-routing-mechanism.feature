@@ -25,8 +25,8 @@ Feature: non-compliant-files-routing-mechanism
 
     @TEST-187
     Scenario Outline: I can change the outcome of Glasswall Blocked files
-        When I change the route for blocked or unprocessable files to <routeOption> and save
-        Then the route selection is applied as <updatedRouteOption>
+        When I change the route for blocked or unprocessable files to '<routeOption>' and save
+        Then the route selection is applied as '<updatedRouteOption>'
         Examples:
             | routeOption | updatedRouteOption |
             | Relay       | Relay              |
@@ -35,12 +35,12 @@ Feature: non-compliant-files-routing-mechanism
 
     @TEST-183
     Scenario Outline: A set routing policy for Glasswall blocked files is correctly applied
-        Given I have set the routing option for Glasswall Blocked files to <blockedPolicyAction>
-        And the non-compliant file service has been defined as <NcfsDecision>
-        When I submit a non compliant file <file> through the icap server
+        Given I have set the routing option for Glasswall Blocked files to '<blockedPolicyAction>'
+        And the non-compliant file service has been defined as '<NcfsDecision>'
+        When I submit a non compliant file '<file>' through the icap server
         And the file outcome status is blocked
-        Then the response code received is <responseCode>
-        And the file outcome for the submitted file is <fileOutcome>
+        Then the response code received is '<responseCode>'
+        And the file outcome for the submitted file is '<fileOutcome>'
         Examples:
             | blockedPolicyAction | NcfsDecision | file | responseCode | fileOutcome        |
             | Relay               | NA           | file | 204          | Unmodified         |
@@ -51,11 +51,11 @@ Feature: non-compliant-files-routing-mechanism
 
 
     Scenario Outline: A set routing policy for unprocessable files is correctly applied
-        Given I have set the routing option for unprocessable files to <fileTypePolicyAction>
-        And the non-compliant file service has been defined as <NcfsDecision>
-        When I submit a unprocessable file <file> through the icap server
-        Then the response code received is <responseCode>
-        And the file outcome for the submitted file is <fileOutcome>
+        Given I have set the routing option for unprocessable files to '<fileTypePolicyAction>'
+        And the non-compliant file service has been defined as '<NcfsDecision>'
+        When I submit a unprocessable file '<file>' through the icap server
+        Then the response code received is '<responseCode>'
+        And the file outcome for the submitted file is '<fileOutcome>'
         Examples:
             | fileTypePolicyAction | NcfsDecision | file | responseCode | fileOutcome        |
             | Relay                | NA           | file | 204          | Unmodified         |
