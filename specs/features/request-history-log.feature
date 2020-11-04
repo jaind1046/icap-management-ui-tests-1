@@ -3,6 +3,9 @@ Feature: request-history-log
     As a admin I need to validate the file requests history log view using a fileId and a combination of multiple filters
     in order to confirm that the solution works as expected
 
+    Background:
+        Given I am logged into the ui
+
     @TEST-166
     Scenario Outline: I am able to change the number of files displayed on the page
         Given I have navigated to the Request History page
