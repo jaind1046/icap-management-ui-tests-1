@@ -25,8 +25,18 @@ Feature: non-compliant-files-routing-mechanism
 
     @TEST-187
     Scenario Outline: I can change the outcome of Glasswall Blocked files
-        When I change the route for blocked or unprocessable files to '<routeOption>' and save
-        Then the route selection is applied as '<updatedRouteOption>'
+        When I change the route for unprocessable files to '<routeOption>' and save
+        Then the route selection for unprocessable files is applied as '<updatedRouteOption>'
+        Examples:
+            | routeOption | updatedRouteOption |
+            | Relay       | Relay              |
+            | Block       | Block              |
+            | Refer       | Refer              |
+
+    @TEST-187
+    Scenario Outline: I can change the outcome of Glasswall Blocked files
+        When I change the route for blocked files to '<routeOption>' and save
+        Then the route selection for blocked files is applied as '<updatedRouteOption>'
         Examples:
             | routeOption | updatedRouteOption |
             | Relay       | Relay              |

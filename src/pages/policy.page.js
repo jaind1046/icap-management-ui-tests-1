@@ -97,7 +97,13 @@ module.exports = {
         metadata: `label[for='pdf-id-8disallow']`
       }
     },
-    validateApiUrlInput: `div[class*='Input_Input__'] > input`
+    validateApiUrlInput: `div[class*='Input_Input__'] > input`,
+    blockedFileRelay: "//label[@for='relay-Glasswall-Blocked-Files']",
+    blockedFileBlock: "//label[@for='block-Glasswall-Blocked-Files']",
+    blockedFileRefer: "//label[@for='refer-Glasswall-Blocked-Files']",
+    unprocessedFileRelay: "//label[@for='relay-Un-Processable-File-Types']",
+    unprocessedFileBlock: "//label[@for='block-Un-Processable-File-Types']",
+    unprocessedFileRefer: "//label[@for='refer-Un-Processable-File-Types']",
   },
   radiobuttons: {
     unprocessedFileRelay: "#relay-Un-Processable-File-Types",
@@ -139,7 +145,10 @@ module.exports = {
   },
   svg: {
     deleteApiUrl: `svg[id=Layer_1]`,
-    validateApiUrl: `div[class*='DomainField_validated__2FsbB'] > svg`
+    validateApiUrl: `table[class*='DomainField_table__'] > tbody > tr > td:nth-child(2) > svg:nth-child(1)`
+  },
+  headers: {
+    blockedFiles: `section[class*='PolicyForNonCompliantFiles_wrapBlocksToggle__'] > h3:nth-child(3)`,
   },
 
   //Methods
@@ -320,70 +329,64 @@ module.exports = {
    */
 
   setUnprocessableFileAsRelay() {
-    const element = this.radiobuttons.unprocessedFileRelay;
+    const element = this.fields.unprocessedFileRelay;
     I.click(element);
   },
 
   setUnprocessableFileAsBlock() {
-    const element = this.radiobuttons.unprocessedFileBlock;
+    const element = this.fields.unprocessedFileBlock;
     I.click(element);
   },
 
   setUnprocessableFileAsRefer() {
-    const element = this.radiobuttons.unprocessedFileRefer;
+    const element = this.fields.unprocessedFileRefer;
     I.click(element);
   },
 
   setBlockedFileAsRelay() {
-    const element = this.radiobuttons.blockedFileRelay;
+    const element = this.fields.blockedFileRelay;
     I.click(element);
   },
 
   setBlockedFileAsBlock() {
-    const element = this.radiobuttons.blockedFileBlock;
+    const element = this.fields.blockedFileBlock;
     I.click(element);
   },
 
   setBlockedFileAsRefer() {
-    const element = this.radiobuttons.unprocessedFileRefer;
+    const element = this.fields.blockedFileRefer;
     I.click(element);
   },
 
-  checkBlockedRouteRadio(glasswallBlockedRoute) {
-    let element;
+  checkBlockedRouteRadio (glasswallBlockedRoute) {
     switch (glasswallBlockedRoute) {
       case ('Relay'):
-        element = this.radiobuttons.blockedFileRelay;
+        this.setBlockedFileAsRelay();
         break;
       case ('Block'):
-        element = this.radiobuttons.blockedFileBlock;
+        this.setBlockedFileAsBlock();
         break;
       case ('Refer'):
-        element = this.radiobuttons.blockedFileRefer;
+        this.setBlockedFileAsRefer();
         break;
       default:
         throw "No such option";
     }
-    I.checkOption(element);
-    return element;
   },
   checkUnprocessableRouteRadio(unprocessableRoute) {
-    let element;
     switch (unprocessableRoute) {
       case ('Relay'):
-        element = this.radiobuttons.unprocessedFileRelay;
+        this.setUnprocessableFileAsRelay();
         break;
       case ('Block'):
-        element = this.radiobuttons.unprocessedFileBlock;
+        this.setUnprocessableFileAsBlock();
         break;
       case ('Refer'):
-        element = this.radiobuttons.unprocessedFileRefer;
+        this.setUnprocessableFileAsRefer();
         break;
       default:
         throw "No such option";
     }
-    I.checkOption(element);
-    return element;
   },
   assertCheckedBlockedRadioButton(radioValue){
     let radioElement = null;
@@ -396,6 +399,21 @@ module.exports = {
         break;
       case ('Block'):
         radioElement = this.radiobuttons.blockedFileBlock;
+        break;
+    }
+    I.seeCheckboxIsChecked(radioElement);
+  },
+  assertCheckedUnprocessableRadioButton(radioValue){
+    let radioElement = null;
+    switch (radioValue){
+      case ('Relay'):
+        radioElement = this.radiobuttons.unprocessedFileRelay;
+        break;
+      case ('Refer'):
+        radioElement = this.radiobuttons.unprocessedFileRefer;
+        break;
+      case ('Block'):
+        radioElement = this.radiobuttons.unprocessedFileBlock;
         break;
     }
     I.seeCheckboxIsChecked(radioElement);

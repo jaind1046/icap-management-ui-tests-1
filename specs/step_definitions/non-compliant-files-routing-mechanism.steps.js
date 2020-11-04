@@ -1,4 +1,4 @@
-const {I, policyPage}= inject();
+const {I, policyPage, filedropPage}= inject();
 
 let currentUrl = null;
 
@@ -29,11 +29,18 @@ Then('the API URL is updated and the validation message {string} is displayed', 
     I.seeInField(policyPage.fields.validateApiUrlInput, currentUrl);
     I.see(message);
 });
-When('I change the route for blocked or unprocessable files to {string} and save',  (routeOption) => {
-    I.checkBlockedRouteRadio(routeOption);
+When('I change the route for blocked files to {string} and save',  (routeOption) => {
+    policyPage.checkBlockedRouteRadio(routeOption);
+
 });
-Then('the route selection is applied as {string}',  (updatedRouteOption) => {
+When('I change the route for unprocessable files to {string} and save',  (routeOption) => {
+    policyPage.checkUnprocessableRouteRadio(routeOption);
+});
+Then('the route selection for blocked files is applied as {string}',  (updatedRouteOption) => {
     policyPage.assertCheckedBlockedRadioButton(updatedRouteOption);
+});
+Then('the route selection for unprocessable files is applied as {string}',  (updatedRouteOption) => {
+    policyPage.assertCheckedUnprocessableRadioButton(updatedRouteOption);
 });
 Given('I have set the routing option for Glasswall Blocked files to {string}',  (blockedPolicyAction) => {
     policyPage.checkBlockedRouteRadio(blockedPolicyAction);
