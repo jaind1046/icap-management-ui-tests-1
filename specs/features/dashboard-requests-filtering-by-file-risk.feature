@@ -4,31 +4,21 @@ Feature: dashboard-requests-filtering-by-file-risk
 
     Background:
         Given I am logged into the ui
-
+        And I have navigated to the analytics page
 
     @TEST-192
     Scenario Outline: I can filter the risk legend
-        Given I have navigated to the analytics page
-        When I filter in the file risk <fileRisk>
-        Then the chart is updated to only show the risk <filteredRisk>
+        When I tick select from the '<chart>' legend a file risk '<fileRisk>'
+        Then the '<chart>' is updated to only show the filtered risk '<filteredRisk>'
         Examples:
-            | fileRisk     | filteredRisk |
-            | Safe         | Safe         |
-            | Blocked      | Blocked      |
-            | Dangerous    | Dangerous    |
-            | Unclassified | Unclassified |
-
-
-# @TEST
-# Scenario Outline: I can remove file-outcomes from the filters on the charts
-#     Given I have navigated to the analytics page
-#     When I click from <chart> on <fileRisk>
-#     Then the chart is updated to remove <fileRisk>
-#     Examples:
-#         | chart      | fileOutcome  |
-#         | line graph | Safe         |
-#         | line graph | Blocked      |
-#         | line graph | Dangerous    |
-#         | line graph | Checked      |
-#         | line graph | Unclassified |
+            | chart      | fileRisk     | filteredRisk |
+            | pie        | Safe         | Safe         |
+            | pie        | Blocked      | Blocked      |
+            | pie        | Dangerous    | Dangerous    |
+            | pie        | Unclassified | Unclassified |
+            | line graph | Safe         | Safe         |
+            | line graph | Blocked      | Blocked      |
+            | line graph | Dangerous    | Dangerous    |
+            | line graph | Checked      | Checked      |
+            | line graph | Unclassified | Unclassified |
 

@@ -41,17 +41,25 @@ module.exports = {
         timeIntervalPopup: 'div[class^=Popup_Popup__]'
     },
     legend: {
-        safe: `li[class*='legend-item-0']`,
-        blocked: `li[class*='legend-item-1']`,
-        dangerous: `li[class*='legend-item-2']`,
-        unclassified: `li[class*='legend-item-3']`,
+        safe: `//li[contains(.,'Safe')]`,
+        blocked: `//li[contains(.,'Blocked')]`,
+        dangerous: `//li[contains(.,'Dangerous')]`,
+        unclassified: `//li[contains(.,'Unclassified')]`,
+        checked: `//li[contains(.,'Checked')]`,
         legendList: `//li[contains(@class,'legend-item-')]`,
-        pie_safe: `g[class*='recharts-pie'] > g:nth-of-type(1) > g:nth-of-type(1) > path`,
+        rechart_sector: `path.recharts-sector`,
+        rechart_line: `path.recharts-curve.recharts-line-curve`,
         riskLabels: `g[class*='recharts-pie-labels']`,
-
+        rechartsTwo: `.recharts-wrapper:nth-child(2) > .recharts-surface`,
+        rechartsOne: `.recharts-wrapper:nth-child(1) > .recharts-surface`,
+        label_Safe: `path[fill*='#6262B7']`,
+        label_Blocked: `path[fill*=' #e1974e']`,
+        label_Dangerous: `path[fill*='']`,
+        label_Unclassified: `path[fill*='#4C9BCC']`,
+        label_Checked: `path[fill*='#7A7A7A']`,
     },
 
-//g[contains(@class,'recharts-pie')]/g[1]/g[1]/path
+    //class="recharts-layer"
 
     //Methods
 
@@ -61,50 +69,133 @@ module.exports = {
      */
 
     async getTotalFileProcessed() {
-        const total = this.sections.countTotalProcessed;
-        let totalText = await I.grabTextFrom(total);
-        return totalText;
+        const element = this.sections.countTotalProcessed;
+        let count = parseInt(await I.grabTextFrom(element));
+        return count;
     },
 
     async getMaxFileProcessed() {
-        const total = this.sections.countMaxProcessed;
-        let totalText = await I.grabTextFrom(total);
-        return totalText;
+        const element = this.sections.countMaxProcessed;
+        let count = parseInt(await I.grabTextFrom(element));
+        return count;
     },
 
     async getTotalIcapRequests() {
-        const total = this.sections.countIcapRequests;
-        let totalText = await I.grabTextFrom(total);
-        return totalText;
+        const element = this.sections.countIcapRequests;
+        let count = parseInt(await I.grabTextFrom(element));
+        return count;
     },
+
 
     /*
      * Risk filtering
      * ***************************************************************
      */
-async filterByRisk(risk) {
-    let list = await I.grabNumberOfVisibleElements(this.legend.legendList);
-    for (let i = 0; i < list; ++i) {
-        let item = await I.grabTextFrom(list[i])
-        if (item !==risk) {
-            I.click(list[i])
+    filterByRisk(chart, fileRisk) {
+        let risk = fileRisk.trim();
+        let element = this.getChartElement(chart)
+        within(element, () => {
+            if (risk === 'Safe') {
+                I.click(this.legend.safe);
+            } else if (risk === 'Blocked') {
+                I.click(this.legend.blocked)
+            } else if (risk === 'Dangerous') {
+                I.click(this.legend.dangerous)
+            } else if (risk === 'Unclassified') {
+                I.click(this.legend.unclassified)
+            } else if (risk === 'Checked') {
+                I.click(this.legend.checked)
+            } else {
+                I.say('Required options not found')
+            }
+        })
+    },
+
+    getChartElement(chart) {
+        let element = null;
+        if (chart === 'pie'.trim()) {
+            element = this.legend.rechartsTwo;
+        } else {
+            element = this.legend.rechartsOne;
         }
-    }break;
-},
+        return element;
+    },
 
-getfilteredRiskPie() {
-    const element = locate(this.legend.riskLabels)
-                        .withChild('')
-     I.seeElement(element)                   
+    async getRiskSector(risk) {
+        let element = this.legend.rechart_sector;
+        let sector = null;
+        this.filterByRisk(element, risk);
+        within(element, () => {
+            try {
+               sector = this.legend.label_ + risk
+            } catch (e) {
+                I.say('errors, sector element not found')
+                console.warn(e);
+            }
+        })
+        return sector;
+    },
 
-},
+    async getRiskMetricsCount(risk) {
+        let count = 0;
+        let element = this.legend.rechart_sector;
+        this.filterByRisk(element, risk);
+        within(element, async () => {
+            try {
+            count = await I.grabValueFrom(this.legend.label_+ risk)
+            } catch (e) {
+                I.say('errors, unable to retrieve value')
+                console.warn(e);
+            }})
+        return count;
+    },
 
+    async getCountOfSectors(chart) {
+        let countsectors = null;
+        if (chart === 'pie'.trim()) {
+            countsectors = await I.grabNumberOfVisibleElements(this.legend.rechart_sector);
+        } else {
+            countsectors = await I.grabNumberOfVisibleElements(this.legend.rechart_line);
+        }
+        return countsectors;
+    },
+
+    async assertFilteredRisk(chart, riskLabel) {
+        let element = this.getChartElement(chart);
+        let label = riskLabel.trim();
+        try {
+            within(element, async () => {
+                let countsectors = null;
+                if (chart === 'pie'.trim()) {
+                    countsectors = await I.grabNumberOfVisibleElements(this.legend.rechart_sector);
+                } else {
+                    countsectors = await I.grabNumberOfVisibleElements(this.legend.rechart_line);
+                }
+                I.assertEqual(countsectors, 1, "The number of filtered risks displayed (" + countsectors + ") is NOT as expected")
+                if (riskLabel === 'Safe') {
+                    I.seeElement(this.legend.label_Safe)
+                } else if (label === 'Blocked') {
+                    I.seeElement(this.legend.label_Blocked)
+                } else if (label === 'Dangerous') {
+                    I.seeElement(this.legend.label_Dangerous)
+                } else if (label === 'Unclassified') {
+                    I.seeElement(this.legend.label_Unclassified)
+                } else if (label === 'Checked') {
+                    I.seeElement(this.legend.label_Checked)
+                } else {
+                    I.say('Required options not found')
+                }
+            })
+        } catch (e) {
+            I.say('errors')
+            console.warn(e);
+        }
+    },
 
     /*
      * Datetime
      * ***************************************************************
      */
-
 
     openDatetimeStart() {
         const element = this.buttons.datetime_left;
