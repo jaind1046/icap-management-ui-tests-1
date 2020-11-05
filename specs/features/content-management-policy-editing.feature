@@ -15,39 +15,39 @@ Feature: Content Management Policy Editing
 
     @TEST-188
     Scenario Outline: A user can cancel any updates that they have done to the policy by pressing cancel
-        When I change one of the <ContentFlags> for required file types <FileType> to <ChangedFlagType>
+        When I change one of the <ContentFlags> for required file types <fileType> to <FlagType>
         When I press the Cancel button
-        Then <ContentFlags> for file types <FileType> defaults to <CurrentFlagType>
+        Then the Current policy defaults to the latest saved policy
         Examples:
-            | FileType   | ContentFlags    | CurrentFlagType    | ChangedFlagType |
-            | word       | embeddedFiles   | disallow           | sanitise        |
-
+            | fileType   | ContentFlags    | FlagType |
+            | word       | embeddedFiles   | sanitise |
+          
 
 
     @TEST-155
     Scenario Outline: I can edit policy content flags
-        When I change one of the <ContentFlags> for required file types <FileType> to <FlagType>
+        When I change one of the <ContentFlags> for required file types <fileType> to <FlagType>
         When I press the Save button
-        Then <ContentFlags> for required file types <FileType> is set to <FlagType>
-        Examples:`
-            | FileType   | ContentFlags         | FlagType |
-            | word       | embeddedFiles        | sanitise |
-            | excel      | externalHyperlinks   | disallow |
-            | powerpoint | metadata             | disallow |
-            | pdf        | actionsAll           | sanitise |
+        Then <ContentFlags> for required file types <fileType> is set to <FlagType>
+        When I click on the previous policy button
+        Then the previous policy can now be located in the Policy history page
+        Examples:
+            | fileType   | ContentFlags    | FlagType |
+            | word       | embeddedFiles   | sanitise |
+            | excel      | reviewComments  | disallow |
+            | powerpoint | embeddedImages  | disallow |
+            | pdf        | acroform        | sanitise |
 
 
     @TEST-Change-all-content-flag-for-all-doc-type
-    Scenario Outline: A user is able to change all content flags for all file type in policy page
-        When I change all the flag for <FileType> to <FlagType> on policy page
-        Then all flags of the <FileType> is changed to <FlagType>
+    Scenario Outline: A user is able to change the content flags to sanitise for word in policy page
+        When I change all the flag for <fileType> to sanitise on policy page
+        Then all flags of the <fileType> is changed to sanitise
+        When I change all the flag for <fileType> to disallow on policy page
+        Then all flags of the <fileType> is changed to disallow
         Examples:
-            | FileType      | FlagType |
-            | word          | sanitise |
-            | word          | disallow |
-            | excel         | sanitise |
-            | excel         | disallow |
-            | excel         | sanitise |
-            | excel         | disallow |
-            | pdf           | sanitise |
-            | pdf           | disallow |
+            | fileType   |
+            | word       |
+            | excel      |
+            | powerpoint |
+            | pdf        |

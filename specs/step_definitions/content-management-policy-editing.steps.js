@@ -24,6 +24,24 @@ Then(/^(.*) for required file types (.*) is set to (.*)$/, (contentFlag, fileTyp
     policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
 });
 
+When(/^I change all the flag for (.*) to sanitise on policy page$/, (fileType) => {
+    policyPage.clickSanitiseForAllFlag(fileType)
+    policyPage.clickSaveChanges()
+});
+
+Then(/^all flags of the (.*) is changed to sanitise$/, (fileType) => {
+    policyPage.assertSanitiseForAllFlag(fileType)
+});
+
+When(/^I change all the flag for (.*) to disallow on policy page$/, (fileType) => {
+    policyPage.clickDisallowForAllFlag(fileType)
+    policyPage.clickSaveChanges()
+});
+
+Then(/^all flags of the (.*) is changed to disallow$/, (fileType) => {
+    policyPage.assertDisallowForAllFlag(fileType)
+});
+
 When('I click on Current Policy in the navigation panel', () => {
     policyPage.clickOnCurrentPolicyTab()
 });
@@ -40,22 +58,9 @@ When('I press the Save button', () => {
     policyPage.clickSaveChanges()
 });
 
-When(/^I change all the flag for (.*) to (.*) on policy page$/, (fileType, flagType) => {
-    if ( flagType === 'sanitise') {
-        policyPage.clickSanitiseForAllFlag(fileType)
-        policyPage.clickSaveChanges()
-    } else if (flagType === 'disallow') {
-        policyPage.clickDisallowForAllFlag(fileType)
-        policyPage.clickSaveChanges()
-    }
-});
-
-When(/^all flags of the (.*) is changed to (.*)$/, (fileType, flagType) => {
-    if ( flagType === 'sanitise') {
-        policyPage.assertSanitiseForAllFlag(fileType)
-    } else if (flagType === 'disallow') {
-        policyPage.assertDisallowForAllFlag(fileType)
-    }
+// TODO Needs to fix this
+When('I click on the previous policy button', () => {
+    // policyPage.clickPrevious()
 });
 
 When('I click the delete button', () => {
@@ -74,6 +79,10 @@ When('the save button is selected', () => {
     policyPage.clickSaveApiUrl()
 });
 
-Then(/^(.*) for file types (.*) defaults to (.*)$/, (contentFlag, fileType, flagType) => {
-    policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
+// TODO while working on previous policy screen
+Then('the previous policy can now be located in the Policy history page', () => {
+});
+
+// TODO How we will make sure this
+Then('the Current policy defaults to the latest saved policy', () => {
 });
