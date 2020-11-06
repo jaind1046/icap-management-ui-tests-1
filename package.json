@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "report": "allure serve output",
-        "test": "(npx codeceptjs run --steps --verbose --plugins allure) & npm run report",
+        "test": "(npx codeceptjs run --steps --grep @smoke --verbose --plugins allure) & npm run report",
         "codeceptjs": "codeceptjs run --steps",
         "codeceptjs:headless": "HEADLESS=true codeceptjs run --steps"
     },
@@ -22,6 +22,7 @@
         "codeceptjs-chai": "^2.2.0",
         "dotenv": "^8.2.0",
         "moment": "^2.29.1",
+        "moment-range": "^4.0.2",
         "puppeteer": "^5.4.1",
         "uuid": "^8.3.1"
     }

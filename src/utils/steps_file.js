@@ -2,18 +2,23 @@ const homePage = require("../pages/home.page.js");
 const loginPage = require("../pages/login.page.js");
 const policyPage = require("../pages/policy.page.js");
 const filedropPage = require("../pages/file-drop.page.js");
+
+const assert = require('assert');
+
+const env = require('../../credentials.js');
 require('dotenv').config({path: '.env'});
+
 
 module.exports = function () {
     return actor({
         onLoginPage: function () {
-            this.amOnPage("http://localhost:10720");
+            this.amOnPage("http://localhost:3000/");
         },
 
         loginNoPwd: function () {
             this.onLoginPage();
             loginPage.clickLogIn();
-            this.wait(5)
+            this.waitForElement(homePage.sections.menu);
         },
 
         enterValidCredential: function () {
@@ -71,14 +76,17 @@ module.exports = function () {
                 case ('Dangerous_file'):
                     path = 'src/data/input/types/dangerous_file.doc';
                     break;
-                //todo: add file
                 case ('Unclassified_file'):
-                    path = 'src/data/input/types/unclassified_file.doc';
+                    path = 'src/data/input/unsupported_icaptest.ps1';
                     break;
                 default:
                     throw 'There is not such file type.'
             }
             this.uploadFile(path);
+        },
+
+        fail(message) {
+            assert.fail(message);
         }
     });
 };

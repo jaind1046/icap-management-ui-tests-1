@@ -10,10 +10,10 @@ module.exports = {
 
     },
     buttons: {
-        accountPopupToggle: "",
-        changePassword: "",
-        logout: "",
-        saveNewPassword: `button[class*='ChangePassword_button__2EU8P']`
+        accountPopupToggle: "div[data-test-id='userLink']",
+        changePassword: "button[data-test-id='userLinksButtonChangePassword']",
+        logout: "button[data-test-id='userLinksButtonLogout']",
+        saveNewPassword: `button[class*='ChangePassword_button__']`
     },
     sections: {
         menu: `section[class*='Toolbar_Toolbar__']`,

@@ -4,31 +4,32 @@ const {
     requesthistoryPage
 } = inject();
 
+let displayedRange;
+let selectedRange;
+
 Given("I am logged into the ui", () => {
     I.loginNoPwd();
-
 });
 
 Given("I have navigated to the Request History page", () => {
     I.goToRequestHistory();
 });
 
-When(/^I click dateTime and select a (.*)$/, (timeInterval) => {
-    requesthistoryPage.openTimeMenu();
+When(/^I open the date picker and select a (.*)$/, (timeInterval) => {
+    requesthistoryPage.openDatePicker();
     requesthistoryPage.selectTimePeriod(timeInterval)
-    I.wait(3)
+   });
 
-});
-
-Then(/^the start date range is updated to (.*) with the end date range as (.*)$/, (datetimeFrom, datetimeTo) => {
-    requesthistoryPage.assertAccurateTimeFromIsSet(datetimeFrom);
-    requesthistoryPage.assertAccurateTimeToIsSet(datetimeTo);
-
+Then(/^the date range is updated to be from (.*) hrs earlier to (.*)$/, async (datetimeFrom, datetimeTo) => {
+    displayedRange = await I.grabTextFrom(requesthistoryPage.calendar.reportRange);
+    selectedRange = requesthistoryPage.getDateRange(datetimeFrom, datetimeTo);
+    I.assertEqual(displayedRange, selectedRange, 'Time ranges do NOT match');
+    
+   
 });
 
 Then('the files processed for the selected period are displayed', () => {
-    I.seeElement(requesthistoryPage.table.historyTable)
-    //TODO
+    requesthistoryPage.isDataInRange(displayedRange);
 });
 
 When(/^I select a valid (.*) and (.*)$/, (datetimeFrom, datetimeTo) => {
@@ -45,4 +46,5 @@ When(/^I select a custom over 24 hours range from (.*) to (.*)$/, (datetimeFrom,
 Then('the expected {string} is displayed', () => {
     I.seeInSource('') //TODO
 });
+
 

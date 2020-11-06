@@ -6,11 +6,11 @@ const { I, requesthistoryPage } = inject();
 Given('I have navigated to the Request History page', () => {
     I.goToRequestHistory();
 });
-When('I click on the Items Shown drop down and select a number of items as {int} and apply', (itemCount) => {
+When('I click on the Items Shown drop down and select a number of items as {string} and apply', (itemCount) => {
     requesthistoryPage.selectCountOfFiles(itemCount);
 });
 Then('the count of files displayed is as selected {int} and will show in the items show dropdown', (fileCount) => {
-    I.assert(requesthistoryPage.countFileRecords(), fileCount);
+    I.seeNumberOfElements(requesthistoryPage.table.fileTableBodyRow, fileCount)
 });
 When('I click on the Add Filter button', () => {
     requesthistoryPage.clickAddFilterButton();
@@ -21,13 +21,15 @@ When('add multiple filter selections as {string}, {string}, {string}', (filterOn
     requesthistoryPage.addFilterWithValue(filterThree);
 });
 Then('the result list shows files with the applied filtertypes {string}', (filteredFile) => {
-    //todo: rewrite after updating @TEST-179
     requesthistoryPage.checkFilters(filteredFile);
 });
 
 Given('{string} and {string} are applied', (filterOne, filterTwo) => {
-    requesthistoryPage.checkFilters(filterOne);
-    requesthistoryPage.checkFilters(filterTwo);
+    requesthistoryPage.clickMoreFiltersButton();
+    requesthistoryPage.clickAddFilterButton();
+    requesthistoryPage.addFilterWithValue(filterOne);
+    requesthistoryPage.clickAddFilterButton();
+    requesthistoryPage.addFilterWithValue(filterTwo);
 });
 When('I remove {string}', (filterName) => {
     requesthistoryPage.removeAppliedFilter(filterName);

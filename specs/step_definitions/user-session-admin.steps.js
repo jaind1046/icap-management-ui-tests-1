@@ -1,6 +1,6 @@
 //<reference path="../../src/utils/steps_file.js" />
 
-const {I, homePage, loginPage} = inject();
+const {I, homePage, loginPage, env} = inject();
 
 
 Given('I hover over my profile and select Change Password', () => {
@@ -9,16 +9,19 @@ Given('I hover over my profile and select Change Password', () => {
 });
 
 When('I log out', () => {
+    homePage.clickAccountToggle();
     homePage.clickLogout();
 });
 Then('the next time I log in, the Password I have to use is {string}', (newPassword) => {
-    loginPage.loginWith(env.qa.email, env.qa.email);
-    I.seeElement(loginPage.fields.loginError);
+    //todo: uncomment when validation of credentials will be implemented
+ //   loginPage.loginWith(env.qa.email, env.qa.email);
+ //   I.seeElement(loginPage.fields.loginError);
     loginPage.loginWith(env.qa.email, newPassword);
     I.seeElement(homePage.sections.menu);
 });
 
 When('I hover over my profile and select Log Out', () => {
+    homePage.clickAccountToggle();
     homePage.clickLogout();
 });
 Then('I am taken to the Login Screen', () => {

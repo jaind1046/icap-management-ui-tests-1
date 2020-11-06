@@ -1,28 +1,34 @@
-const { setHeadlessWhen } = require('@codeceptjs/configure');
-require('dotenv').config({path: '.env'});
+const {
+  setHeadlessWhen
+} = require('@codeceptjs/configure');
+require('dotenv').config({
+  path: '.env'
+});
 
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
   output: './output',
   helpers: {
+    MyHelper: {
+      require: "./src/utils/helper.js"
+    },
     Puppeteer: {
       url: 'http://localhost:5431',
-      show: false,
+      show: true,
       windowSize: '1536 x 826',
       chrome: {
         args: ['--no-sandbox', '--window-size=1536,826'],
       },
       waitForNavigation: ["domcontentloaded", "networkidle0"],
-      waitForAction: 2000,
-      waitForTimeout: 60000
+     
     },
     FileSystem: {},
-    AssertWrapper : {
-     require: "codeceptjs-assert"
+    AssertWrapper: {
+      require: "codeceptjs-assert"
     },
     ChaiWrapper: {
-     require: "codeceptjs-chai"
+      require: "codeceptjs-chai"
     }
   },
   include: {
@@ -50,13 +56,21 @@ exports.config = {
     retryFailedStep: {
       enabled: false
     },
-
+    customLocator: {
+      enabled: true,
+      attribute: 'data-test-id'  
+    },
+    customLocator: {
+      enabled: true,
+      attribute: 'data-range-key'
+    },
+    
     screenshotOnFail: {
       enabled: true
     },
     autoDelay: {
       enabled: true,
-      delayBefore: 200,
+      delayBefore: 300,
       delayAfter: 200
     },
 
