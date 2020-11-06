@@ -15,8 +15,11 @@ Feature: request-history-filtering-by-file-type
             | filter        | filteredFile |
             | fileType_DOC  | DOC          |
             | fileType_DOCX | DOCX         |
+            | fileType_DOCM | DOCM         |
+            | fileType_DOT  | DOT          |
             | fileType_XLSX | XLSX         |
             | fileType_XLS  | XLS          |
+            | fileType_XLSM | XLSM         |
             | fileType_PPT  | PPT          |
             | fileType_PPTX | PPTX         |
             | fileType_JPEG | JPEG         |

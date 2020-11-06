@@ -13,7 +13,7 @@ module.exports = {
         customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
     },
     options: {
-        countOfFiles: ""
+        countOfFiles: "div[class*='Pagination_pageCountSelector__'] > select"
     },
     buttons: {
         filterArrow: `button[class*='Filters_arrow__']`,
@@ -27,16 +27,15 @@ module.exports = {
         apply: `button[class*='applyBtn']`,
         cancel: `button[class*='cancelBtn']`,
         deleteAppliedFilter: `button[class^='SelectedFilter_buttonClose__']`,
-        fileTypeMenu: "",
-        fileOutcomeMenu: "",
+        fileTypeMenu: "button[data-test-id='buttonFilterFileTypes']",
+        fileOutcomeMenu: "button[data-test-id='buttonFilterRisk']",
         fileOutcomeFilterSafe: "//span[contains(.,'Safe')]",
         fileOutcomeFilterBlockedByNCFS: "//span[contains(.,'Blocked By NCFS')]",
         fileOutcomeFilterBlockedByPolicy: "//span[contains(.,'Blocked By Policy')]",
         fileOutcomeFilterAllowedByPolicy: "//span[contains(.,'Allowed By Policy')]",
         fileOutcomeFilterAllowedByNCFS: "//span[contains(.,'Allowed By NCFS')]",
-        fileTypeMenuAdd: `div[class*='Filters_popup__'] > button:nth-child(1)`,
         fileIdAdd: "//button[contains(.,'+ ADD')]",
-        fileIdMenu: "button:nth-child(3) > p",
+        fileIdMenu: "button[data-test-id='buttonFilterFileId']",
         gotoPage: "",
         previousPage: "",
         firstPage: "",
@@ -44,15 +43,25 @@ module.exports = {
         lastPage: "",
     },
     table: {
-        historyTable: `div[class*='RequestHistory_wrapTable__13V_o']`,
-        fileTableBody: `th[class*='MuiTableCell-root MuiTableCell-body']`,
+
+        historyTable1: `div[class*='RequestHistory_wrapTable__13V_o']`,
+        fileTableBody1: `th[class*='MuiTableCell-root MuiTableCell-body']`,
         dataTransactionInfo: `//h2[contains(.,'No Transaction Data Found')]`
+
+        historyTable: `div[class*='RequestHistory_wrapTable__']`,
+        fileTableBody: `tbody[class*='MuiTableBody-root']`,
+        fileTableBodyRow: `tbody[class*='MuiTableBody-root'] > tr`
+
+
     },
     checkboxes: {
         fileTypeDoc: `//span[contains(.,'doc')]/parent::label/span[1]/span/input`,
         fileTypeDocx: `//span[contains(.,'docx')]/parent::label/span[1]/span/input`,
+        fileTypeDocm: `//span[contains(.,'docm')]/parent::label/span[1]/span/input`,
+        fileTypeDot: `//span[contains(.,'dot')]/parent::label/span[1]/span/input`,
         fileTypeXlsx: `//span[contains(.,'xlsx')]/parent::label/span[1]/span/input`,
         fileTypeXls: `//span[contains(.,'xls')]/parent::label/span[1]/span/input`,
+        fileTypeXlsm: `//span[contains(.,'xlsm')]/parent::label/span[1]/span/input`,
         fileTypePpt: `//span[contains(.,'ppt')]/parent::label/span[1]/span/input`,
         fileTypePptx: `//span[contains(.,'pptx')]/parent::label/span[1]/span/input`,
         fileTypePdf: `//span[contains(.,'pdf')]/parent::label/span[1]/span/input`,
@@ -83,7 +92,8 @@ module.exports = {
     },
     containers: {
         appliedFilterFamily: `div[class^=SelectedFilter_SelectedFilter__]`,
-        appliedFilters: `div[class*=Filters_filters__] > div`
+        appliedFilters: `div[class*=Filters_filters__] > div`,
+        appliedFiltersFooter: `div[class*='SelectedFilter_footer__'] > span`,
     },
     modal: {
         modalHeader: `section[class*='FileInfo_FileInfo__1Z457'] > header`,
@@ -280,9 +290,9 @@ module.exports = {
     },
     setFileOutcome(outcome) {
         let outcomeType = null;
-        const outcomeMenu = this.popup.filterFileOutcomes;
+        const outcomeMenu = this.buttons.fileOutcomeMenu;
         I.click(outcomeMenu);
-        if (outcome === "safe") {
+        if (outcome === "Safe") {
             outcomeType = this.buttons.fileOutcomeFilterSafe;
         } else if (outcome === "allowedByNCFS") {
             outcomeType = this.buttons.fileOutcomeFilterAllowedByNCFS;
@@ -299,7 +309,7 @@ module.exports = {
     },
 
     clickFileTypeAdd() {
-        const element = this.buttons.fileTypeMenuAdd;
+        const element = this.buttons.fileTypeMenu;
         I.click(element);
     },
 
@@ -329,11 +339,20 @@ module.exports = {
             case 'DOCX':
                 element = this.checkboxes.fileTypeDocx;
                 break;
+                case 'DOCM':
+                element = this.checkboxes.fileTypeDocm;
+                break;
+            case 'DOT':
+                element = this.checkboxes.fileTypeDot;
+                break;
             case 'XLS':
                 element = this.checkboxes.fileTypeXls;
                 break;
             case 'XLSX':
                 element = this.checkboxes.fileTypeXlsx;
+                break;
+                case 'XLSM':
+                element = this.checkboxes.fileTypeXlsm;
                 break;
             case 'PPT':
                 element = this.checkboxes.fileTypePpt;
@@ -375,7 +394,7 @@ module.exports = {
                 element = this.checkboxes.fileTypeMacho;
                 break;
         }
-        I.checkOption(element);
+        I.click(element);
     },
 
     selectCountOfFiles(itemCount) {
@@ -388,13 +407,13 @@ module.exports = {
         const filterName = res[0];
         const filterValue = res[1];
         switch (filterName) {
-            case 'fileOutcome':
+            case 'FileOutcome':
                 this.setFileOutcome(filterValue);
                 break;
             case 'fileId':
                 this.setFileId(filterValue);
                 break;
-            case 'fileType':
+            case 'FileType':
                 this.setFileType(filterValue);
                 break;
             default:
@@ -403,23 +422,22 @@ module.exports = {
         I.wait(5);
     },
 
-    checkFilters(filteredFile) {
+    async checkFilters(filteredFile) {
         //todo: rewrite after updating @TEST-179
         const res = filteredFile.split("_");
         if (res.length === 1) {
-            //going to text in SelectedFilter_footer
-            const filterValue = this.containers.appliedFilters + '> div > div > span';
-            I.seeInField(filterValue, filteredFile);
+            const filterValue = this.containers.appliedFiltersFooter;
+            let filterValueText = await I.grabTextFrom(filterValue);
+            I.seeTextEquals(filteredFile, filterValueText.toLowerCase());
         } else {
             //todo: write for multiple filters
-            // for (let value in res) {
-            // }
         }
     },
 
     removeAppliedFilter(filterName) {
         const res = filterName.split("_");
         const filterValue = res[1];
+
 
         let listOfFilters = document.querySelectorAll(this.containers.appliedFilterFamily);
         listOfFilters.forEach(e => {
@@ -434,6 +452,9 @@ module.exports = {
                 I.click(`button[class*='` + deleteButton + `']`);
             }
         })
+
+        I.click(`//span[contains(., '` + filterValue+ `')]/parent::*/../div/button`);
+
     },
     checkFileValues(filteredFile) {
         const table = document.getElementsByTagName('table')
@@ -507,11 +528,6 @@ module.exports = {
 
     openFileRecord(fileId) {
         I.click(this.getFileRecord(fileId))
-    },
-
-    countFileRecords() {
-        const table = document.getElementsByTagName('table')
-        return table.tBodies[0].rows.length;
     },
 
     checkFileDetailViewId(fileId) {
