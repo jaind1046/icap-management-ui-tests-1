@@ -12,8 +12,8 @@ Feature: Content Management Policy Editing
         When I click on Current Policy in the navigation panel
         Then I am taken to the current policy page
 
-
-    @TEST-188
+    @smoke
+    @TEST-188 
     Scenario Outline: A user can cancel any updates that they have done to the policy by pressing cancel
         When I change one of the <ContentFlags> for required file types <fileType> to <FlagType>
         When I press the Cancel button
@@ -23,7 +23,7 @@ Feature: Content Management Policy Editing
             | word       | embeddedFiles   | sanitise |
           
 
-
+    
     @TEST-155
     Scenario Outline: I can edit policy content flags
         When I change one of the <ContentFlags> for required file types <fileType> to <FlagType>
@@ -38,7 +38,7 @@ Feature: Content Management Policy Editing
             | powerpoint | embeddedImages  | disallow |
             | pdf        | acroform        | sanitise |
 
-
+    @smoke
     @TEST-Change-all-content-flag-for-all-doc-type
     Scenario Outline: A user is able to change the content flags to sanitise for word in policy page
         When I change all the flag for <fileType> to sanitise on policy page

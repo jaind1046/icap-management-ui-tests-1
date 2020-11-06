@@ -4,7 +4,8 @@ Feature: request-history-filtering-by-file-type
 
     Background:
         Given I am logged into the ui
-
+    
+    
     @TEST-163_164_165_180
     Scenario Outline: I can filter the log by file type
         Given I have navigated to the Request History page

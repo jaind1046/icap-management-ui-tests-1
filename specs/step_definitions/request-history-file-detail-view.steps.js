@@ -13,13 +13,14 @@ Given("I have navigated to the Request History page", () => {
     pause();
 });
 
-When(/^I search for a file with id (.*) and click on the file record$/, (fileId) => {
-    requesthistoryPage.filterByFileId(fileId)
+When('I click on a available file record with id {string}', (fileId) => {
+    //requesthistoryPage.filterByFileId(fileId)
     requesthistoryPage.openFileRecord(fileId)
 });
 
-Then('the file detail view opens with the ID displayed at the top', (fileId) => {
-    I.seeElement(requesthistoryPage.modal.fileDetailModal)
+Then('the file detail view opens with the {string} displayed at the top', (fileId) => {
+    I.wait(5)
+    //I.seeElementInDOM(requesthistoryPage.modal.fileDetailModal)
     requesthistoryPage.checkFileDetailViewId(fileId)
 
 });

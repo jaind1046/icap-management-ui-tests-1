@@ -8,7 +8,7 @@ module.exports = {
 
     sections: {
         filedropModal: `div[class*='StyledDropzone_border__92UuO']`,
-        analysisReportView: `div[class*='RenderResults_RenderResults__3aMKv']`,
+        analysisReportView: `div[data-test-id='divFileDropResults']`,
         fileAttributeView: `div[class*='FileAttributes_FileAttributes__13JsG']`,
         activeContentView: `div[class*='RenderAnalysis_RenderAnalysis__1DRB7'] > div:nth-of-type(1)`,
         repairedObjestsView: `div[class*='RenderAnalysis_RenderAnalysis__1DRB7'] > div:nth-of-type(2)`,
