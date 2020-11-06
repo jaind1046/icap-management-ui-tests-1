@@ -1,6 +1,6 @@
 //<reference path="../../src/utils/steps_file.js" />
 
-const {I, homePage, loginPage} = inject();
+const {I, homePage, loginPage, env} = inject();
 
 
 Given('I hover over my profile and select Change Password', () => {
@@ -9,6 +9,7 @@ Given('I hover over my profile and select Change Password', () => {
 });
 
 When('I log out', () => {
+    homePage.clickAccountToggle();
     homePage.clickLogout();
 });
 Then('the next time I log in, the Password I have to use is {string}', (newPassword) => {
@@ -19,6 +20,7 @@ Then('the next time I log in, the Password I have to use is {string}', (newPassw
 });
 
 When('I hover over my profile and select Log Out', () => {
+    homePage.clickAccountToggle();
     homePage.clickLogout();
 });
 Then('I am taken to the Login Screen', () => {
