@@ -9,7 +9,7 @@ Given('I have navigated to the Request History page', () => {
 When('I click on the Items Shown drop down and select a number of items as {string} and apply', (itemCount) => {
     requesthistoryPage.selectCountOfFiles(itemCount);
 });
-Then('the count of files displayed is as selected {string} and will show in the items show dropdown', (fileCount) => {
+Then('the count of files displayed is as selected {int} and will show in the items show dropdown', (fileCount) => {
     I.seeNumberOfElements(requesthistoryPage.table.fileTableBodyRow, fileCount)
 });
 When('I click on the Add Filter button', () => {

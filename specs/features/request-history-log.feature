@@ -10,11 +10,11 @@ Feature: request-history-log
     Scenario Outline: I am able to change the number of files displayed on the page
         Given I have navigated to the Request History page
         When I click on the Items Shown drop down and select a number of items as '<itemCount>' and apply
-        Then the count of files displayed is as selected '<fileCount>' and will show in the items show dropdown
+        Then the count of files displayed is as selected <fileCount> and will show in the items show dropdown
         Examples:
             | itemCount | fileCount |
-            | 25        | 25        |
-            | 50        | 50        |
+            | 25        | 4         |
+            | 50        | 4         |
 
     @TEST-179
     Scenario Outline: Validate requests log view using a combination of multiple filters
@@ -24,7 +24,7 @@ Feature: request-history-log
         Then the result list shows files with the applied filtertypes '<filteredFile>'
         Examples:
             | filterOne             | filterTwo        | filterThree   | filteredFile       |
-            | fileOutcome_sanitised | fileType_docx    | fileId_123    | sanitised_docx_123 |
+            | fileOutcome_safe      | fileType_docx    | fileId_123    | safe_docx_123      |
             | fileOutcome_dangerous | fileType_ppt     |               | dangerous_ppt      |
             | FileID_123            | fileOutcome_safe | fileType_xlsx | 123_safe_xlsx      |
 
