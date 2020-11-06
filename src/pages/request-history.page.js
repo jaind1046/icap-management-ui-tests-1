@@ -1,5 +1,6 @@
 const MyHelper = require("../utils/helper");
-let moment = require('moment');
+const moment = require('moment');
+
 const {
     I
 } = inject();
@@ -10,20 +11,21 @@ module.exports = {
     fields: {
         inputFilterFileID: `input[name='fileId']`,
         customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
-        datetimeFrom: `#datetime-local-left`,
-        datetimeTo: `#datetime-local-right`,
     },
     options: {
         countOfFiles: "div[class*='Pagination_pageCountSelector__'] > select"
     },
     buttons: {
         filterArrow: `button[class*='Filters_arrow__']`,
-        moreFilters: `button[class*='Filters_moreFilters__']`,
+        moreFilters: `[data-test-id=buttonMoreFilters]`,
+        addFilter: `button[data-test-id='addFilterButton']`,
         dateTime: `//button[contains(.,'Date/Time')]`,
-        time_1hour: 'button:nth-child(1) > p',
-        time_12hours: 'button:nth-child(2) > p',
-        time_24hours: 'button:nth-child(3) > p',
-        addFilter: `//button[contains(.,'+ Add Filter')]`,
+        time_1hour: `li[data-range-key='1 Hour']`,
+        time_12hours: '$12 Hours',
+        time_24hours: '$24 Hours',
+        customRange: '$Custom Range',
+        apply: `button[class*='applyBtn']`,
+        cancel: `button[class*='cancelBtn']`,
         deleteAppliedFilter: `button[class^='SelectedFilter_buttonClose__']`,
         fileTypeMenu: "button[data-test-id='buttonFilterFileTypes']",
         fileOutcomeMenu: "button[data-test-id='buttonFilterRisk']",
@@ -41,9 +43,15 @@ module.exports = {
         lastPage: "",
     },
     table: {
+
+        historyTable1: `div[class*='RequestHistory_wrapTable__13V_o']`,
+        fileTableBody1: `th[class*='MuiTableCell-root MuiTableCell-body']`,
+        dataTransactionInfo: `//h2[contains(.,'No Transaction Data Found')]`
+
         historyTable: `div[class*='RequestHistory_wrapTable__']`,
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
         fileTableBodyRow: `tbody[class*='MuiTableBody-root'] > tr`
+
 
     },
     checkboxes: {
@@ -69,10 +77,15 @@ module.exports = {
         fileTypeCoff: `//span[contains(.,'Coff')]/parent::label/span[1]/span/input`,
     },
     calendar: {
-        dateTimePicker: "",
+        dateTimePicker: `div[class*='daterangepicker']`,
+        drp_calendar_left: `div[class*='drp-calendar left']`,
+        drp_calendar_right: `div[class*='drp-calendar right']`,
+        reportRange: `#reportrange > span`,
+        drp_selected: `span.drp-selected`,
+
     },
     popup: {
-        filterFileId: `div[class*='Filters_popup__'] > button:nth-child(1)`,
+        filterFileId: `button:nth-child(1) > p`,
         filterType: `div[class*='Filters_popup__'] > button:nth-child(3)`,
         filterFileOutcomes: `div[class*='Filters_popup__'] > button:nth-child(2)`,
         filterMenu: `div[class*='Filters_popup__']`,
@@ -85,10 +98,10 @@ module.exports = {
     modal: {
         modalHeader: `section[class*='FileInfo_FileInfo__1Z457'] > header`,
         cmpDetailsBanner: `div[class*='FileInfo_inner__1NnWT'] > div:nth-of-type(5) > div > label`,
-        issueItemsBanner: `div[class*='FileInfo_inner__1NnWT'] > div:nth-of-type(2)`,
+        issueItemsBanner: `.FileInfo_block__3_27q:nth-child(2) .MuiFormControlLabel-root`,
         sanitisationItemsBanner: `div[class*='FileInfo_inner__1NnWT'] > div:nth-of-type(3)`,
         remedyItemsBanner: `div[class*='FileInfo_inner__1NnWT'] > div:nth-of-type(4)`,
-        fileDetailModal: `section[class*='Modal_Modal__9Stj1']`,
+        fileDetailModal: `//section[2]/section/div`,
     },
 
     //Methods
@@ -107,87 +120,159 @@ module.exports = {
         I.fillField(element, value);
     },
 
-    openTimeMenu() {
-        const element = this.buttons.dateTime;
-        I.click(element);
+    openDatePicker() {
+        const element = this.calendar.reportRange;
+        I.click(element).catch(() => I.say(element + 'is not clickable'));
     },
 
-    selectTimePeriod(period) {
-        if (period === '1 Hour') {
-            I.click(this.buttons.time_1hour)
-        } else if (period === '12 Hours') {
-            I.click(this.buttons.time_12hours)
-        } else if (period === '24 Hours') {
-            I.click(this.buttons.time_24hours)
+    async selectTimePeriod(period) {
+        try {
+            if (period === '1 Hour') {
+                await I.click(this.buttons.time_1hour).catch(() => I.say('unable to click period'));
+            } else if (period === '12 Hours') {
+                await I.click(this.buttons.time_12hours).catch(() => I.say('unable to click period'));
+            } else if (period === '24 Hours') {
+                await I.click(this.buttons.time_24hours).catch(() => I.say('unable to click period'));
+            } else {
+                I.say("Unable to find the required option");
+            }
+        }
+        catch (e) {
+            I.say('Action unsuccessul')
+            console.warn(e);
         }
     },
 
     async getTimeFrom() {
-        return await I.grabValueFrom(this.fields.datetimeFrom);
+        let startime = null;
+        let range = await I.grabTextFrom(this.calendar.reportRange);
+        startime = range.split("-")
+        return startime;
     },
 
     async getTimeTo() {
-        return await I.grabTextFrom(this.fields.datetimeTo);
+        let endtime = null;
+        let range = await I.grabTextFrom(this.calendar.reportRange);
+        endtime = range.split("-")
+        return startime;
     },
 
     setTimeTo(dateTo) {
-        const element = this.fields.datetimeTo;
-        I.click(element)
-        if (dateTo === 'current time') {
-            I.type(getCurrentTime());
-        } else {
-            I.type(dateTo);
-        }
+        const element = this.calendar.dateTimePicker;
+        within(element, () => {
+            if (dateTo === 'current time') {
+                I.type(this.getCurrentTime());
+            } else {
+                I.type(dateTo);
+            }
+        })
     },
 
     setTimeFrom(dateFrom) {
-        const element = this.fields.datetimeFrom;
-        I.click(element)
-        if (dateFrom === '1 hour earlier') {
-            I.type(getPastPeriod(1));
-        } else if (dateFrom === '6 hours earlier') {
-            I.type(getPastPeriod(6));
-        } else if (dateFrom === '24 hours earlier') {
-            I.type(getPastPeriod(24));
+        const element = this.calendar.dateTimePicker;
+        within(element, () => {
+            if (dateFrom === '1 hour earlier') {
+                I.type(this.getPastPeriod(1));
+            } else if (dateFrom === '6 hours earlier') {
+                I.type(this.getPastPeriod(6));
+            } else if (dateFrom === '24 hours earlier') {
+                I.type(this.getPastPeriod(24));
+            } else {
+                I.type(dateFrom);
+            }
+        })
+    },
+
+
+    setCustomRange(dateFrom, dateTo) {
+        const start = this.setTimeFrom(dateFrom);
+        const end = setTimeTo(dateTo);
+        const range = moment.range(start, end);
+        range.format()
+    },
+
+    async getSelectedRange() {
+        const element = this.calendar.reportRange;
+        await I.grabTextFrom(element);
+
+    },
+
+
+    getDateRange(start, end) {
+        var time = null;
+        if (end === 'current time') {
+            time = moment();
         } else {
-            I.type(dateFrom);
+            time = datetimeTo
         }
-    },
+        const currentTime = time.subtract(0, 'h').format('DD/MM/YYYY H:mm A')
+        const timeFrom = time.subtract(start, 'h').format('DD/MM/YYYY H:mm A');
+        const range = timeFrom + " - " + currentTime;
+        return range.toString();
 
-    assertAccurateTimeFromIsSet(datetimeFrom) {
-        let x = document.getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value);
-        if (datetimeFrom === '1 hour earlier') {
-            I.seeTextEquals(this.getPastPeriod(1), x)
-        } else if (datetimeFrom === '12 hours earlier') {
-            I.see(this.getPastPeriod(12), this.fields.datetimeFrom)
-        } else if (datetimeFrom === '24 hours earlier') {
-            I.see(this.getPastPeriod(24), this.fields.datetimeFrom)
-        }
-    },
-
-    checkAccurateTime() {
-        let timeFrom = document.getElementById(this.fields.datetimeFrom).ATTRIBUTE_NODE(value);
-        I.seeTextEquals(this.getPastPeriod(1), timeFrom)
     },
 
     getCurrentTime() {
-        let currentTime = moment().utc(true).format().slice(0, -1);
+        var currentTime = moment();
         return currentTime;
     },
 
+    getRequiredTime(datetimeTo) {
+        let time = null;
+        try {
+            if (datetimeTo === 'current time') {
+                time = this.getCurrentTime();
+            } else {
+                time = datetimeTo
+            }
+        } catch (e) {
+            I.say('errors')
+            console.warn(e);
+        }
+        return time;
+    },
+
     getPastPeriod(time) {
-        const now = moment().utc(true);
-        const pastPeriod = now.subtract(time, 'h').format(String).slice(0, -1);
+        const now = this.getCurrentTime();
+        const pastPeriod = now.subtract(time, 'h')
         return pastPeriod;
     },
 
-    assertAccurateTimeToIsSet(datetimeTo) {
-        const currentTime = moment().utc(true).format().slice(0, -1);
-        let x = document.getElementById(this.fields.datetimeTo).ATTRIBUTE_NODE(value);
-        if (datetimeTo === 'current time') {
-            I.seeTextEquals(currentTime, x);
+    async isDataAvailable(range) {
+        const table = this.table.fileTableBody;
+        try {
+            const element = await I.grabNumberOfVisibleElements(this.table.dataTransactionInfo);
+            if (element) {
+                I.say("No Transaction Data Found")
+            } else {
+                I.say("The table data is available")
+            }
+        } catch (e) {
+            I.say('errors')
+            console.warn(e);
         }
     },
+
+    async isDataInRange(range) {
+        try {
+            I.waitForElement('th:nth-of-type(1)', 30)
+            I.wait(5);
+            let raws = await I.grabNumberOfVisibleElements('th:nth-of-type(1)')
+            if (raws > 2) {
+                I.say("Data is available")
+                // for (let i = 2; i < raws; i++) {
+                //     let timestamp = await I.grabTextFrom(`tr:nth-of-type(` + i + `) > th:nth-of-type(1)`);
+                //     let parsed = moment(timestamp, 'DD/MM/YYYY').toDate()
+                //     moment(parsed).isBetween(range.split("-"))
+                // }
+            } else { I.say(raws) }
+        } catch (e) {
+            I.say('errors')
+            console.warn(e);
+        }
+
+    },
+
 
 
     /*
@@ -201,7 +286,7 @@ module.exports = {
     clickMoreFiltersButton() {
         const element = this.buttons.moreFilters;
         I.click(element);
-        I.wait(2);
+        I.wait(5);
     },
     setFileOutcome(outcome) {
         let outcomeType = null;
@@ -217,6 +302,8 @@ module.exports = {
             outcomeType = this.buttons.fileOutcomeFilterBlockedByPolicy;
         } else if (outcome === "blockedByNCFS") {
             outcomeType = this.buttons.fileOutcomeFilterBlockedByNCFS;
+        } else {
+            I.say("Unable to find the required option");
         }
         I.click(outcomeType);
     },
@@ -350,7 +437,24 @@ module.exports = {
     removeAppliedFilter(filterName) {
         const res = filterName.split("_");
         const filterValue = res[1];
+
+
+        let listOfFilters = document.querySelectorAll(this.containers.appliedFilterFamily);
+        listOfFilters.forEach(e => {
+            const filterFooter = e.lastElementChild.children.item(0);
+            if (filterFooter.textContent === filterValue) {
+                const deleteButton = document.getElementsByClassName(
+                    e.firstElementChild
+                        .children
+                        .item(1)
+                        .className
+                );
+                I.click(`button[class*='` + deleteButton + `']`);
+            }
+        })
+
         I.click(`//span[contains(., '` + filterValue+ `')]/parent::*/../div/button`);
+
     },
     checkFileValues(filteredFile) {
         const table = document.getElementsByTagName('table')

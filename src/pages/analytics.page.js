@@ -41,11 +41,11 @@ module.exports = {
         timeIntervalPopup: 'div[class^=Popup_Popup__]'
     },
     legend: {
-        safe: `//li[contains(.,'Safe')]`,
-        blocked: `//li[contains(.,'Blocked')]`,
-        dangerous: `//li[contains(.,'Dangerous')]`,
-        unclassified: `//li[contains(.,'Unclassified')]`,
-        checked: `//li[contains(.,'Checked')]`,
+        safe: `//span[contains(.,'Safe')]`,
+        blocked: `//span[contains(.,'Blocked')]`,
+        dangerous: `//span[contains(.,'Dangerous')]`,
+        unclassified: `//span[contains(.,'Unclassified')]`,
+        checked: `//span[contains(.,'Checked')]`,
         legendList: `//li[contains(@class,'legend-item-')]`,
         rechart_sector: `path.recharts-sector`,
         rechart_line: `path.recharts-curve.recharts-line-curve`,

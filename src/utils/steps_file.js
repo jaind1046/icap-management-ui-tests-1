@@ -2,13 +2,17 @@ const homePage = require("../pages/home.page.js");
 const loginPage = require("../pages/login.page.js");
 const policyPage = require("../pages/policy.page.js");
 const filedropPage = require("../pages/file-drop.page.js");
+
+const assert = require('assert');
+
 const env = require('../../credentials.js');
 require('dotenv').config({path: '.env'});
+
 
 module.exports = function () {
     return actor({
         onLoginPage: function () {
-            this.amOnPage("http://localhost:10720");
+            this.amOnPage("http://localhost:3000/");
         },
 
         loginNoPwd: function () {
@@ -79,6 +83,10 @@ module.exports = function () {
                     throw 'There is not such file type.'
             }
             this.uploadFile(path);
+        },
+
+        fail(message) {
+            assert.fail(message);
         }
     });
 };
