@@ -41,8 +41,10 @@ module.exports = {
         lastPage: "",
     },
     table: {
-        historyTable: `div[class*='RequestHistory_wrapTable__13V_o']`,
+        historyTable: `div[class*='RequestHistory_wrapTable__']`,
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
+        fileTableBodyRow: `tbody[class*='MuiTableBody-root'] > tr`
+
     },
     checkboxes: {
         fileTypeDoc: `//span[contains(.,'doc')]/parent::label/span[1]/span/input`,
@@ -422,11 +424,6 @@ module.exports = {
 
     openFileRecord(fileId) {
         I.click(this.getFileRecord(fileId))
-    },
-
-    countFileRecords() {
-        const table = document.getElementsByTagName('table')
-        return table.tBodies[0].rows.length;
     },
 
     checkFileDetailViewId(fileId) {
