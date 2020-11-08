@@ -13,6 +13,7 @@ Then('the count of files displayed is as selected {int} and will show in the ite
     I.seeNumberOfElements(requesthistoryPage.table.fileTableBodyRow, fileCount)
 });
 When('I click on the Add Filter button', () => {
+    requesthistoryPage.clickMoreFiltersButton();
     requesthistoryPage.clickAddFilterButton();
 });
 When('add multiple filter selections as {string}, {string}, {string}', (filterOne, filterTwo, filterThree) => {

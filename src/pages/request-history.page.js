@@ -17,7 +17,7 @@ module.exports = {
     },
     buttons: {
         filterArrow: `button[class*='Filters_arrow__']`,
-        moreFilters: `[data-test-id=buttonMoreFilters]`,
+        moreFilters: `button[class*='Filters_moreFilters__']`,
         addFilter: `button[data-test-id='addFilterButton']`,
         dateTime: `//button[contains(.,'Date/Time')]`,
         time_1hour: `li[data-range-key='1 Hour']`,
@@ -46,7 +46,7 @@ module.exports = {
 
         historyTable1: `div[class*='RequestHistory_wrapTable__13V_o']`,
         fileTableBody1: `th[class*='MuiTableCell-root MuiTableCell-body']`,
-        dataTransactionInfo: `//h2[contains(.,'No Transaction Data Found')]`
+        dataTransactionInfo: `//h2[contains(.,'No Transaction Data Found')]`,
 
         historyTable: `div[class*='RequestHistory_wrapTable__']`,
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
@@ -285,8 +285,11 @@ module.exports = {
     },
     clickMoreFiltersButton() {
         const element = this.buttons.moreFilters;
+        //a bug: "more filters" button needs to be clicked twice
         I.click(element);
-        I.wait(5);
+        I.click(element);
+        I.wait(2);
+        I.seeElement(this.buttons.addFilter);
     },
     setFileOutcome(outcome) {
         let outcomeType = null;
@@ -351,7 +354,7 @@ module.exports = {
             case 'XLSX':
                 element = this.checkboxes.fileTypeXlsx;
                 break;
-                case 'XLSM':
+            case 'XLSM':
                 element = this.checkboxes.fileTypeXlsm;
                 break;
             case 'PPT':
@@ -427,32 +430,23 @@ module.exports = {
         const res = filteredFile.split("_");
         if (res.length === 1) {
             const filterValue = this.containers.appliedFiltersFooter;
-            let filterValueText = await I.grabTextFrom(filterValue);
-            I.seeTextEquals(filteredFile, filterValueText.toLowerCase());
+            await this.checkFilterByValue(res[0], filterValue);
         } else {
-            //todo: write for multiple filters
+            for (let value in res) {
+                let filterValueLocator = `//div/span[contains(.,'` + value + `')]`;
+                I.assert(filterValueLocator, value);
+            }
         }
+    },
+
+    async checkFilterByValue(value, locator) {
+        let filterValueText = await I.grabTextFrom(locator);
+        I.assert(value, filterValueText.toLowerCase());
     },
 
     removeAppliedFilter(filterName) {
         const res = filterName.split("_");
         const filterValue = res[1];
-
-
-        let listOfFilters = document.querySelectorAll(this.containers.appliedFilterFamily);
-        listOfFilters.forEach(e => {
-            const filterFooter = e.lastElementChild.children.item(0);
-            if (filterFooter.textContent === filterValue) {
-                const deleteButton = document.getElementsByClassName(
-                    e.firstElementChild
-                        .children
-                        .item(1)
-                        .className
-                );
-                I.click(`button[class*='` + deleteButton + `']`);
-            }
-        })
-
         I.click(`//span[contains(., '` + filterValue+ `')]/parent::*/../div/button`);
 
     },
