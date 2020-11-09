@@ -8,7 +8,7 @@ Feature: user-records-admin
     @TEST-171
     Scenario Outline: I can add a new user to the ui
         Given I have logged into the ui and navigated to the Users page
-        When I add a new user with a valid <email>
+        When I add a new user with a valid '<email>'
         Then The new user record is saved
         Examples:
             | name    | email                    |

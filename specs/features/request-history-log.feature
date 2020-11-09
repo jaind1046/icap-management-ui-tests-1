@@ -24,9 +24,8 @@ Feature: request-history-log
         Then the result list shows files with the applied filtertypes '<filteredFile>'
         Examples:
             | filterOne             | filterTwo        | filterThree   | filteredFile       |
-            | fileOutcome_safe      | fileType_docx    | fileId_123    | safe_docx_123      |
-            | fileOutcome_dangerous | fileType_ppt     |               | dangerous_ppt      |
-            | FileID_123            | fileOutcome_safe | fileType_xlsx | 123_safe_xlsx      |
+            | FileOutcome_Safe      | FileType_png     |               | Safe_png           |
+
 
     @TEST-189
     Scenario Outline: I can remove individual filters
@@ -45,5 +44,5 @@ Feature: request-history-log
         When I click on the Add Filter button and add a file id filter as '<filter>'
         Then the result list only shows the filtered file as '<filteredFile>'
         Examples:
-            | filter     | filteredFile |
-            | fileId_123 | 123          |
+            | filter                                             | filteredFile                                  |
+            | fileId_44444444 - 4444 - 4444 - 4444 - 44444444444 | 44444444 - 4444 - 4444 - 4444 - 44444444444   |

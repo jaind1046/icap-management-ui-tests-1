@@ -14,12 +14,12 @@ Feature: dashboard-requests-filtering-by-file-risk
         Examples:
             | chart      | fileRisk     | filteredRisk |
             | pie        | Safe         | Safe         |
-            # | pie        | Blocked      | Blocked      |
-            # | pie        | Dangerous    | Dangerous    |
-            # | pie        | Unclassified | Unclassified |
+            | pie        | Blocked      | Blocked      |
+            | pie        | Dangerous    | Dangerous    |
+            | pie        | Unclassified | Unclassified |
             | line graph | Safe         | Safe         |
-            # | line graph | Blocked      | Blocked      |
-            # | line graph | Dangerous    | Dangerous    |
-            # | line graph | Checked      | Checked      |
-            # | line graph | Unclassified | Unclassified |
+            | line graph | Blocked      | Blocked      |
+            | line graph | Dangerous    | Dangerous    |
+            | line graph | Checked      | Checked      |
+            | line graph | Unclassified | Unclassified |
 

@@ -53,11 +53,7 @@ As a admin I need to validate that policy content flags can be edited in order t
             | powerpoint |
             | pdf        |
 
-  As a admin I need to validate that policy content flags can be edited in order to confirm that the solution works as expected
 
-  Background:
-    Given I am logged into the portal
-    Given I am on current policy screen
 
 
   @TEST-153

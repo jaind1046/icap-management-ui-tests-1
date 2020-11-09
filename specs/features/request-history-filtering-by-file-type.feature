@@ -13,26 +13,19 @@ Feature: request-history-filtering-by-file-type
         Then the result list only shows files with the selected types as '<filteredFile>'
         Examples:
             | filter        | filteredFile |
-            | fileType_DOC  | DOC          |
-            | fileType_DOCX | DOCX         |
-            | fileType_DOCM | DOCM         |
-            | fileType_DOT  | DOT          |
-            | fileType_XLSX | XLSX         |
-            | fileType_XLS  | XLS          |
-            | fileType_XLSM | XLSM         |
-            | fileType_PPT  | PPT          |
-            | fileType_PPTX | PPTX         |
-            | fileType_JPEG | JPEG         |
-            | fileType_PNG  | PNG          |
-            | fileType_GIF  | GIF          |
-            | fileType_WMF  | WMF          |
-            | fileType_EMF  | EMF          |
-            | fileType_PDF  | PDF          |
-            | fileType_RTF  | RTF          |
-            | fileType_PE   | PE           |
-            | fileType_MACHO| MACHO        |
-            | fileType_ELF  | ELF          |
-            | fileType_COFF | COFF         |
+            | FileType_DOCX | DOCX         |
+            | FileType_DOC  | DOC          |
+            | FileType_DOCM | DOCM         |
+            | FileType_DOT  | DOT          |
+            | FileType_XLSX | XLSX         |
+            | FileType_XLS  | XLS          |
+            | FileType_XLSM | XLSM         |
+            | FileType_PPT  | PPT          |
+            | FileType_PPTX | PPTX         |
+            | FileType_JPEG | JPEG         |
+            | FileType_PNG  | PNG          |
+            | FileType_GIF  | GIF          |
+            | FileType_PDF  | PDF          |
 
 
 
