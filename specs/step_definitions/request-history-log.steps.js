@@ -13,12 +13,14 @@ Then('the count of files displayed is as selected {int} and will show in the ite
     I.seeNumberOfElements(requesthistoryPage.table.fileTableBodyRow, fileCount)
 });
 When('I click on the Add Filter button', () => {
+    requesthistoryPage.clickMoreFiltersButton();
     requesthistoryPage.clickAddFilterButton();
 });
 When('add multiple filter selections as {string}, {string}, {string}', (filterOne, filterTwo, filterThree) => {
     requesthistoryPage.addFilterWithValue(filterOne);
     requesthistoryPage.addFilterWithValue(filterTwo);
     requesthistoryPage.addFilterWithValue(filterThree);
+    requesthistoryPage.closeFilterMenu();
 });
 Then('the result list shows files with the applied filtertypes {string}', (filteredFile) => {
     requesthistoryPage.checkFilters(filteredFile);
@@ -36,6 +38,7 @@ When('I remove {string}', (filterName) => {
 });
 
 When('I click on the Add Filter button and add a file id filter as {string}', (filter) => {
+    requesthistoryPage.clickMoreFiltersButton();
     requesthistoryPage.addFilterWithValue(filter);
 });
 

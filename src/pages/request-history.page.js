@@ -17,7 +17,7 @@ module.exports = {
     },
     buttons: {
         filterArrow: `button[class*='Filters_arrow__']`,
-        moreFilters: `[data-test-id=buttonMoreFilters]`,
+        moreFilters: `button[class*='Filters_moreFilters__']`,
         addFilter: `button[data-test-id='addFilterButton']`,
         dateTime: `//button[contains(.,'Date/Time')]`,
         time_1hour: `li[data-range-key='1 Hour']`,
@@ -279,8 +279,11 @@ module.exports = {
     },
     clickMoreFiltersButton() {
         const element = this.buttons.moreFilters;
+        //a bug: "more filters" button needs to be clicked twice
         I.click(element);
-        I.wait(5);
+        I.click(element);
+        I.wait(2);
+        I.seeElement(this.buttons.addFilter);
     },
     setFileOutcome(outcome) {
         let outcomeType = null;
@@ -345,7 +348,7 @@ module.exports = {
             case 'XLSX':
                 element = this.checkboxes.fileTypeXlsx;
                 break;
-                case 'XLSM':
+            case 'XLSM':
                 element = this.checkboxes.fileTypeXlsm;
                 break;
             case 'PPT':
@@ -397,6 +400,9 @@ module.exports = {
     },
 
     addFilterWithValue(filterWithValue) {
+        if (filterWithValue===''){
+            return;
+        }
         const res = filterWithValue.split("_");
         const filterName = res[0];
         const filterValue = res[1];
@@ -417,65 +423,55 @@ module.exports = {
     },
 
     async checkFilters(filteredFile) {
-        //todo: rewrite after updating @TEST-179
         const res = filteredFile.split("_");
         if (res.length === 1) {
             const filterValue = this.containers.appliedFiltersFooter;
-            let filterValueText = await I.grabTextFrom(filterValue);
-            I.seeTextEquals(filteredFile, filterValueText.toLowerCase());
+            await this.checkFilterByValue(res[0], filterValue);
         } else {
-            //todo: write for multiple filters
+            for (let i = 0; i< res.length; i++) {
+                let filterValueLocator = `//div/span[contains(.,'` + res[i] + `')]`;
+                await this.checkFilterByValue(res[i].toLowerCase(), filterValueLocator);
+            }
         }
+    },
+
+    async checkFilterByValue(value, locator) {
+        let filterValueText = (await I.grabTextFrom(locator)).toLowerCase();
+        I.assert(value, filterValueText);
     },
 
     removeAppliedFilter(filterName) {
         const res = filterName.split("_");
         const filterValue = res[1];
-
-
-        let listOfFilters = document.querySelectorAll(this.containers.appliedFilterFamily);
-        listOfFilters.forEach(e => {
-            const filterFooter = e.lastElementChild.children.item(0);
-            if (filterFooter.textContent === filterValue) {
-                const deleteButton = document.getElementsByClassName(
-                    e.firstElementChild
-                        .children
-                        .item(1)
-                        .className
-                );
-                I.click(`button[class*='` + deleteButton + `']`);
-            }
-        })
-
         I.click(`//span[contains(., '` + filterValue+ `')]/parent::*/../div/button`);
 
     },
     checkFileValues(filteredFile) {
-        const table = document.getElementsByTagName('table')
-        for (let row in table.tBodies[0].rows) {
-            I.seeInField(row + '> td:nth-child(2)', filteredFile);
+        const res = filteredFile.split("_");
+        const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
+        I.seeInField(row, res[1]);
+    },
+    async checkFileTypeValues(filteredFile) {
+        const table = locate('tbody');
+        const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
+        if (numberOfElements > 0) {
+                const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
+                const text = await I.grabTextFrom(row);
+                I.assert(text, filteredFile);
         }
     },
-    checkFileTypeValues(filteredFile) {
-        const table = document.getElementsByTagName('table');
-        if (I.see('No Transaction Data Found')) {
-            return;
-        } else {
-            for (let row in table.tBodies[0].rows) {
-                I.seeInField(row + '> td:nth-child(3)', filteredFile);
-            }
+   async checkFileRiskValues(filteredFile) {
+        const table = locate('tbody');
+        const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
+        if (numberOfElements > 0) {
+            const row = locate('tbody').find('tr').find('td:nth-child(4)').toXPath();
+            const text = await I.grabTextFrom(row);
+            I.assert(text, filteredFile);
         }
     },
-    checkFileRiskValues(filteredFile) {
-        const table = document.getElementsByTagName('table');
-        if (I.see('No Transaction Data Found')) {
-            return;
-        } else {
-            for (let row in table.tBodies[0].rows) {
-                I.seeInField(row + '> td:nth-child(4)', filteredFile);
-            }
-        }
-    },
+    closeFilterMenu() {
+    I.moveCursorTo('#heading');
+},
 
     /*
      * Pagination
