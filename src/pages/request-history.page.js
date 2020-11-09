@@ -43,7 +43,6 @@ module.exports = {
         lastPage: "",
     },
     table: {
-
         historyTable1: `div[class*='RequestHistory_wrapTable__13V_o']`,
         fileTableBody1: `th[class*='MuiTableCell-root MuiTableCell-body']`,
         dataTransactionInfo: `//h2[contains(.,'No Transaction Data Found')]`,
@@ -82,7 +81,6 @@ module.exports = {
         drp_calendar_right: `div[class*='drp-calendar right']`,
         reportRange: `#reportrange > span`,
         drp_selected: `span.drp-selected`,
-
     },
     popup: {
         filterFileId: `button:nth-child(1) > p`,
@@ -406,6 +404,9 @@ module.exports = {
     },
 
     addFilterWithValue(filterWithValue) {
+        if (filterWithValue===''){
+            return;
+        }
         const res = filterWithValue.split("_");
         const filterName = res[0];
         const filterValue = res[1];
@@ -426,22 +427,21 @@ module.exports = {
     },
 
     async checkFilters(filteredFile) {
-        //todo: rewrite after updating @TEST-179
         const res = filteredFile.split("_");
         if (res.length === 1) {
             const filterValue = this.containers.appliedFiltersFooter;
             await this.checkFilterByValue(res[0], filterValue);
         } else {
-            for (let value in res) {
-                let filterValueLocator = `//div/span[contains(.,'` + value + `')]`;
-                I.assert(filterValueLocator, value);
+            for (let i = 0; i< res.length; i++) {
+                let filterValueLocator = `//div/span[contains(.,'` + res[i] + `')]`;
+                await this.checkFilterByValue(res[i].toLowerCase(), filterValueLocator);
             }
         }
     },
 
     async checkFilterByValue(value, locator) {
-        let filterValueText = await I.grabTextFrom(locator);
-        I.assert(value, filterValueText.toLowerCase());
+        let filterValueText = (await I.grabTextFrom(locator)).toLowerCase();
+        I.assert(value, filterValueText);
     },
 
     removeAppliedFilter(filterName) {
@@ -451,31 +451,31 @@ module.exports = {
 
     },
     checkFileValues(filteredFile) {
-        const table = document.getElementsByTagName('table')
-        for (let row in table.tBodies[0].rows) {
-            I.seeInField(row + '> td:nth-child(2)', filteredFile);
+        const res = filteredFile.split("_");
+        const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
+        I.seeInField(row, res[1]);
+    },
+    async checkFileTypeValues(filteredFile) {
+        const table = locate('tbody');
+        const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
+        if (numberOfElements > 0) {
+                const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
+                const text = await I.grabTextFrom(row);
+                I.assert(text, filteredFile);
         }
     },
-    checkFileTypeValues(filteredFile) {
-        const table = document.getElementsByTagName('table');
-        if (I.see('No Transaction Data Found')) {
-            return;
-        } else {
-            for (let row in table.tBodies[0].rows) {
-                I.seeInField(row + '> td:nth-child(3)', filteredFile);
-            }
+   async checkFileRiskValues(filteredFile) {
+        const table = locate('tbody');
+        const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
+        if (numberOfElements > 0) {
+            const row = locate('tbody').find('tr').find('td:nth-child(4)').toXPath();
+            const text = await I.grabTextFrom(row);
+            I.assert(text, filteredFile);
         }
     },
-    checkFileRiskValues(filteredFile) {
-        const table = document.getElementsByTagName('table');
-        if (I.see('No Transaction Data Found')) {
-            return;
-        } else {
-            for (let row in table.tBodies[0].rows) {
-                I.seeInField(row + '> td:nth-child(4)', filteredFile);
-            }
-        }
-    },
+    closeFilterMenu() {
+    I.moveCursorTo('#heading');
+},
 
     /*
      * Pagination

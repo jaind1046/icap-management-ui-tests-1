@@ -20,6 +20,7 @@ When('add multiple filter selections as {string}, {string}, {string}', (filterOn
     requesthistoryPage.addFilterWithValue(filterOne);
     requesthistoryPage.addFilterWithValue(filterTwo);
     requesthistoryPage.addFilterWithValue(filterThree);
+    requesthistoryPage.closeFilterMenu();
 });
 Then('the result list shows files with the applied filtertypes {string}', (filteredFile) => {
     requesthistoryPage.checkFilters(filteredFile);
@@ -37,6 +38,7 @@ When('I remove {string}', (filterName) => {
 });
 
 When('I click on the Add Filter button and add a file id filter as {string}', (filter) => {
+    requesthistoryPage.clickMoreFiltersButton();
     requesthistoryPage.addFilterWithValue(filter);
 });
 
