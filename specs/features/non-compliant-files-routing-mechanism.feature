@@ -23,8 +23,8 @@ Feature: non-compliant-files-routing-mechanism
             | invalidurl | error   |
 
     @smoke
-    @TEST-187
-    Scenario Outline: I can change the outcome of Glasswall Blocked files
+    @TEST-183
+    Scenario Outline: I can change the outcome of unprocessable files
         When I change the route for unprocessable files to '<routeOption>' and save
         Then the route selection for unprocessable files is applied as '<updatedRouteOption>'
         Examples:
@@ -44,7 +44,7 @@ Feature: non-compliant-files-routing-mechanism
             | Block       | Block              |
             | Refer       | Refer              |
 
-    @TEST-183
+    @TEST-233
     Scenario Outline: A set routing policy for Glasswall blocked files is correctly applied
         Given I have set the routing option for Glasswall Blocked files to '<blockedPolicyAction>'
         And the non-compliant file service has been defined as '<NcfsDecision>'
@@ -60,7 +60,7 @@ Feature: non-compliant-files-routing-mechanism
             # | Refer               | replace      | file | ''           | alternativeContent |
             # | Refer               | block        | file | 403          | HtmlReport         |
 
-
+    @TEST-234
     Scenario Outline: A set routing policy for unprocessable files is correctly applied
         Given I have set the routing option for unprocessable files to '<fileTypePolicyAction>'
         And the non-compliant file service has been defined as '<NcfsDecision>'

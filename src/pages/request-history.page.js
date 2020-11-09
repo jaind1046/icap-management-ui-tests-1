@@ -43,16 +43,11 @@ module.exports = {
         lastPage: "",
     },
     table: {
-
-        historyTable1: `div[class*='RequestHistory_wrapTable__13V_o']`,
         fileTableBody1: `th[class*='MuiTableCell-root MuiTableCell-body']`,
-        dataTransactionInfo: `//h2[contains(.,'No Transaction Data Found')]`
-
+        dataTransactionInfo: `//h2[contains(.,'No Transaction Data Found')]`,
         historyTable: `div[class*='RequestHistory_wrapTable__']`,
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
         fileTableBodyRow: `tbody[class*='MuiTableBody-root'] > tr`
-
-
     },
     checkboxes: {
         fileTypeDoc: `//span[contains(.,'doc')]/parent::label/span[1]/span/input`,
@@ -82,7 +77,6 @@ module.exports = {
         drp_calendar_right: `div[class*='drp-calendar right']`,
         reportRange: `#reportrange > span`,
         drp_selected: `span.drp-selected`,
-
     },
     popup: {
         filterFileId: `button:nth-child(1) > p`,

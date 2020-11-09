@@ -7,7 +7,7 @@ Feature: file-drop-file-analysis-reporting
         And I have navigated to the File Drop page
 
     @smoke
-    @TEST-178
+    @TEST-225
     Scenario Outline: I can download the full XML analysis report for a file
         Given I have uploded a file <supportedFile>
         When  I view result and click on XML button
@@ -17,7 +17,7 @@ Feature: file-drop-file-analysis-reporting
             | src/data/input/file1.docx | file1.xml |
 
     @smoke
-    @TEST-181
+    @TEST-226
     Scenario Outline: I can download the full PDF analysis report for a file
         Given I have uploded a file <supportedFile>
         When  I view result and click on PDF button

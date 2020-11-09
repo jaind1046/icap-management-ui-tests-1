@@ -24,12 +24,8 @@ Then(/^The (.*) for required file types (.*) is set to (.*)$/, (contentFlag, fil
     policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
 });
 
-When('I click on Current Policy in the navigation panel', () => {
-    policyPage.clickOnCurrentPolicyTab()
-});
-
-Then('I am taken to the current policy page', () => {
-    policyPage.assertCurrentPolicyPage()
+Then('I see all the content flags set as Sanitise', () => {
+    
 });
 
 When('I press the Cancel button', () => {
