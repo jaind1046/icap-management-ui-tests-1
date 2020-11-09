@@ -56,9 +56,9 @@ Feature: non-compliant-files-routing-mechanism
             | blockedPolicyAction | NcfsDecision | file | responseCode | fileOutcome        |
             | Relay               | NA           | file | 204          | Unmodified         |
             | Block               | NA           | file | 403          | HtmlReport         |
-            # | Refer               | relay        | file | 204          | Unmodified         |
-            # | Refer               | replace      | file | ''           | alternativeContent |
-            # | Refer               | block        | file | 403          | HtmlReport         |
+            | Refer               | relay        | file | 204          | Unmodified         |
+            | Refer               | replace      | file | ''           | alternativeContent |
+            | Refer               | block        | file | 403          | HtmlReport         |
 
 
     Scenario Outline: A set routing policy for unprocessable files is correctly applied
