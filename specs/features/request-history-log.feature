@@ -6,6 +6,7 @@ Feature: request-history-log
     Background:
         Given I am logged into the ui
 
+    @smoke
     @TEST-166
     Scenario Outline: I am able to change the number of files displayed on the page
         Given I have navigated to the Request History page

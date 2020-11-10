@@ -6,8 +6,8 @@ Feature: request-history-filtering-by-date
         Given I am logged into the ui
         Given I have navigated to the Request History page
 
-    
-    @TEST-167_168
+   
+    @TEST-167
     Scenario Outline: I can filter the request log using the time interval
         When I open the date picker and select a <timeInterval>
         Then the date range is updated to be from <datetimeFrom> hrs earlier to <datetimeTo>
@@ -19,8 +19,8 @@ Feature: request-history-filtering-by-date
             | 24 Hours     | 24           | current time |
 
 
-    @datepicker
-    Scenario Outline: I can filter the request log using the date picker
+    @TEST-235
+    Scenario Outline: I can filter the request log using a custom range
         When I select a valid <datetimeFrom> and <datetimeTo>
         Then the files processed for the selected period are displayed
         Examples:
