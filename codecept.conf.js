@@ -21,7 +21,8 @@ exports.config = {
         args: ['--no-sandbox', '--window-size=1536,826'],
       },
       waitForNavigation: ["domcontentloaded", "networkidle0"],
-     
+      waitForAction: 2000,
+      waitForTimeout: 60000
     },
     FileSystem: {},
     AssertWrapper: {
@@ -41,7 +42,8 @@ exports.config = {
     passwordResetPage: './src/pages/password-reset.page.js',
     policyPage: './src/pages/policy.page.js',
     requesthistoryPage: './src/pages/request-history.page.js',
-    usersPage: './src/pages/users.page.js'
+    usersPage: './src/pages/users.page.js',
+    icapProxyPage: './src/pages/icap-proxy.page.js'
   },
   bootstrap: null,
   gherkin: {
@@ -58,13 +60,13 @@ exports.config = {
     },
     customLocator: {
       enabled: true,
-      attribute: 'data-test-id'  
+      attribute: 'data-test-id'
     },
     customLocator: {
       enabled: true,
       attribute: 'data-range-key'
     },
-    
+
     screenshotOnFail: {
       enabled: true
     },
