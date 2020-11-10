@@ -37,12 +37,12 @@ Feature: file-drop-file-process-result-view
             | fileWithIssues           | nonrepairedObject    | processStatus                |
             | src/data/input/file2.pdf | Non-conforming image | Your file has been processed |
 
-# @fileDownload
-# Scenario Outline: I can download successfully processed files
-#     Given I have processed a supported file <supportedFile>
-#     When I view result and click on Download Processed File
-#     Then I have the file successfully downloaded as <downloadedFileName>
-#     And I can successfully open the downloaded file
-#     Examples:
-#         | supportedFile              | downloadedFileName |
-#         | src/data/input/issues.docx | issues.docx        |
+ @fileDownload
+ Scenario Outline: I can download successfully processed files
+     Given I have processed a supported file <supportedFile>
+     When I view result and click on Download Processed File
+     Then I have the file successfully downloaded as <downloadedFileName>
+     And I can successfully open the downloaded file
+     Examples:
+         | supportedFile              | downloadedFileName |
+         | src/data/input/issues.docx | issues.docx        |
