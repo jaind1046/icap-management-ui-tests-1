@@ -29,11 +29,11 @@ Feature: request-history-filtering-by-file-type
         Examples:
             | filter | filteredFile |
             | docx   | Docx         |
-            | xls    | XLS          |
-            | pptx   | PPTX         |
-            | rtf    | PDF          |
-            | png    | PNG          |
-            | pdf    | PDF          |
+            | xls    | Xls          |
+            | pptx   | Pptx         |
+            | rtf    | Rtf          |
+            | png    | Png          |
+            | pdf    | Pdf          |
 
 
 

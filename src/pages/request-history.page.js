@@ -11,7 +11,7 @@ module.exports = {
     fields: {
         inputFilterFileID: `input[name='fileId']`,
         customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
-    
+
     },
     options: {
         countOfFiles: "div[class*='Pagination_pageCountSelector__'] > select"
@@ -52,7 +52,7 @@ module.exports = {
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
         fileTableBodyRow: `tbody[class*='MuiTableBody-root'] > tr`
     },
-  
+
     calendar: {
         dateTimePicker: `div[class*='daterangepicker']`,
         drp_calendar_left: `div[class*='drp-calendar left']`,
@@ -307,7 +307,7 @@ module.exports = {
     },
 
     setFileId(value) {
-       this.clickMoreFiltersButton()
+        this.clickMoreFiltersButton()
         this.clickAddFilterButton()
         I.click(this.buttons.fileIdMenu);
         I.fillField(this.fields.inputFilterFileID, value);
@@ -323,7 +323,7 @@ module.exports = {
         this.clickFileTypeAdd();
         try {
             I.say('Filter to set is: ' + value)
-            let element = `//span[contains(.,'`+value+`')]/parent::label/span[1]/span/input`
+            let element = `//span[contains(.,'` + value + `')]/parent::label/span[1]/span/input`
             I.click(element);
             this.closeFilterPopup();
             I.wait(5);
@@ -338,30 +338,9 @@ module.exports = {
     },
 
     async verifyResultIsAccurate(filter, col) {
-            this.checkRow(filter, col)
+        this.checkRow(filter, col)
     },
 
-    async checkRow(filter, col) {
-      try {
-       I.usePuppeteerTo('verify file types', async ({ page }) => {
-            await page.waitForSelector('tbody');
-            let tableRows = 'tbody tr';
-            let rowCount = await page.$$eval(tableRows, rows => rows.length);
-            for (let i = 0; i < rowCount; i++) {
-               let cellText = await page.$eval(`${tableRows}:nth-child(${i}) td:nth-child(${col})`, elem => elem.innerText);
-                if (cellText === filter) {
-                    I.say('The result list shows files with the selected types: ' + cellText);
-                } else {
-                    I.say('The result is not as expected, file type found is: ' + cellText);
-                }  break;  }    
-        });
-         } catch (e) {
-            I.say('errors')
-            console.warn(e);
-        }
-    },
-
- 
     selectCountOfFiles(itemCount) {
         const element = this.options.countOfFiles;
         I.selectOption(element, itemCount);
@@ -422,11 +401,10 @@ module.exports = {
         I.seeInField(row, res[1]);
     },
 
-    async checkFileTypeValues(filteredFile) {
-        const table = locate('tbody');
-     I.checkRow(filteredFile, 3)
+    async checkFileTypeValues(filteredFile, col) {
+        I.checkRow(filteredFile, col)
     },
-      
+
     async checkFileRiskValues(filteredFile) {
         const table = locate('tbody');
         const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));

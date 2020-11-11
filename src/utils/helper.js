@@ -39,15 +39,15 @@ class MyHelper extends Helper {
         try{
         let rowCount = await page.$$eval(tableRows, rows => rows.length);
         for (let i = 0; i < rowCount; i++) {
-            const str = await page.$eval(
+            const text = await page.$eval(
                 `${tableRows}:nth-child(${i + 1}) th:nth-child(${col})`,
                 (e) => e.innerText
             )
-            if (str === val) {
-                console.log('The result list shows files with the selected types: ' + str);
+            if (text === val) {
+                console.log('The result list shows files with the selected types: ' + text);
             }
             else {
-                console.log('The result is not as expected, file type found is: ' + str);
+                console.error('The result is not as expected, file type found is: ' + text);
             }
             break;
         }
