@@ -11,7 +11,6 @@ module.exports = {
     fields: {
         inputFilterFileID: `input[name='fileId']`,
         customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
-    
     },
     options: {
         countOfFiles: "div[class*='Pagination_pageCountSelector__'] > select"
@@ -47,7 +46,6 @@ module.exports = {
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
         fileTableBodyRow: `tbody[class*='MuiTableBody-root'] > tr`
     },
-  
     calendar: {
         dateTimePicker: `div[class*='daterangepicker']`,
         drp_calendar_left: `div[class*='drp-calendar left']`,
@@ -81,6 +79,42 @@ module.exports = {
     },
 
     //Methods
+
+    /*
+     * General
+     * ***************************************************************
+     */
+    clickAddFilterButton() {
+        const mainEl = this.containers.filters;
+        within(mainEl, () => {
+            I.waitForClickable(this.buttons.addFilterBytxt)
+            I.retry(2).click(this.buttons.addFilterBytxt);
+        })
+    },
+
+    clickMoreFiltersButton() {
+        const mainEl = this.containers.filters;
+        within(mainEl, () => {
+            I.retry(2).click(locate(this.buttons.moreFilters));
+        })
+    },
+
+    closeFilterPopup() {
+        I.click('tbody');
+    },
+
+    selectCountOfFiles(itemCount) {
+        const element = this.options.countOfFiles;
+        I.selectOption(element, itemCount);
+    },
+
+    removeAppliedFilter(filterName) {
+        const res = filterName.split("_");
+        const filterValue = res[1];
+        I.click(`//span[contains(., '` + filterValue + `')]/parent::*/../div/button`);
+
+    },
+
 
     /*
      * Datetimepicker
@@ -249,45 +283,10 @@ module.exports = {
 
     },
 
-
     /*
-     * AddingFilter
+     * File Type Filtering
      * ***************************************************************
      */
-    clickAddFilterButton() {
-        const mainEl = this.containers.filters;
-        within(mainEl, () => {
-            I.waitForClickable(this.buttons.addFilterBytxt)
-            I.retry(2).click(this.buttons.addFilterBytxt);
-        })
-    },
-
-    clickMoreFiltersButton() {
-        const mainEl = this.containers.filters;
-        within(mainEl, () => {
-            I.retry(2).click(locate(this.buttons.moreFilters));
-        })
-    },
-
-    setFileOutcome(outcome) {
-        let outcomeType = null;
-        const outcomeMenu = this.buttons.fileOutcomeMenu;
-        I.click(outcomeMenu);
-        if (outcome === "Safe") {
-            outcomeType = this.buttons.fileOutcomeFilterSafe;
-        } else if (outcome === "allowedByNCFS") {
-            outcomeType = this.buttons.fileOutcomeFilterAllowedByNCFS;
-        } else if (outcome === "allowedByPolicy") {
-            outcomeType = this.buttons.fileOutcomeFilterAllowedByPolicy;
-        } else if (outcome === "blockedByPolicy") {
-            outcomeType = this.buttons.fileOutcomeFilterBlockedByPolicy;
-        } else if (outcome === "blockedByNCFS") {
-            outcomeType = this.buttons.fileOutcomeFilterBlockedByNCFS;
-        } else {
-            I.say("Unable to find the required option");
-        }
-        I.click(outcomeType);
-    },
 
     clickFileTypeAdd() {
         const mainEl = this.popup.filterMenu;
@@ -312,24 +311,11 @@ module.exports = {
         }
     },
 
-    setFileId(value) {
-       this.clickMoreFiltersButton()
-        this.clickAddFilterButton()
-        I.click(this.buttons.fileIdMenu);
-        I.fillField(this.fields.inputFilterFileID, value);
-        I.click(this.buttons.fileIdAdd);
-    },
-
-    filterByFileId(fileId) {
-        this.setFileId(fileId);
-        I.click(this.buttons.fileIdAdd);
-    },
-
     selectFileType(value) {
         this.clickFileTypeAdd();
         try {
             I.say('Filter to set is: ' + value)
-            let element = `//span[contains(.,'`+value+`')]/parent::label/span[1]/span/input`
+            let element = `//span[contains(.,'` + value + `')]/parent::label/span[1]/span/input`
             I.click(element);
             this.closeFilterPopup();
             I.wait(5);
@@ -352,42 +338,16 @@ module.exports = {
         }
     },
 
-    closeFilterPopup() {
-        I.click('tbody');
+    async checkFileTypeValues(filteredFile, col) {
+        I.checkRow(filteredFile, col)
     },
 
     async verifyResultIsAccurate(filter, col) {
             this.checkRow(filter, col)
     },
-
- 
     selectCountOfFiles(itemCount) {
         const element = this.options.countOfFiles;
         I.selectOption(element, itemCount);
-    },
-
-    addFilterWithValue(filterWithValue) {
-        if (filterWithValue === '') {
-            return;
-        }
-        const res = filterWithValue.split("_");
-        const filterName = res[0];
-        const filterValue = res[1];
-        switch (filterName) {
-            case 'FileOutcome':
-                this.setFileOutcome(filterValue);
-                break;
-            case 'fileId':
-                this.setFileId(filterValue);
-                break;
-            case 'FileType':
-                this.selectFileType(filterValue);
-                break;
-            default:
-            //this should be a proper default selection  
-        }
-        this.closeFilterPopup();
-        I.wait(5);
     },
 
     async checkFilters(filteredFile) {
@@ -408,25 +368,37 @@ module.exports = {
         I.assert(value, filterValueText);
     },
 
-    removeAppliedFilter(filterName) {
-        const res = filterName.split("_");
-        const filterValue = res[1];
-        I.click(`//span[contains(., '` + filterValue + `')]/parent::*/../div/button`);
-
-    },
-
     checkFileValues(filteredFile) {
         const res = filteredFile.split("_");
         const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
         I.seeInField(row, res[1]);
     },
 
+
     async checkFileTypeValues(filteredFile) {
         const table = locate('tbody');
      I.checkRow(filteredFile, 3)
     },
     async checkFileOutcomeValues(filteredFile) {
-     I.checkRow(filteredFile, 4)
+     I.checkRow(filteredFile, 4);
+
+    },
+
+    /*
+     * File ID Filtering
+     * ***************************************************************
+     */
+    setFileId(value) {
+        this.clickMoreFiltersButton()
+        this.clickAddFilterButton()
+        I.click(this.buttons.fileIdMenu);
+        I.fillField(this.fields.inputFilterFileID, value);
+        I.click(this.buttons.fileIdAdd);
+    },
+
+    filterByFileId(fileId) {
+        this.setFileId(fileId);
+        I.click(this.buttons.fileIdAdd);
     },
 
     /*

@@ -15,8 +15,8 @@ exports.config = {
     },
     Puppeteer: {
       windowSize: '1536 x 826',
-      url: 'http://localhost:5431',
-      show: false,
+      url: 'http://localhost:8080',
+      show: true,
       chrome: {
         args: ['--no-sandbox', '--window-size=1536,826'],
       },
@@ -53,7 +53,9 @@ exports.config = {
   mocha: {},
   name: 'icap-management-ui-tests',
   plugins: {
-    allure: {},
+    allure: {
+      outputDir: './allure-results'
+    },
     pauseOnFail: {},
     retryFailedStep: {
       enabled: false
