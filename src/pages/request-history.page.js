@@ -30,12 +30,7 @@ module.exports = {
         cancel: `button[class*='cancelBtn']`,
         deleteAppliedFilter: `button[class^='SelectedFilter_buttonClose__']`,
         fileTypeMenu: "button[data-test-id='buttonFilterFileTypes']",
-        fileOutcomeMenu: "button[data-test-id='buttonFilterRisk']",
-        fileOutcomeFilterSafe: "//span[contains(.,'Safe')]",
-        fileOutcomeFilterBlockedByNCFS: "//span[contains(.,'Blocked By NCFS')]",
-        fileOutcomeFilterBlockedByPolicy: "//span[contains(.,'Blocked By Policy')]",
-        fileOutcomeFilterAllowedByPolicy: "//span[contains(.,'Allowed By Policy')]",
-        fileOutcomeFilterAllowedByNCFS: "//span[contains(.,'Allowed By NCFS')]",
+        fileOutcomeMenu: '$buttonFilterRisk',
         fileIdAdd: "//button[contains(.,'+ ADD')]",
         fileIdMenu: "button[data-test-id='buttonFilterFileId']",
         gotoPage: "",
@@ -304,6 +299,17 @@ module.exports = {
             console.warn(e);
         }
     },
+    clickFileOutcomeAdd() {
+        const mainEl = this.popup.filterMenu;
+        try {
+            within(mainEl, () => {
+                I.retry(2).click(this.popup.filterFileOutcomes);
+            })
+        } catch (e) {
+            I.say('Unable to click on locator')
+            console.warn(e);
+        }
+    },
 
     selectFileType(value) {
         this.clickFileTypeAdd();
@@ -318,57 +324,30 @@ module.exports = {
             console.warn(e);
         }
     },
+    selectFileOutcome(value) {
+        this.clickFileOutcomeAdd();
+        try {
+            I.say('Filter to set is: ' + value)
+            let element = `//span[text()='`+value+`']`;
+            I.click(element);
+            this.closeFilterPopup();
+            I.wait(5);
+        } catch (e) {
+            I.say('Unable to click on locator ' + element)
+            console.warn(e);
+        }
+    },
 
     async checkFileTypeValues(filteredFile, col) {
         I.checkRow(filteredFile, col)
     },
 
-    /*
-     * File Risk Filtering
-     * ***************************************************************
-     */
-    setFileOutcome(outcome) {
-        let outcomeType = null;
-        const outcomeMenu = this.buttons.fileOutcomeMenu;
-        I.click(outcomeMenu);
-        if (outcome === "Safe") {
-            outcomeType = this.buttons.fileOutcomeFilterSafe;
-        } else if (outcome === "allowedByNCFS") {
-            outcomeType = this.buttons.fileOutcomeFilterAllowedByNCFS;
-        } else if (outcome === "allowedByPolicy") {
-            outcomeType = this.buttons.fileOutcomeFilterAllowedByPolicy;
-        } else if (outcome === "blockedByPolicy") {
-            outcomeType = this.buttons.fileOutcomeFilterBlockedByPolicy;
-        } else if (outcome === "blockedByNCFS") {
-            outcomeType = this.buttons.fileOutcomeFilterBlockedByNCFS;
-        } else {
-            I.say("Unable to find the required option");
-        }
-        I.click(outcomeType);
+    async verifyResultIsAccurate(filter, col) {
+            this.checkRow(filter, col)
     },
-
-    addFilterWithValue(filterWithValue) {
-        if (filterWithValue === '') {
-            return;
-        }
-        const res = filterWithValue.split("_");
-        const filterName = res[0];
-        const filterValue = res[1];
-        switch (filterName) {
-            case 'FileOutcome':
-                this.setFileOutcome(filterValue);
-                break;
-            case 'fileId':
-                this.setFileId(filterValue);
-                break;
-            case 'FileType':
-                this.selectFileType(filterValue);
-                break;
-            default:
-            //this should be a proper default selection  
-        }
-        this.closeFilterPopup();
-        I.wait(5);
+    selectCountOfFiles(itemCount) {
+        const element = this.options.countOfFiles;
+        I.selectOption(element, itemCount);
     },
 
     async checkFilters(filteredFile) {
@@ -395,14 +374,14 @@ module.exports = {
         I.seeInField(row, res[1]);
     },
 
-    async checkFileRiskValues(filteredFile) {
+
+    async checkFileTypeValues(filteredFile) {
         const table = locate('tbody');
-        const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
-        if (numberOfElements > 0) {
-            const row = locate('tbody').find('tr').find('td:nth-child(4)').toXPath();
-            const text = await I.grabTextFrom(row);
-            I.assert(text, filteredFile);
-        }
+     I.checkRow(filteredFile, 3)
+    },
+    async checkFileOutcomeValues(filteredFile) {
+     I.checkRow(filteredFile, 4);
+
     },
 
     /*
