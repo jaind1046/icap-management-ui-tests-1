@@ -53,7 +53,9 @@ exports.config = {
   mocha: {},
   name: 'icap-management-ui-tests',
   plugins: {
-    allure: {},
+    allure: {
+      outputDir: './allure-results'
+    },
     pauseOnFail: {},
     retryFailedStep: {
       enabled: false
