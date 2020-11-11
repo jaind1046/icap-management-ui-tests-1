@@ -11,6 +11,7 @@ module.exports = {
     fields: {
         inputFilterFileID: `input[name='fileId']`,
         customPaginatorGoTo: `input[class*='custom-paginator-goto']`,
+    
     },
     options: {
         countOfFiles: "div[class*='Pagination_pageCountSelector__'] > select"
@@ -19,6 +20,8 @@ module.exports = {
         filterArrow: `button[class*='Filters_arrow__']`,
         moreFilters: `button[class*='Filters_moreFilters__']`,
         addFilter: `button[data-test-id='addFilterButton']`,
+        dataId_addFilter: `$addFilterButton`,
+        addFilterBytxt: "//button[contains(.,'+ Add Filter')]",
         dateTime: `//button[contains(.,'Date/Time')]`,
         time_1hour: `li[data-range-key='1 Hour']`,
         time_12hours: '$12 Hours',
@@ -49,28 +52,7 @@ module.exports = {
         fileTableBody: `tbody[class*='MuiTableBody-root']`,
         fileTableBodyRow: `tbody[class*='MuiTableBody-root'] > tr`
     },
-    checkboxes: {
-        fileTypeDoc: `//span[contains(.,'doc')]/parent::label/span[1]/span/input`,
-        fileTypeDocx: `//span[contains(.,'docx')]/parent::label/span[1]/span/input`,
-        fileTypeDocm: `//span[contains(.,'docm')]/parent::label/span[1]/span/input`,
-        fileTypeDot: `//span[contains(.,'dot')]/parent::label/span[1]/span/input`,
-        fileTypeXlsx: `//span[contains(.,'xlsx')]/parent::label/span[1]/span/input`,
-        fileTypeXls: `//span[contains(.,'xls')]/parent::label/span[1]/span/input`,
-        fileTypeXlsm: `//span[contains(.,'xlsm')]/parent::label/span[1]/span/input`,
-        fileTypePpt: `//span[contains(.,'ppt')]/parent::label/span[1]/span/input`,
-        fileTypePptx: `//span[contains(.,'pptx')]/parent::label/span[1]/span/input`,
-        fileTypePdf: `//span[contains(.,'pdf')]/parent::label/span[1]/span/input`,
-        fileTypePng: `//span[contains(.,'png')]/parent::label/span[1]/span/input`,
-        fileTypeGif: `//span[contains(.,'gif')]/parent::label/span[1]/span/input`,
-        fileTypeJpeg: `//span[contains(.,'jpeg')]/parent::label/span[1]/span/input`,
-        fileTypeRtf: `//span[contains(.,'rtf')]/parent::label/span[1]/span/input`,
-        fileTypeWmf: `//span[contains(.,'wmf')]/parent::label/span[1]/span/input`,
-        fileTypeEmf: `//span[contains(.,'emf')]/parent::label/span[1]/span/input`,
-        fileTypePe: `//span[contains(.,'Pe')]/parent::label/span[1]/span/input`,
-        fileTypeMacho: `//span[contains(.,'Macho')]/parent::label/span[1]/span/input`,
-        fileTypeElf: `//span[contains(.,'Elf')]/parent::label/span[1]/span/input`,
-        fileTypeCoff: `//span[contains(.,'Coff')]/parent::label/span[1]/span/input`,
-    },
+  
     calendar: {
         dateTimePicker: `div[class*='daterangepicker']`,
         drp_calendar_left: `div[class*='drp-calendar left']`,
@@ -79,15 +61,20 @@ module.exports = {
         drp_selected: `span.drp-selected`,
     },
     popup: {
-        filterFileId: `button:nth-child(1) > p`,
+        filterFileId: `button:nth-child(3) > p`,
         filterType: `div[class*='Filters_popup__'] > button:nth-child(3)`,
+        fileTypeByCss: `button:nth-child(1) > p`,
+        riskByCss: `button:nth-child(2) > p`,
         filterFileOutcomes: `div[class*='Filters_popup__'] > button:nth-child(2)`,
         filterMenu: `div[class*='Filters_popup__']`,
+        filterMenuByTxt: `//div[@id='root']/div/div/section/div/div[3]`,
+        filetypesPopup: `.MuiFormControl-root:nth-child(6) > .MuiFormGroup-root`
     },
     containers: {
         appliedFilterFamily: `div[class^=SelectedFilter_SelectedFilter__]`,
         appliedFilters: `div[class*=Filters_filters__] > div`,
         appliedFiltersFooter: `div[class*='SelectedFilter_footer__'] > span`,
+        filters: `div[class*='Filters_wrap__']`
     },
     modal: {
         modalHeader: `section[class*='FileInfo_FileInfo__1Z457'] > header`,
@@ -268,23 +255,25 @@ module.exports = {
     },
 
 
-
     /*
      * AddingFilter
      * ***************************************************************
      */
     clickAddFilterButton() {
-        const element = this.buttons.addFilter;
-        I.click(element);
+        const mainEl = this.containers.filters;
+        within(mainEl, () => {
+            I.waitForClickable(this.buttons.addFilterBytxt)
+            I.retry(2).click(this.buttons.addFilterBytxt);
+        })
     },
+
     clickMoreFiltersButton() {
-        const element = this.buttons.moreFilters;
-        //a bug: "more filters" button needs to be clicked twice
-        I.click(element);
-        I.click(element);
-        I.wait(2);
-        I.seeElement(this.buttons.addFilter);
+        const mainEl = this.containers.filters;
+        within(mainEl, () => {
+            I.retry(2).click(locate(this.buttons.moreFilters));
+        })
     },
+
     setFileOutcome(outcome) {
         let outcomeType = null;
         const outcomeMenu = this.buttons.fileOutcomeMenu;
@@ -306,15 +295,20 @@ module.exports = {
     },
 
     clickFileTypeAdd() {
-        const element = this.buttons.fileTypeMenu;
-        I.click(element);
+        const mainEl = this.popup.filterMenu;
+        try {
+            within(mainEl, () => {
+                I.retry(2).click(this.popup.fileTypeByCss);
+            })
+        } catch (e) {
+            I.say('Unable to click on locator')
+            console.warn(e);
+        }
     },
 
     setFileId(value) {
-        I.waitForElement(this.buttons.moreFilters, 30)
-        I.click(this.buttons.moreFilters);
-        I.waitForElement(this.buttons.addFilter, 30)
-        I.click(this.buttons.addFilter);
+       this.clickMoreFiltersButton()
+        this.clickAddFilterButton()
         I.click(this.buttons.fileIdMenu);
         I.fillField(this.fields.inputFilterFileID, value);
         I.click(this.buttons.fileIdAdd);
@@ -325,82 +319,56 @@ module.exports = {
         I.click(this.buttons.fileIdAdd);
     },
 
-    setFileType(value) {
-        const checkboxLabel = value.toUpperCase();
-        let element = null;
+    selectFileType(value) {
         this.clickFileTypeAdd();
-        switch (checkboxLabel) {
-            case 'DOC':
-                element = this.checkboxes.fileTypeDoc;
-                break;
-            case 'DOCX':
-                element = this.checkboxes.fileTypeDocx;
-                break;
-                case 'DOCM':
-                element = this.checkboxes.fileTypeDocm;
-                break;
-            case 'DOT':
-                element = this.checkboxes.fileTypeDot;
-                break;
-            case 'XLS':
-                element = this.checkboxes.fileTypeXls;
-                break;
-            case 'XLSX':
-                element = this.checkboxes.fileTypeXlsx;
-                break;
-            case 'XLSM':
-                element = this.checkboxes.fileTypeXlsm;
-                break;
-            case 'PPT':
-                element = this.checkboxes.fileTypePpt;
-                break;
-            case 'PPTX':
-                element = this.checkboxes.fileTypePptx;
-                break;
-            case 'JPEG':
-                element = this.checkboxes.fileTypeJpeg;
-                break;
-            case 'GIF':
-                element = this.checkboxes.fileTypeGif;
-                break;
-            case 'PNG':
-                element = this.checkboxes.fileTypePng;
-                break;
-            case 'PDF':
-                element = this.checkboxes.fileTypePdf;
-                break;
-            case 'RTF':
-                element = this.checkboxes.fileTypeRtf;
-                break;
-            case 'WMF':
-                element = this.checkboxes.fileTypeWmf;
-                break;
-            case 'EMF':
-                element = this.checkboxes.fileTypeEmf;
-                break;
-            case 'PE':
-                element = this.checkboxes.fileTypePe;
-                break;
-            case 'ELF':
-                element = this.checkboxes.fileTypeElf;
-                break;
-            case 'COFF':
-                element = this.checkboxes.fileTypeCoff;
-                break;
-            case 'MACHO':
-                element = this.checkboxes.fileTypeMacho;
-                break;
+        try {
+            I.say('Filter to set is: ' + value)
+            let element = `//span[contains(.,'`+value+`')]/parent::label/span[1]/span/input`
+            I.click(element);
+            this.closeFilterPopup();
+            I.wait(5);
+        } catch (e) {
+            I.say('Unable to click on locator ' + element)
+            console.warn(e);
         }
-        I.click(element);
     },
 
+    closeFilterPopup() {
+        I.click('tbody');
+    },
+
+    async verifyResultIsAccurate(filter, col) {
+            this.checkRow(filter, col)
+    },
+
+    async checkRow(filter, col) {
+      try {
+       I.usePuppeteerTo('verify file types', async ({ page }) => {
+            await page.waitForSelector('tbody');
+            let tableRows = 'tbody tr';
+            let rowCount = await page.$$eval(tableRows, rows => rows.length);
+            for (let i = 0; i < rowCount; i++) {
+               let cellText = await page.$eval(`${tableRows}:nth-child(${i}) td:nth-child(${col})`, elem => elem.innerText);
+                if (cellText === filter) {
+                    I.say('The result list shows files with the selected types: ' + cellText);
+                } else {
+                    I.say('The result is not as expected, file type found is: ' + cellText);
+                }  break;  }    
+        });
+         } catch (e) {
+            I.say('errors')
+            console.warn(e);
+        }
+    },
+
+ 
     selectCountOfFiles(itemCount) {
         const element = this.options.countOfFiles;
         I.selectOption(element, itemCount);
     },
 
     addFilterWithValue(filterWithValue) {
-        if (filterWithValue===''){
+        if (filterWithValue === '') {
             return;
         }
         const res = filterWithValue.split("_");
@@ -414,11 +382,12 @@ module.exports = {
                 this.setFileId(filterValue);
                 break;
             case 'FileType':
-                this.setFileType(filterValue);
+                this.selectFileType(filterValue);
                 break;
             default:
-                throw "there is no such element";
+            //this should be a proper default selection  
         }
+        this.closeFilterPopup();
         I.wait(5);
     },
 
@@ -428,7 +397,7 @@ module.exports = {
             const filterValue = this.containers.appliedFiltersFooter;
             await this.checkFilterByValue(res[0], filterValue);
         } else {
-            for (let i = 0; i< res.length; i++) {
+            for (let i = 0; i < res.length; i++) {
                 let filterValueLocator = `//div/span[contains(.,'` + res[i] + `')]`;
                 await this.checkFilterByValue(res[i].toLowerCase(), filterValueLocator);
             }
@@ -443,24 +412,22 @@ module.exports = {
     removeAppliedFilter(filterName) {
         const res = filterName.split("_");
         const filterValue = res[1];
-        I.click(`//span[contains(., '` + filterValue+ `')]/parent::*/../div/button`);
+        I.click(`//span[contains(., '` + filterValue + `')]/parent::*/../div/button`);
 
     },
+
     checkFileValues(filteredFile) {
         const res = filteredFile.split("_");
         const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
         I.seeInField(row, res[1]);
     },
+
     async checkFileTypeValues(filteredFile) {
         const table = locate('tbody');
-        const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
-        if (numberOfElements > 0) {
-                const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
-                const text = await I.grabTextFrom(row);
-                I.assert(text, filteredFile);
-        }
+     I.checkRow(filteredFile, 3)
     },
-   async checkFileRiskValues(filteredFile) {
+      
+    async checkFileRiskValues(filteredFile) {
         const table = locate('tbody');
         const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
         if (numberOfElements > 0) {
@@ -469,9 +436,10 @@ module.exports = {
             I.assert(text, filteredFile);
         }
     },
+
     closeFilterMenu() {
-    I.moveCursorTo('#heading');
-},
+        I.moveCursorTo('#heading');
+    },
 
     /*
      * Pagination

@@ -5,16 +5,16 @@ Feature: request-history-filtering-by-risk-outcome
     Background:
         Given I am logged into the ui
 
-    
+
     @TEST-163_164_165_180
     Scenario Outline: I can filter the log by file risks
         Given I have navigated to the Request History page
         When I click on the Add Filter button and add a risk filter as '<filter>'
         Then the result list only shows filtered files with the selected risk as '<filteredFile>'
         Examples:
-            | filter                      | filteredFile       |
-            | fileOutcome_blockedByPolicy | Blocked By Policy  |
-            | fileOutcome_blockedByNCFS   | Blocked By NCFS    |
-            | fileOutcome_safe            | safe               |
-            | fileOutcome_allowedByPolicy | Allowed By Policy  |
-            | fileOutcome_allowedByNCFS   | Allowed By NCFS    |
+            | filter            | filteredFile      |
+            | BLOCKED BY POLICY | Blocked By Policy |
+            | BLOCKED BY NCFS   | Blocked By NCFS   |
+            | SAFE              | safe              |
+            | ALLOWED BY POLICY | Allowed By Policy |
+            | ALLOWED BY NCFS   | Allowed By NCFS   |
