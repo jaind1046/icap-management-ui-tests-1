@@ -13,8 +13,8 @@ Feature: request-history-filtering-by-risk-outcome
         Then the result list only shows filtered files with the selected risk as '<filteredFile>'
         Examples:
             | filter            | filteredFile      |
-            | BLOCKED BY POLICY | Blocked By Policy |
-            | BLOCKED BY NCFS   | Blocked By NCFS   |
-            | SAFE              | safe              |
-            | ALLOWED BY POLICY | Allowed By Policy |
-            | ALLOWED BY NCFS   | Allowed By NCFS   |
+            | Blocked By Policy | Blocked By Policy |
+            | Blocked By NCFS   | Blocked By NCFS   |
+            | Safe              | Safe              |
+            | Allowed By Policy | Allowed by Policy |
+            | Allowed By NCFS   | Allowed by NCFS   |

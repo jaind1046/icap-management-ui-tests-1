@@ -31,12 +31,7 @@ module.exports = {
         cancel: `button[class*='cancelBtn']`,
         deleteAppliedFilter: `button[class^='SelectedFilter_buttonClose__']`,
         fileTypeMenu: "button[data-test-id='buttonFilterFileTypes']",
-        fileOutcomeMenu: "button[data-test-id='buttonFilterRisk']",
-        fileOutcomeFilterSafe: "//span[contains(.,'Safe')]",
-        fileOutcomeFilterBlockedByNCFS: "//span[contains(.,'Blocked By NCFS')]",
-        fileOutcomeFilterBlockedByPolicy: "//span[contains(.,'Blocked By Policy')]",
-        fileOutcomeFilterAllowedByPolicy: "//span[contains(.,'Allowed By Policy')]",
-        fileOutcomeFilterAllowedByNCFS: "//span[contains(.,'Allowed By NCFS')]",
+        fileOutcomeMenu: '$buttonFilterRisk',
         fileIdAdd: "//button[contains(.,'+ ADD')]",
         fileIdMenu: "button[data-test-id='buttonFilterFileId']",
         gotoPage: "",
@@ -305,6 +300,17 @@ module.exports = {
             console.warn(e);
         }
     },
+    clickFileOutcomeAdd() {
+        const mainEl = this.popup.filterMenu;
+        try {
+            within(mainEl, () => {
+                I.retry(2).click(this.popup.filterFileOutcomes);
+            })
+        } catch (e) {
+            I.say('Unable to click on locator')
+            console.warn(e);
+        }
+    },
 
     setFileId(value) {
        this.clickMoreFiltersButton()
@@ -332,6 +338,19 @@ module.exports = {
             console.warn(e);
         }
     },
+    selectFileOutcome(value) {
+        this.clickFileOutcomeAdd();
+        try {
+            I.say('Filter to set is: ' + value)
+            let element = `//span[text()='`+value+`']`;
+            I.click(element);
+            this.closeFilterPopup();
+            I.wait(5);
+        } catch (e) {
+            I.say('Unable to click on locator ' + element)
+            console.warn(e);
+        }
+    },
 
     closeFilterPopup() {
         I.click('tbody');
@@ -339,26 +358,6 @@ module.exports = {
 
     async verifyResultIsAccurate(filter, col) {
             this.checkRow(filter, col)
-    },
-
-    async checkRow(filter, col) {
-      try {
-       I.usePuppeteerTo('verify file types', async ({ page }) => {
-            await page.waitForSelector('tbody');
-            let tableRows = 'tbody tr';
-            let rowCount = await page.$$eval(tableRows, rows => rows.length);
-            for (let i = 0; i < rowCount; i++) {
-               let cellText = await page.$eval(`${tableRows}:nth-child(${i}) td:nth-child(${col})`, elem => elem.innerText);
-                if (cellText === filter) {
-                    I.say('The result list shows files with the selected types: ' + cellText);
-                } else {
-                    I.say('The result is not as expected, file type found is: ' + cellText);
-                }  break;  }    
-        });
-         } catch (e) {
-            I.say('errors')
-            console.warn(e);
-        }
     },
 
  
@@ -426,19 +425,8 @@ module.exports = {
         const table = locate('tbody');
      I.checkRow(filteredFile, 3)
     },
-      
-    async checkFileRiskValues(filteredFile) {
-        const table = locate('tbody');
-        const numberOfElements = await I.grabNumberOfVisibleElements(table.withChild('tr'));
-        if (numberOfElements > 0) {
-            const row = locate('tbody').find('tr').find('td:nth-child(4)').toXPath();
-            const text = await I.grabTextFrom(row);
-            I.assert(text, filteredFile);
-        }
-    },
-
-    closeFilterMenu() {
-        I.moveCursorTo('#heading');
+    async checkFileOutcomeValues(filteredFile) {
+     I.checkRow(filteredFile, 4)
     },
 
     /*
