@@ -44,10 +44,10 @@ class MyHelper extends Helper {
                 (e) => e.innerText
             )
             if (text === val) {
-                console.log('The result list shows files with the selected types: ' + text);
+                console.log('The result list shows required files with the filter: ' + text);
             }
             else {
-                console.error('The result is not as expected, file type found is: ' + text);
+                console.error('The result is not as expected, filter found is: ' + text);
             }
             break;
         }
