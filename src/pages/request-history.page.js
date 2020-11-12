@@ -109,9 +109,7 @@ module.exports = {
     },
 
     removeAppliedFilter(filterName) {
-        const res = filterName.split("_");
-        const filterValue = res[1];
-        I.click(`//span[contains(., '` + filterValue + `')]/parent::*/../div/button`);
+        I.click(`//span[contains(., '` + filterName + `')]/parent::*/../div/button`);
 
     },
 
@@ -381,13 +379,6 @@ module.exports = {
         I.assert(value, filterValueText);
     },
 
-    removeAppliedFilter(filterName) {
-        const res = filterName.split("_");
-        const filterValue = res[1];
-        I.click(`//span[contains(., '` + filterValue + `')]/parent::*/../div/button`);
-
-    },
-
     checkFileValues(filteredFile) {
         const res = filteredFile.split("_");
         const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
@@ -401,6 +392,15 @@ module.exports = {
     async checkFileOutcomeValues(filteredFile) {
      I.checkRow(filteredFile, 4);
 
+    },
+
+    applyMultipleFilters(riskFilter, typeFilter){
+        this.clickMoreFiltersButton();
+        this.clickAddFilterButton();
+        this.selectFileOutcome(riskFilter);
+
+        this.clickAddFilterButton();
+        this.selectFileType(typeFilter);
     },
 
     /*

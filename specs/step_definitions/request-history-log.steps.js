@@ -29,12 +29,8 @@ Then('the result list shows files with the applied filtertypes {string}', (filte
     requesthistoryPage.checkFilters(filteredFile);
 });
 
-Given('{string} and {string} are applied', (filterOne, filterTwo) => {
-    requesthistoryPage.clickMoreFiltersButton();
-    requesthistoryPage.clickAddFilterButton();
-    requesthistoryPage.addFilterWithValue(filterOne);
-    requesthistoryPage.clickAddFilterButton();
-    requesthistoryPage.addFilterWithValue(filterTwo);
+Given('{string} and {string} are applied', (typeFilter, riskFilter) => {
+    requesthistoryPage.applyMultipleFilters(riskFilter, typeFilter);
 });
 When('I remove {string}', (filterName) => {
     requesthistoryPage.removeAppliedFilter(filterName);

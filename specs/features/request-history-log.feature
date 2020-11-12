@@ -22,9 +22,9 @@ Feature: request-history-log
         Given I have navigated to the Request History page
         When I click on the Add Filter button
         And add multiple filter selections as '<riskFilter>', '<typeFilter>', '<fileIdFilter>'
-        Then the result list shows files with the applied filtertypes '<filteredFile>'
+        Then the result list shows files with the applied filtertypes '<appliedFilters>'
         Examples:
-            | riskFilter | typeFilter | fileIdFilter                         | filteredFile       |
+            | riskFilter | typeFilter | fileIdFilter                         | appliedFilters       |
             | Safe       | png        |                                      | Safe_png           |
 #            | Safe       | png        | 12e9aa0a-a2ac-4e06-96d1-1ce54ed6a366 | Safe_png           |
 
@@ -33,12 +33,12 @@ Feature: request-history-log
     Scenario Outline: I can remove individual filters
         Given I have navigated to the Request History page
         And '<filterOne>' and '<filterTwo>' are applied
-        When I remove '<filterOne>'
+        When I remove '<filterToRemove>'
         Then the result list shows files with the applied filtertypes '<filteredFile>'
         Examples:
-            | filterOne        | filterTwo             | filteredFile |
-            | FileType_docx    | FileOutcome_Safe      | safe         |
-            | FileOutcome_Safe | FileType_docx         | docx         |
+            | filterOne | filterTwo | filterToRemove | filteredFile |
+            | docx      | Safe      | docx           | safe         |
+#            | Safe      | docx      | docx         |
 
     @filterfileid
     Scenario Outline: I can filter the log using file id
