@@ -25,7 +25,7 @@ module.exports = {
         time_1hour: `li[data-range-key='1 Hour']`,
         time_12hours: '$12 Hours',
         time_24hours: '$24 Hours',
-        customRange: '$Custom Range',
+        customRange: `.ranges li:nth-child(4)`,
         apply: `button[class*='applyBtn']`,
         cancel: `button[class*='cancelBtn']`,
         deleteAppliedFilter: `button[class^='SelectedFilter_buttonClose__']`,
@@ -50,7 +50,7 @@ module.exports = {
         dateTimePicker: `div[class*='daterangepicker']`,
         drp_calendar_left: `div[class*='drp-calendar left']`,
         drp_calendar_right: `div[class*='drp-calendar right']`,
-        reportRange: `#reportrange > span`,
+        reportRange: `div[id*='reportrange']`,
         drp_selected: `span.drp-selected`,
     },
     popup: {
@@ -115,7 +115,6 @@ module.exports = {
 
     },
 
-
     /*
      * Datetimepicker
      * ***************************************************************
@@ -135,23 +134,21 @@ module.exports = {
         I.click(element).catch(() => I.say(element + 'is not clickable'));
     },
 
-    async selectTimePeriod(period) {
+    selectTimePeriod(period) {
         try {
             if (period === '1 Hour') {
-                await I.click(this.buttons.time_1hour).catch(() => I.say('unable to click period'));
+                I.click(this.buttons.time_1hour);
             } else if (period === '12 Hours') {
-                await I.click(this.buttons.time_12hours).catch(() => I.say('unable to click period'));
+                I.click(this.buttons.time_12hours);
             } else if (period === '24 Hours') {
-                await I.click(this.buttons.time_24hours).catch(() => I.say('unable to click period'));
+               I.click(this.buttons.time_24hours);
             } else {
                 I.say("Unable to find the required option");
-            }
-        }
-        catch (e) {
-            I.say('Action unsuccessul')
+            }}catch (e) {
+            I.say('Action unsuccessful')
             console.warn(e);
         }
-    },
+       }, 
 
     async getTimeFrom() {
         let startime = null;
@@ -178,21 +175,16 @@ module.exports = {
         })
     },
 
-    setTimeFrom(dateFrom) {
-        const element = this.calendar.dateTimePicker;
-        within(element, () => {
-            if (dateFrom === '1 hour earlier') {
-                I.type(this.getPastPeriod(1));
-            } else if (dateFrom === '6 hours earlier') {
-                I.type(this.getPastPeriod(6));
-            } else if (dateFrom === '24 hours earlier') {
-                I.type(this.getPastPeriod(24));
-            } else {
-                I.type(dateFrom);
-            }
-        })
+   async  isCustomRangeApplied(dateFrom, dateTo) {
+       // const element = null;
+      const range = (dateFrom + " - " + dateTo).toString();
+      const newrange = await I.grabTextFrom(this.calendar.reportRange)
+        if (newrange ===range){
+            I.say('The required range is applied ' + newrange + ' as selected '+range)
+    }else{
+        I.say('The required range is not applied-- displayed range is ' + newrange + ' different to selected ' + range)
+    }
     },
-
 
     setCustomRange(dateFrom, dateTo) {
         const start = this.setTimeFrom(dateFrom);
@@ -204,11 +196,9 @@ module.exports = {
     async getSelectedRange() {
         const element = this.calendar.reportRange;
         await I.grabTextFrom(element);
-
     },
 
-
-    getDateRange(start, end) {
+    isTimeApplied(start, end) {
         var time = null;
         if (end === 'current time') {
             time = moment();
@@ -217,10 +207,10 @@ module.exports = {
         }
         const currentTime = time.subtract(0, 'h').format('DD/MM/YYYY H:mm A')
         const timeFrom = time.subtract(start, 'h').format('DD/MM/YYYY H:mm A');
-        const range = timeFrom + " - " + currentTime;
-        return range.toString();
-
+        //const range = (timeFrom + " - " + currentTime).toString();
+        I.seeElement(`//span[contains(.,'` + timeFrom + ` - ` + currentTime +`')]`)
     },
+
 
     getCurrentTime() {
         var currentTime = moment();
@@ -263,24 +253,19 @@ module.exports = {
         }
     },
 
-    async isDataInRange(range) {
-        try {
-            I.waitForElement('th:nth-of-type(1)', 30)
-            I.wait(5);
-            let raws = await I.grabNumberOfVisibleElements('th:nth-of-type(1)')
-            if (raws > 2) {
+    async isDataInRange(range, col) {
+           try {
+            const text = await I.grabTextFrom(`//tbody`);
+            if (text == 'No Transaction Data Found') {
+                I.say('No data returned')
+                 } else {
                 I.say("Data is available")
-                // for (let i = 2; i < raws; i++) {
-                //     let timestamp = await I.grabTextFrom(`tr:nth-of-type(` + i + `) > th:nth-of-type(1)`);
-                //     let parsed = moment(timestamp, 'DD/MM/YYYY').toDate()
-                //     moment(parsed).isBetween(range.split("-"))
-                // }
-            } else { I.say(raws) }
+                I.checkIfReturnedFilesInDateRange(range, col)
+           }
         } catch (e) {
             I.say('errors')
             console.warn(e);
         }
-
     },
 
     /*
