@@ -207,7 +207,7 @@ module.exports = {
 
 
     getDateRange(start, end) {
-        var time = null;
+        let time = null;
         if (end === 'current time') {
             time = moment();
         } else {
@@ -221,7 +221,7 @@ module.exports = {
     },
 
     getCurrentTime() {
-        var currentTime = moment();
+        const currentTime = moment();
         return currentTime;
     },
 
@@ -251,12 +251,12 @@ module.exports = {
         try {
             const element = await I.grabNumberOfVisibleElements(this.table.dataTransactionInfo);
             if (element) {
-                I.say("No Transaction Data Found")
+                await I.say("No Transaction Data Found")
             } else {
-                I.say("The table data is available")
+                await I.say("The table data is available")
             }
         } catch (e) {
-            I.say('errors')
+            await I.say('errors')
             console.warn(e);
         }
     },
@@ -267,13 +267,13 @@ module.exports = {
             I.wait(5);
             let raws = await I.grabNumberOfVisibleElements('th:nth-of-type(1)')
             if (raws > 2) {
-                I.say("Data is available")
+                await I.say("Data is available")
                 // for (let i = 2; i < raws; i++) {
                 //     let timestamp = await I.grabTextFrom(`tr:nth-of-type(` + i + `) > th:nth-of-type(1)`);
                 //     let parsed = moment(timestamp, 'DD/MM/YYYY').toDate()
                 //     moment(parsed).isBetween(range.split("-"))
                 // }
-            } else { I.say(raws) }
+            } else { await I.say(raws) }
         } catch (e) {
             I.say('errors')
             console.warn(e);
@@ -372,10 +372,11 @@ module.exports = {
         I.seeInField(row, res[1]);
     },
 
-    async checkFileTypeValues(filteredFile) {
-        const table = locate('tbody');
-        I.checkRow(filteredFile, 3)
-    },
+    // async checkFileTypeValues(filteredFile) {
+    //     const table = locate('tbody');
+    //     I.checkRow(filteredFile, 3)
+    // },
+
     async checkFileOutcomeValues(filteredFile) {
      I.checkRow(filteredFile, 4);
 
@@ -469,11 +470,10 @@ module.exports = {
         })
     },
     getAppliedFilter(res) {
-     //   if (I.compareThatEqual(res,'Safe')) {
-        if (res === 'Safe'){
+        let col;
+        if (res === 'Safe' || res === 'Blocked By Policy'){
             col= 4;
         }
-   //     if (res.isUUID()) return 2;
         else col= 3;
         return col;
     },
