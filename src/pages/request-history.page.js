@@ -100,7 +100,7 @@ module.exports = {
     },
 
     closeFilterPopup() {
-        I.click('tbody');
+        I.moveCursorTo('#root');
     },
 
     selectCountOfFiles(itemCount) {
@@ -311,6 +311,20 @@ module.exports = {
         }
     },
 
+    setFileId(value) {
+       this.clickMoreFiltersButton();
+        this.clickAddFilterButton();
+        I.click(this.buttons.fileIdMenu);
+        I.fillField(this.fields.inputFilterFileID, value);
+        I.click(this.buttons.fileIdAdd);
+        this.closeFilterPopup();
+    },
+
+    filterByFileId(fileId) {
+        this.setFileId(fileId);
+        I.click(this.buttons.fileIdAdd);
+    },
+
     selectFileType(value) {
         this.clickFileTypeAdd();
         try {
@@ -341,7 +355,6 @@ module.exports = {
     async checkFileTypeValues(filteredFile, col) {
         I.checkRow(filteredFile, col)
     },
-
     async verifyResultIsAccurate(filter, col) {
             this.checkRow(filter, col)
     },
@@ -368,12 +381,18 @@ module.exports = {
         I.assert(value, filterValueText);
     },
 
+    removeAppliedFilter(filterName) {
+        const res = filterName.split("_");
+        const filterValue = res[1];
+        I.click(`//span[contains(., '` + filterValue + `')]/parent::*/../div/button`);
+
+    },
+
     checkFileValues(filteredFile) {
         const res = filteredFile.split("_");
         const row = locate('tbody').find('tr').find('td:nth-child(3)').toXPath();
         I.seeInField(row, res[1]);
     },
-
 
     async checkFileTypeValues(filteredFile) {
         const table = locate('tbody');
@@ -399,6 +418,9 @@ module.exports = {
     filterByFileId(fileId) {
         this.setFileId(fileId);
         I.click(this.buttons.fileIdAdd);
+    },
+    async checkFileIdValues(filteredFile) {
+     I.checkRow(filteredFile, 2)
     },
 
     /*
