@@ -34,11 +34,11 @@ Feature: request-history-log
         Given I have navigated to the Request History page
         And '<filterOne>' and '<filterTwo>' are applied
         When I remove '<filterToRemove>'
-        Then the result list shows files with the applied filtertypes '<filteredFile>'
+        Then the result list shows files with the applied filtertypes '<appliedFilter>'
         Examples:
-            | filterOne | filterTwo | filterToRemove | filteredFile |
-            | docx      | Safe      | docx           | safe         |
-#            | Safe      | docx      | docx         |
+            | filterOne | filterTwo | filterToRemove | appliedFilter |
+            | docx      | Safe      | docx           | Safe         |
+            | png       | Safe      | Safe           | png          |
 
     @filterfileid
     Scenario Outline: I can filter the log using file id

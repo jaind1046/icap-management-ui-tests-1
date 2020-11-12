@@ -309,19 +309,6 @@ module.exports = {
         }
     },
 
-    setFileId(value) {
-       this.clickMoreFiltersButton();
-        this.clickAddFilterButton();
-        I.click(this.buttons.fileIdMenu);
-        I.fillField(this.fields.inputFilterFileID, value);
-        I.click(this.buttons.fileIdAdd);
-        this.closeFilterPopup();
-    },
-
-    filterByFileId(fileId) {
-        this.setFileId(fileId);
-        I.click(this.buttons.fileIdAdd);
-    },
 
     selectFileType(value) {
         this.clickFileTypeAdd();
@@ -353,30 +340,30 @@ module.exports = {
     async checkFileTypeValues(filteredFile, col) {
         I.checkRow(filteredFile, col)
     },
-    async verifyResultIsAccurate(filter, col) {
-            this.checkRow(filter, col)
-    },
-    selectCountOfFiles(itemCount) {
-        const element = this.options.countOfFiles;
-        I.selectOption(element, itemCount);
+
+
+    async verifyResultIsAccurate(filter) {
+        let col = this.getAppliedFilter(filter);
+            await I.checkRow(filter, col);
     },
 
-    async checkFilters(filteredFile) {
-        const res = filteredFile.split("_");
+
+    async checkFilters(appliedFilters) {
+        const res = appliedFilters.split("_");
         if (res.length === 1) {
             const filterValue = this.containers.appliedFiltersFooter;
             await this.checkFilterByValue(res[0], filterValue);
         } else {
             for (let i = 0; i < res.length; i++) {
                 let filterValueLocator = `//div/span[contains(.,'` + res[i] + `')]`;
-                await this.checkFilterByValue(res[i].toLowerCase(), filterValueLocator);
+                await this.checkFilterByValue(res[i], filterValueLocator);
             }
         }
     },
 
     async checkFilterByValue(value, locator) {
-        let filterValueText = (await I.grabTextFrom(locator)).toLowerCase();
-        I.assert(value, filterValueText);
+        let filterValueText = (await I.grabTextFrom(locator));
+        I.compareThatEqual(value, filterValueText);
     },
 
     checkFileValues(filteredFile) {
@@ -387,7 +374,7 @@ module.exports = {
 
     async checkFileTypeValues(filteredFile) {
         const table = locate('tbody');
-     I.checkRow(filteredFile, 3)
+        I.checkRow(filteredFile, 3)
     },
     async checkFileOutcomeValues(filteredFile) {
      I.checkRow(filteredFile, 4);
@@ -408,10 +395,16 @@ module.exports = {
      * ***************************************************************
      */
     setFileId(value) {
-        this.clickMoreFiltersButton()
-        this.clickAddFilterButton()
+        this.clickMoreFiltersButton();
+        this.clickAddFilterButton();
         I.click(this.buttons.fileIdMenu);
         I.fillField(this.fields.inputFilterFileID, value);
+        I.click(this.buttons.fileIdAdd);
+        this.closeFilterPopup();
+    },
+
+    filterByFileId(fileId) {
+        this.setFileId(fileId);
         I.click(this.buttons.fileIdAdd);
     },
 
@@ -474,5 +467,23 @@ module.exports = {
         within(this.modal.modalHeader, () => {
             I.see(fileId);
         })
+    },
+    getAppliedFilter(res) {
+     //   if (I.compareThatEqual(res,'Safe')) {
+        if (res === 'Safe'){
+            col= 4;
+        }
+   //     if (res.isUUID()) return 2;
+        else col= 3;
+        return col;
+    },
+
+    isUUID (uuid) {
+    let s = "" + uuid;
+    s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+    if (s === null) {
+        return false;
     }
+    return true;
+}
 };

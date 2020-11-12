@@ -43,7 +43,7 @@ class MyHelper extends Helper {
                 `${tableRows}:nth-child(${i + 1}) th:nth-child(${col})`,
                 (e) => e.innerText
             )
-            if (text === val) {
+            if (this.compareThatEqual(text, val)) {
                 console.log('The result list shows required files with the filter: ' + text);
             }
             else {
@@ -55,6 +55,10 @@ class MyHelper extends Helper {
         console.log('Skipping operation as there was a problem getting the cell');
     }
 }
+
+        compareThatEqual(word1, word2){
+            return word1.toUpperCase() === word2.toUpperCase();
+        }
 }
 
 
