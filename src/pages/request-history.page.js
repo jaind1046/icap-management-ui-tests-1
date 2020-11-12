@@ -454,21 +454,11 @@ module.exports = {
         })
     },
     getAppliedFilter(res) {
-     //   if (I.compareThatEqual(res,'Safe')) {
+        let col;
         if (res === 'Safe'){
             col= 4;
         }
-   //     if (res.isUUID()) return 2;
         else col= 3;
         return col;
-    },
-
-    isUUID (uuid) {
-    let s = "" + uuid;
-    s = s.match('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
-    if (s === null) {
-        return false;
     }
-    return true;
-}
 };
