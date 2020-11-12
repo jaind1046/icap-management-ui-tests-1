@@ -100,7 +100,7 @@ module.exports = {
     },
 
     closeFilterPopup() {
-        I.click('tbody');
+        I.moveCursorTo('#root');
     },
 
     selectCountOfFiles(itemCount) {
@@ -109,9 +109,7 @@ module.exports = {
     },
 
     removeAppliedFilter(filterName) {
-        const res = filterName.split("_");
-        const filterValue = res[1];
-        I.click(`//span[contains(., '` + filterValue + `')]/parent::*/../div/button`);
+        I.click(`//span[contains(., '` + filterName + `')]/parent::*/../div/button`);
 
     },
 
@@ -296,6 +294,7 @@ module.exports = {
         }
     },
 
+
     selectFileType(value) {
         this.clickFileTypeAdd();
         try {
@@ -327,30 +326,29 @@ module.exports = {
         I.checkRow(filteredFile, col)
     },
 
-    async verifyResultIsAccurate(filter, col) {
-            this.checkRow(filter, col)
-    },
-    selectCountOfFiles(itemCount) {
-        const element = this.options.countOfFiles;
-        I.selectOption(element, itemCount);
+
+    async verifyResultIsAccurate(filter) {
+        let col = this.getAppliedFilter(filter);
+            await I.checkRow(filter, col);
     },
 
-    async checkFilters(filteredFile) {
-        const res = filteredFile.split("_");
+
+    async checkFilters(appliedFilters) {
+        const res = appliedFilters.split("_");
         if (res.length === 1) {
             const filterValue = this.containers.appliedFiltersFooter;
             await this.checkFilterByValue(res[0], filterValue);
         } else {
             for (let i = 0; i < res.length; i++) {
                 let filterValueLocator = `//div/span[contains(.,'` + res[i] + `')]`;
-                await this.checkFilterByValue(res[i].toLowerCase(), filterValueLocator);
+                await this.checkFilterByValue(res[i], filterValueLocator);
             }
         }
     },
 
     async checkFilterByValue(value, locator) {
-        let filterValueText = (await I.grabTextFrom(locator)).toLowerCase();
-        I.assert(value, filterValueText);
+        let filterValueText = (await I.grabTextFrom(locator));
+        I.compareThatEqual(value, filterValueText);
     },
 
     checkFileValues(filteredFile) {
@@ -359,14 +357,22 @@ module.exports = {
         I.seeInField(row, res[1]);
     },
 
-
     async checkFileTypeValues(filteredFile) {
         const table = locate('tbody');
-     I.checkRow(filteredFile, 3)
+        I.checkRow(filteredFile, 3)
     },
     async checkFileOutcomeValues(filteredFile) {
      I.checkRow(filteredFile, 4);
 
+    },
+
+    applyMultipleFilters(riskFilter, typeFilter){
+        this.clickMoreFiltersButton();
+        this.clickAddFilterButton();
+        this.selectFileOutcome(riskFilter);
+
+        this.clickAddFilterButton();
+        this.selectFileType(typeFilter);
     },
 
     /*
@@ -374,16 +380,25 @@ module.exports = {
      * ***************************************************************
      */
     setFileId(value) {
-        this.clickMoreFiltersButton()
-        this.clickAddFilterButton()
+        this.clickMoreFiltersButton();
+        this.clickAddFilterButton();
         I.click(this.buttons.fileIdMenu);
         I.fillField(this.fields.inputFilterFileID, value);
+        I.click(this.buttons.fileIdAdd);
+        this.closeFilterPopup();
+    },
+
+    filterByFileId(fileId) {
+        this.setFileId(fileId);
         I.click(this.buttons.fileIdAdd);
     },
 
     filterByFileId(fileId) {
         this.setFileId(fileId);
         I.click(this.buttons.fileIdAdd);
+    },
+    async checkFileIdValues(filteredFile) {
+     I.checkRow(filteredFile, 2)
     },
 
     /*
@@ -437,5 +452,13 @@ module.exports = {
         within(this.modal.modalHeader, () => {
             I.see(fileId);
         })
+    },
+    getAppliedFilter(res) {
+        let col;
+        if (res === 'Safe'){
+            col= 4;
+        }
+        else col= 3;
+        return col;
     }
 };
