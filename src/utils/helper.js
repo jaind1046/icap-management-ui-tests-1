@@ -36,25 +36,48 @@ class MyHelper extends Helper {
         const page = this.helpers['Puppeteer'].page;
         page.waitForSelector('tbody');
         const tableRows = 'tbody tr';
-        try{
-        let rowCount = await page.$$eval(tableRows, rows => rows.length);
-        for (let i = 0; i < rowCount; i++) {
-            const text = await page.$eval(
-                `${tableRows}:nth-child(${i + 1}) th:nth-child(${col})`,
-                (e) => e.innerText
-            )
-            if (text === val) {
-                console.log('The result list shows required files with the filter: ' + text);
+        try {
+            let rowCount = await page.$$eval(tableRows, rows => rows.length);
+            if (rowCount<1) {
+            for (let i = 0; i < rowCount; i++) {
+                const text = await page.$eval(
+                    `${tableRows}:nth-child(${i + 1}) th:nth-child(${col})`,
+                    (e) => e.innerText
+                )
+                if (text === val) {
+                    console.log('The result list shows required files with the filter: ' + text);
+                }
+                else {
+                    console.error('The result is not as expected, filter found is: ' + text);
+                }
+                break;}
             }
-            else {
-                console.error('The result is not as expected, filter found is: ' + text);
-            }
-            break;
+        } catch (err) {
+            console.log('Skipping operation as there was a problem getting the cell');
         }
-    } catch (err) {
-        console.log('Skipping operation as there was a problem getting the cell');
     }
-}
+
+    async checkIfReturnedFilesInDateRange(range, col) {
+        const page = this.helpers['Puppeteer'].page;
+        page.waitForSelector('tbody');
+        const tableRows = 'tbody tr';
+        try {
+            let rowCount = await page.$$eval(tableRows, rows => rows.length);
+            for (let i = 0; i < rowCount; i++) {
+                let timestamp = await page.$eval(`${tableRows}:nth-child(${i + 1}) th:nth-child(${col})`, (e) => e.innerText);
+                let parsed = moment(timestamp, 'DD/MM/YYYY').toDate()
+                if (moment(parsed).isBetween(range.split("-"))) {
+                    console.log('The result list shows required files within the selected time: ' + range);
+                } else {
+                    console.error('The result files returned are not within the selected time: ' + range);
+                }
+                break;
+            }
+        } catch (err) {
+            console.error('Skipping operation as there was a problem getting the cell');
+        }
+    }
+
 }
 
 
