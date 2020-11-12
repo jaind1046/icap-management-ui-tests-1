@@ -14,15 +14,15 @@ exports.config = {
       require: "./src/utils/helper.js"
     },
     Puppeteer: {
-      url: 'http://localhost:5431',
-      show: true,
       windowSize: '1536 x 826',
+      url: 'http://localhost:8080',
+      show: true,
       chrome: {
         args: ['--no-sandbox', '--window-size=1536,826'],
       },
       waitForNavigation: ["domcontentloaded", "networkidle0"],
-      waitForAction: 2000,
-      waitForTimeout: 60000
+      waitForTimeout: 60000,
+      waitForAction: 2000
     },
     FileSystem: {},
     AssertWrapper: {
@@ -53,7 +53,9 @@ exports.config = {
   mocha: {},
   name: 'icap-management-ui-tests',
   plugins: {
-    allure: {},
+    allure: {
+      outputDir: './allure-results'
+    },
     pauseOnFail: {},
     retryFailedStep: {
       enabled: false
@@ -72,8 +74,8 @@ exports.config = {
     },
     autoDelay: {
       enabled: true,
-      delayBefore: 300,
-      delayAfter: 200
+      // delayBefore: 300,
+      // delayAfter: 200
     },
 
   }

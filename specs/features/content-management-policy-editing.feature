@@ -56,14 +56,14 @@ As a admin I need to validate that policy content flags can be edited in order t
 
 
 
-  @TEST-153
-  Scenario: A user selecting the "Current Policy" in the navigation panel will be taken to the current policy page
-    When I click on Current Policy in the navigation panel
-    Then I am taken to the current policy page
+  @TEST-216
+  Scenario: The default Current Policy set is Sanitise
+    Then I see all the content flags set as Sanitise
 
 
-  @TEST-188
-  Scenario Outline: A user can cancel any updates that they have done to the policy by pressing cancel
+  @smoke
+  @TEST-213
+  Scenario Outline: A user can cancel any updates that they have done to the policy 
     When I change one of the <ContentFlags> for required file types <FileType> to <ChangedFlagType>
     And I press the Cancel button
     Then The <ContentFlags> for file types <FileType> defaults to <CurrentFlagType>
@@ -72,8 +72,8 @@ As a admin I need to validate that policy content flags can be edited in order t
       | word       | embeddedFiles   | disallow           | sanitise        |
 
 
-
-  @TEST-155
+  @smoke
+  @TEST-214
   Scenario Outline: I can edit policy content flags
     When I change one of the <ContentFlags> for required file types <FileType> to <FlagType>
     And I press the Save button
@@ -81,23 +81,23 @@ As a admin I need to validate that policy content flags can be edited in order t
     Examples:`
       | FileType   | ContentFlags         | FlagType |
       | word       | embeddedFiles        | sanitise |
-      | excel      | externalHyperlinks   | disallow |
-      | powerpoint | metadata             | disallow |
-      | pdf        | actionsAll           | sanitise |
+    #   | excel      | externalHyperlinks   | disallow |
+    #   | powerpoint | metadata             | disallow |
+    #   | pdf        | actionsAll           | sanitise |
 
-
-  @TEST-Change-all-content-flag-for-all-doc-type
+  @smoke
+  @TEST-215
   Scenario Outline: A user is able to change all content flags for all file type in policy page
     When I change all the flag for <FileType> to <FlagType> on policy page
     Then All flags of the <FileType> is changed to <FlagType>
     Examples:
       | FileType      | FlagType |
       | word          | sanitise |
-      | word          | disallow |
-      | excel         | sanitise |
-      | excel         | disallow |
-      | excel         | sanitise |
-      | excel         | disallow |
-      | pdf           | sanitise |
-      | pdf           | disallow |
+    #   | word          | disallow |
+    #   | excel         | sanitise |
+    #   | excel         | disallow |
+    #   | excel         | sanitise |
+    #   | excel         | disallow |
+    #   | pdf           | sanitise |
+    #   | pdf           | disallow |
 
