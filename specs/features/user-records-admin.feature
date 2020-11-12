@@ -49,3 +49,5 @@ Feature: user-records-admin
         Given I have logged into the ui and has navigated to the Users page
         When I observe my account
         Then there will be no delete button next to my account
+
+    Scenario: I can update a user record
