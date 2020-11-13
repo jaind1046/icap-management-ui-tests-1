@@ -242,6 +242,10 @@ module.exports = {
     blockedFiles: `section[class*='PolicyForNonCompliantFiles_wrapBlocksToggle__'] > h3:nth-child(3)`,
   },
 
+  options: {
+    countOfPolicies: "div[class*='Pagination_pageCountSelector__'] > select"
+  },
+
   //Methods
 
   /*
@@ -369,8 +373,17 @@ module.exports = {
   assertNumberOfRecordsOfPolicy(count) {
     const numberOfRowsInTable = I.grabNumberOfVisibleElements(this.table.tableRows)
     numberOfRowsInTable.then((numberOfRows) => {
-      I.assert((numberOfRows > count), true)
+      I.assert((numberOfRows >= count), true)
     })
+  },
+
+  selectCountOfPolicies(itemCount) {
+    const element = this.options.countOfPolicies;
+    I.selectOption(element, itemCount);
+  },
+
+  assertPoliciesItemShownCount(itemCount) {
+    I.seeNumberOfElements(this.table.tableRows, itemCount)
   },
 
   clickOnHistoryPolicyTab() {

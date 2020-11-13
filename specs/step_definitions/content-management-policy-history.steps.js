@@ -25,15 +25,15 @@ Then('the user is taken to the Policy History page', () => {
     policyPage.assertHistoryPolicyPage()
 });
 
-Given(/^I have navigated to the Policy History page and there are more than (.*) policies in the history$/, (count) => {
+Given('I have navigated to the Policy History page and there are more than {int} policies in the history', (count) => {
     policyPage.clickOnHistoryPolicyTab()
     policyPage.assertNumberOfRecordsOfPolicy(count)
 });
 
-// TODO implement this when app has records
 When(/^Items Shown is changed to (.*)$/, (itemCount) => {
+    policyPage.selectCountOfPolicies(itemCount)
 });
 
-// TODO implement this when app has records
-Then(/^up to (.*) previous policies are displayed$/, (fileCount) => {
+Then('up to {int} previous policies are displayed', (itemCount) => {
+    policyPage.assertPoliciesItemShownCount(itemCount)
 });
