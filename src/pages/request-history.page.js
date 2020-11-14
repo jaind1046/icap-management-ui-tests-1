@@ -322,14 +322,24 @@ module.exports = {
         }
     },
 
-    async checkFileTypeValues(filteredFile, col) {
-        I.checkRow(filteredFile, col)
+   async checkResultFileTypesAreAccurate(filteredFile, col) {
+         try {
+             const text = await I.grabTextFrom(`//tbody`);
+             if (text == 'No Transaction Data Found') {
+                 I.say('No data returned')
+             } else {
+                 I.say("Data is available")
+                 I.checkRow(filteredFile, col)
+             }} catch (e) {
+             I.say('errors')
+             console.warn(e);
+         }     
     },
 
 
-    async verifyResultIsAccurate(filter) {
+   verifyResultIsAccurate(filter) {
         let col = this.getAppliedFilter(filter);
-            await I.checkRow(filter, col);
+            I.checkRow(filter, col);
     },
 
 
@@ -358,7 +368,6 @@ module.exports = {
     },
 
     async checkFileTypeValues(filteredFile) {
-        const table = locate('tbody');
         I.checkRow(filteredFile, 3)
     },
     async checkFileOutcomeValues(filteredFile) {
