@@ -5,8 +5,6 @@ Feature: request-history-filtering-by-file-type
     Background:
         Given I am logged into the ui
 
-    @functional
-    @smoke
     @TEST-163
     Scenario Outline: filter the log by file type
         Given I have navigated to the Request History page
@@ -17,7 +15,9 @@ Feature: request-history-filtering-by-file-type
             | docx   | Docx         |
             | xls    | Xls          |
             | pptx   | Pptx         |
-           
+            | rtf    | Rtf          |
+            | png    | Png          |
+            | pdf    | Pdf          |
 
 
 

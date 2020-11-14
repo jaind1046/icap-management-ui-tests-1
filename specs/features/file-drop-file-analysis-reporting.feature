@@ -6,7 +6,7 @@ Feature: file-drop-file-analysis-reporting
         Given I am logged into the ui
         And I have navigated to the File Drop page
 
-    
+    @smoke
     @TEST-225
     Scenario Outline: I can download the full XML analysis report for a file
         Given I have uploded a file <supportedFile>
@@ -16,7 +16,7 @@ Feature: file-drop-file-analysis-reporting
             | supportedFile             | xmlFile   |
             | src/data/input/file1.docx | file1.xml |
 
-    
+    @smoke
     @TEST-226
     Scenario Outline: I can download the full PDF analysis report for a file
         Given I have uploded a file <supportedFile>

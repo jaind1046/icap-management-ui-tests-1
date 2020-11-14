@@ -13,7 +13,7 @@ As a admin I need to validate that policy content flags can be edited in order t
         When I click on Current Policy in the navigation panel
         Then I am taken to the current policy page
 
-    @functional
+
     @smoke
     @TEST-188
     Scenario Outline: A user can cancel any updates that they have done to the policy by pressing cancel
@@ -24,8 +24,7 @@ As a admin I need to validate that policy content flags can be edited in order t
           | FileType   | ContentFlags    | CurrentFlagType    | ChangedFlagType |
           | word       | embeddedFiles   | disallow           | sanitise        |
 
-    @functional
-    @smoke
+
     @TEST-155
     Scenario Outline: I can edit policy content flags
       When I change one of the <ContentFlags> for required file types <FileType> to <FlagType>
@@ -33,10 +32,12 @@ As a admin I need to validate that policy content flags can be edited in order t
       Then The <ContentFlags> for required file types <FileType> is set to <FlagType>
         Examples:
           | FileType   | ContentFlags         | FlagType |
+          | word       | embeddedFiles        | sanitise |
+          | excel      | externalHyperlinks   | disallow |
           | powerpoint | metadata             | disallow |
           | pdf        | actionsAll           | sanitise |
 
-    @functional
+
     @smoke
     @TEST-Change-all-content-flag-for-all-doc-type
     Scenario Outline: A user is able to change all content flags for all file type in policy page
@@ -45,5 +46,10 @@ As a admin I need to validate that policy content flags can be edited in order t
       Examples:
         | FileType      | FlagType |
         | word          | sanitise |
+        | word          | disallow |
+        | excel         | sanitise |
+        | excel         | disallow |
+        | excel         | sanitise |
         | excel         | disallow |
         | pdf           | sanitise |
+        | pdf           | disallow |

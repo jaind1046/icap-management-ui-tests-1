@@ -16,9 +16,9 @@ exports.config = {
     Puppeteer: {
       windowSize: '1536 x 826',
       url: 'http://localhost:8080',
-      show: false,
+      show: true,
       chrome: {
-        args: ["--headless", '--no-sandbox', '--window-size=1536,826'],
+        args: ['--no-sandbox', '--window-size=1536,826'],
       },
       waitForNavigation: ["domcontentloaded", "networkidle0"],
       waitForTimeout: 60000,
@@ -76,12 +76,6 @@ exports.config = {
       enabled: true,
       // delayBefore: 300,
       // delayAfter: 200
-    },
-    multiple: {
-      parallel: {
-        chunks: 3,
-        browsers: ['puppeteer']
-      }
     },
 
   }

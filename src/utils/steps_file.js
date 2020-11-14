@@ -12,7 +12,7 @@ require('dotenv').config({path: '.env'});
 module.exports = function () {
     return actor({
         onLoginPage: function () {
-            this.amOnPage("http://management-ui-main.northeurope.cloudapp.azure.com/");
+            this.amOnPage("http://localhost:8080");
         },
 
         loginNoPwd: function () {
