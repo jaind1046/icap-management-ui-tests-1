@@ -18,7 +18,7 @@ exports.config = {
       url: 'http://localhost:8080',
       show: true,
       chrome: {
-        args: ['--no-sandbox', '--window-size=1536,826'],
+        args: ['--headless', '--no-sandbox', '--window-size=1536,826'],
       },
       waitForNavigation: ["domcontentloaded", "networkidle0"],
       waitForTimeout: 60000,

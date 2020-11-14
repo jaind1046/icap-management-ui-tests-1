@@ -6,6 +6,7 @@ Feature: request-history-log
     Background:
         Given I am logged into the ui
 
+@functional
     @smoke
     @TEST-166
     Scenario Outline: I am able to change the number of files displayed on the page
@@ -17,6 +18,7 @@ Feature: request-history-log
             | 25        | 4         |
             | 50        | 4         |
 
+@functional
     @TEST-179
     Scenario Outline: Validate requests log view using a combination of multiple filters
         Given I have navigated to the Request History page
@@ -28,7 +30,7 @@ Feature: request-history-log
             | Safe       | png        |                                      | Safe_png           |
 #            | Safe       | png        | 12e9aa0a-a2ac-4e06-96d1-1ce54ed6a366 | Safe_png           |
 
-
+@functional
     @TEST-189
     Scenario Outline: I can remove individual filters
         Given I have navigated to the Request History page
@@ -39,6 +41,7 @@ Feature: request-history-log
             | filterOne | filterTwo | filterToRemove | appliedFilter |
             | docx      | Safe      | docx           | Safe         |
             | png       | Safe      | Safe           | png          |
+
 
     @filterfileid
     Scenario Outline: I can filter the log using file id
