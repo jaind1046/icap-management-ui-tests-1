@@ -6,7 +6,7 @@ Feature: content-management-policy-history
         Given I am logged into the portal
         Given I am on current policy screen
 
-    @smoke
+    
     @TEST-217
     Scenario Outline: I can change the number of items displayed on a page
         Given I have navigated to the Policy History page and there are more than 10 policies in the history
