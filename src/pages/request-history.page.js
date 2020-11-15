@@ -287,7 +287,7 @@ module.exports = {
         const mainEl = this.popup.filterMenu;
         try {
             within(mainEl, () => {
-                I.retry(2).click(this.popup.filterFileOutcomes);
+                I.retry(2).click(this.popup.riskByCss);
             })
         } catch (e) {
             I.say('Unable to click on locator')
@@ -339,9 +339,19 @@ module.exports = {
     },
 
 
-    verifyResultIsAccurate(filter) {
+   async verifyResultIsAccurate(filter) {
+         try {
+             const text = await I.grabTextFrom(`//tbody`);
+             if (text == 'No Transaction Data Found') {
+                 I.say('No data returned')
+             } else {
+                 I.say("Data is available")
         let col = this.getAppliedFilter(filter);
         I.checkRow(filter, col);
+        }} catch (e) {
+            I.say('errors')
+            console.warn(e);
+        }
     },
 
 

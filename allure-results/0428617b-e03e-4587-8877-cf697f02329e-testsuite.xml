@@ -1,0 +1,265 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1605445037441' stop='1605445094557'>
+    <name>request-history-filtering-by-file-type @request-history-filtering-by-file-type</name>
+    <title>request-history-filtering-by-file-type @request-history-filtering-by-file-type</title>
+    <test-cases>
+        <test-case start='1605445037442' status='passed' stop='1605445065943'>
+            <name>filter the log by file type {"filter":"docx","filteredFile":"Docx"} @functional @smoke @TEST-163</name>
+            <title>filter the log by file type {"filter":"docx","filteredFile":"Docx"} @functional @smoke @TEST-163</title>
+            <labels>
+                <label name='tag' value='@request-history-filtering-by-file-type'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-163'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445047132' status='passed' stop='1605445049505'>
+                    <name>homePage: clickRequestsHistory </name>
+                    <title>homePage: clickRequestsHistory </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445047132' status='passed' stop='1605445049391'>
+                            <name>I click "a[href*='request-history'] > div"</name>
+                            <title>I click "a[href*='request-history'] > div"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445049505' status='passed' stop='1605445054231'>
+                    <name>Within "div[class*='Filters_wrap__']" </name>
+                    <title>Within "div[class*='Filters_wrap__']" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445049505' status='passed' stop='1605445051744'>
+                            <name>I click button[class*='Filters_moreFilters__']</name>
+                            <title>I click button[class*='Filters_moreFilters__']</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445051762' status='passed' stop='1605445051787'>
+                            <name>I wait for clickable "//button[contains(.,'+ Add Filter')]"</name>
+                            <title>I wait for clickable "//button[contains(.,'+ Add Filter')]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445051889' status='passed' stop='1605445054115'>
+                            <name>I click "//button[contains(.,'+ Add Filter')]"</name>
+                            <title>I click "//button[contains(.,'+ Add Filter')]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445054231' status='passed' stop='1605445056617'>
+                    <name>Within "div[class*='Filters_popup__']" </name>
+                    <title>Within "div[class*='Filters_popup__']" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445054231' status='passed' stop='1605445056511'>
+                            <name>I click "button:nth-child(1) > p"</name>
+                            <title>I click "button:nth-child(1) > p"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445056515' status='passed' stop='1605445056515'>
+                            <name>Filter to set is: docx</name>
+                            <title>Filter to set is: docx</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445056617' status='passed' stop='1605445058903'>
+                    <name>requesthistoryPage: selectFileType "docx"</name>
+                    <title>requesthistoryPage: selectFileType "docx"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445056617' status='passed' stop='1605445058903'>
+                            <name>I click "//span[contains(.,'docx')]/parent::label/span[1]/span/input"</name>
+                            <title>I click "//span[contains(.,'docx')]/parent::label/span[1]/span/input"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445058904' status='passed' stop='1605445060919'>
+                    <name>requesthistoryPage: closeFilterPopup </name>
+                    <title>requesthistoryPage: closeFilterPopup </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445058904' status='passed' stop='1605445060919'>
+                            <name>I move cursor to "#root"</name>
+                            <title>I move cursor to "#root"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445060919' status='passed' stop='1605445065922'>
+                    <name>requesthistoryPage: selectFileType "docx"</name>
+                    <title>requesthistoryPage: selectFileType "docx"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445060919' status='passed' stop='1605445065921'>
+                            <name>I wait 5</name>
+                            <title>I wait 5</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445065922' status='passed' stop='1605445065943'>
+                    <name>requesthistoryPage: checkResultFileTypesAreAccurate "Docx", 3</name>
+                    <title>requesthistoryPage: checkResultFileTypesAreAccurate "Docx", 3</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445065922' status='passed' stop='1605445065942'>
+                            <name>I grab text from "//tbody"</name>
+                            <title>I grab text from "//tbody"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445065953' status='passed' stop='1605445065953'>
+                    <name>No data returned</name>
+                    <title>No data returned</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+        <test-case start='1605445066095' status='passed' stop='1605445094379'>
+            <name>filter the log by file type {"filter":"pdf","filteredFile":"Pdf"} @functional @smoke @TEST-163</name>
+            <title>filter the log by file type {"filter":"pdf","filteredFile":"Pdf"} @functional @smoke @TEST-163</title>
+            <labels>
+                <label name='tag' value='@request-history-filtering-by-file-type'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-163'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445075573' status='passed' stop='1605445077970'>
+                    <name>homePage: clickRequestsHistory </name>
+                    <title>homePage: clickRequestsHistory </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445075574' status='passed' stop='1605445077855'>
+                            <name>I click "a[href*='request-history'] > div"</name>
+                            <title>I click "a[href*='request-history'] > div"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445077970' status='passed' stop='1605445082683'>
+                    <name>Within "div[class*='Filters_wrap__']" </name>
+                    <title>Within "div[class*='Filters_wrap__']" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445077970' status='passed' stop='1605445080189'>
+                            <name>I click button[class*='Filters_moreFilters__']</name>
+                            <title>I click button[class*='Filters_moreFilters__']</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445080240' status='passed' stop='1605445080250'>
+                            <name>I wait for clickable "//button[contains(.,'+ Add Filter')]"</name>
+                            <title>I wait for clickable "//button[contains(.,'+ Add Filter')]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445080351' status='passed' stop='1605445082577'>
+                            <name>I click "//button[contains(.,'+ Add Filter')]"</name>
+                            <title>I click "//button[contains(.,'+ Add Filter')]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445082683' status='passed' stop='1605445085087'>
+                    <name>Within "div[class*='Filters_popup__']" </name>
+                    <title>Within "div[class*='Filters_popup__']" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445082683' status='passed' stop='1605445084983'>
+                            <name>I click "button:nth-child(1) > p"</name>
+                            <title>I click "button:nth-child(1) > p"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445084985' status='passed' stop='1605445084985'>
+                            <name>Filter to set is: pdf</name>
+                            <title>Filter to set is: pdf</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445085087' status='passed' stop='1605445087346'>
+                    <name>requesthistoryPage: selectFileType "pdf"</name>
+                    <title>requesthistoryPage: selectFileType "pdf"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445085087' status='passed' stop='1605445087346'>
+                            <name>I click "//span[contains(.,'pdf')]/parent::label/span[1]/span/input"</name>
+                            <title>I click "//span[contains(.,'pdf')]/parent::label/span[1]/span/input"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445087346' status='passed' stop='1605445089355'>
+                    <name>requesthistoryPage: closeFilterPopup </name>
+                    <title>requesthistoryPage: closeFilterPopup </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445087346' status='passed' stop='1605445089355'>
+                            <name>I move cursor to "#root"</name>
+                            <title>I move cursor to "#root"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445089355' status='passed' stop='1605445094356'>
+                    <name>requesthistoryPage: selectFileType "pdf"</name>
+                    <title>requesthistoryPage: selectFileType "pdf"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445089356' status='passed' stop='1605445094356'>
+                            <name>I wait 5</name>
+                            <title>I wait 5</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445094356' status='passed' stop='1605445094379'>
+                    <name>requesthistoryPage: checkResultFileTypesAreAccurate "Pdf", 3</name>
+                    <title>requesthistoryPage: checkResultFileTypesAreAccurate "Pdf", 3</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445094356' status='passed' stop='1605445094378'>
+                            <name>I grab text from "//tbody"</name>
+                            <title>I grab text from "//tbody"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445094383' status='passed' stop='1605445094383'>
+                    <name>No data returned</name>
+                    <title>No data returned</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

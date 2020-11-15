@@ -23,7 +23,7 @@ exports.config = {
       waitForNavigation: ["domcontentloaded", "networkidle0"],
       waitForTimeout: 60000,
       waitForAction: 2000,
-     
+
     },
     FileSystem: {},
     AssertWrapper: {
@@ -62,13 +62,13 @@ exports.config = {
     },
     customLocator: {
       enabled: true,
-      attribute: 'data-test-id'  
+      attribute: 'data-test-id'
     },
     customLocator: {
       enabled: true,
       attribute: 'data-range-key'
     },
-    
+
     screenshotOnFail: {
       enabled: true
     },
@@ -76,7 +76,12 @@ exports.config = {
       enabled: true,
       // delayBefore: 300,
       // delayAfter: 200
-    },
-
-  }
+    }
+  },
+  multiple: {
+    parallel: {
+      chunks: 10,
+      browsers: ['puppeteer']
+    }
+  },
 }
