@@ -23,7 +23,7 @@ jobs:
           npm install    
           npm install -g allure-commandline --save-dev      
           npm test
-          allure generate allure/results --clean -o allure/report
+  
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
