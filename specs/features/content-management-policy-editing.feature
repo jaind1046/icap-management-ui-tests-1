@@ -25,6 +25,7 @@ Feature: Content Management Policy Editing
       | word     | embeddedFiles | disallow        | sanitise        |
 
   @functional
+  @smoke
   @TEST-155
   Scenario Outline: I can edit policy content flags
     When I change one of the <ContentFlags> for required file types <FileType> to <FlagType>

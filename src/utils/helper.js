@@ -42,7 +42,7 @@ class MyHelper extends Helper {
                 for (let i = 0; i < rowCount; i++) {
                     const text = await page.$eval(`${tableRows}:nth-child(${i + 1}) th:nth-child(${col})`,
                         (e) => e.innerText)
-                    if (text === val) {
+                    if (this.compareThatEqual(text, val)) {
                         console.log('The result list shows required files with the filter: ' + text);
                     } else {
                         console.error('The result is not as expected, filter found is: ' + text);

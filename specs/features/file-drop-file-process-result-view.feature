@@ -6,7 +6,7 @@ Feature: file-drop-file-process-result-view
         Given I am logged into the ui
         And I have navigated to the File Drop page
 
-    @functional
+   
     @smoke
     @TEST-227
     Scenario Outline: I can download the full analysis report of a processed file
@@ -17,7 +17,7 @@ Feature: file-drop-file-process-result-view
             | supportedFile              | analysisReport  |
             | src/data/input/issues.docx | issues.docx.xml |
 
-    @functional
+    
     @smoke
     @TEST-228
     Scenario Outline: I can see the result of a repaired file with the issues removed

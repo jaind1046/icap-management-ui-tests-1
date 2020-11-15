@@ -1,0 +1,262 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1605444985508' stop='1605445037398'>
+    <name>request-history-filtering-by-date @request-history-filtering-by-date</name>
+    <title>request-history-filtering-by-date @request-history-filtering-by-date</title>
+    <test-cases>
+        <test-case start='1605444985510' status='passed' stop='1605445003130'>
+            <name>I can filter the request log using the time interval {"timeInterval":"1 Hour","datetimeFrom":"1","datetimeTo":"current time"} @functional @smoke @TEST-167</name>
+            <title>I can filter the request log using the time interval {"timeInterval":"1 Hour","datetimeFrom":"1","datetimeTo":"current time"} @functional @smoke @TEST-167</title>
+            <labels>
+                <label name='tag' value='@request-history-filtering-by-date'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-167'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605444998403' status='passed' stop='1605445000761'>
+                    <name>requesthistoryPage: openDatePicker </name>
+                    <title>requesthistoryPage: openDatePicker </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605444998403' status='passed' stop='1605445000661'>
+                            <name>I click "div[id*='reportrange']"</name>
+                            <title>I click "div[id*='reportrange']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445000761' status='passed' stop='1605445003109'>
+                    <name>requesthistoryPage: selectTimePeriod "1 Hour"</name>
+                    <title>requesthistoryPage: selectTimePeriod "1 Hour"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445000761' status='passed' stop='1605445003109'>
+                            <name>I click "li[data-range-key='1 Hour']"</name>
+                            <title>I click "li[data-range-key='1 Hour']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445003109' status='passed' stop='1605445003114'>
+                    <name>requesthistoryPage: isTimeApplied "1", "current time"</name>
+                    <title>requesthistoryPage: isTimeApplied "1", "current time"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445003109' status='passed' stop='1605445003114'>
+                            <name>I see element "//span[contains(.,'15/11/2020 11:56 AM - 15/11/2020 12:56 PM')]"</name>
+                            <title>I see element "//span[contains(.,'15/11/2020 11:56 AM - 15/11/2020 12:56 PM')]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445003114' status='passed' stop='1605445003120'>
+                    <name>And the files processed for the selected period are displayed </name>
+                    <title>And the files processed for the selected period are displayed </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445003114' status='passed' stop='1605445003120'>
+                            <name>I grab text from "div[id*='reportrange']"</name>
+                            <title>I grab text from "div[id*='reportrange']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445003120' status='passed' stop='1605445003130'>
+                    <name>requesthistoryPage: isDataInRange "15/11/2020 11:56 AM - 15/11/2020 12:56 PM", 1</name>
+                    <title>requesthistoryPage: isDataInRange "15/11/2020 11:56 AM - 15/11/2020 12:56 PM", 1</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445003120' status='passed' stop='1605445003130'>
+                            <name>I grab text from "//tbody"</name>
+                            <title>I grab text from "//tbody"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445003132' status='passed' stop='1605445003132'>
+                    <name>No data returned</name>
+                    <title>No data returned</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+        <test-case start='1605445003309' status='passed' stop='1605445019979'>
+            <name>I can filter the request log using the time interval {"timeInterval":"12 Hours","datetimeFrom":"12","datetimeTo":"current time"} @functional @smoke @TEST-167</name>
+            <title>I can filter the request log using the time interval {"timeInterval":"12 Hours","datetimeFrom":"12","datetimeTo":"current time"} @functional @smoke @TEST-167</title>
+            <labels>
+                <label name='tag' value='@request-history-filtering-by-date'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-167'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445015238' status='passed' stop='1605445017668'>
+                    <name>requesthistoryPage: openDatePicker </name>
+                    <title>requesthistoryPage: openDatePicker </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445015238' status='passed' stop='1605445017566'>
+                            <name>I click "div[id*='reportrange']"</name>
+                            <title>I click "div[id*='reportrange']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445017668' status='passed' stop='1605445019924'>
+                    <name>requesthistoryPage: selectTimePeriod "12 Hours"</name>
+                    <title>requesthistoryPage: selectTimePeriod "12 Hours"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445017668' status='passed' stop='1605445019923'>
+                            <name>I click "$12 Hours"</name>
+                            <title>I click "$12 Hours"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445019924' status='passed' stop='1605445019950'>
+                    <name>requesthistoryPage: isTimeApplied "12", "current time"</name>
+                    <title>requesthistoryPage: isTimeApplied "12", "current time"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445019924' status='passed' stop='1605445019950'>
+                            <name>I see element "//span[contains(.,'15/11/2020 0:56 AM - 15/11/2020 12:56 PM')]"</name>
+                            <title>I see element "//span[contains(.,'15/11/2020 0:56 AM - 15/11/2020 12:56 PM')]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445019950' status='passed' stop='1605445019967'>
+                    <name>And the files processed for the selected period are displayed </name>
+                    <title>And the files processed for the selected period are displayed </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445019950' status='passed' stop='1605445019967'>
+                            <name>I grab text from "div[id*='reportrange']"</name>
+                            <title>I grab text from "div[id*='reportrange']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445019967' status='passed' stop='1605445019979'>
+                    <name>requesthistoryPage: isDataInRange "15/11/2020 0:56 AM - 15/11/2020 12:56 PM", 1</name>
+                    <title>requesthistoryPage: isDataInRange "15/11/2020 0:56 AM - 15/11/2020 12:56 PM", 1</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445019967' status='passed' stop='1605445019979'>
+                            <name>I grab text from "//tbody"</name>
+                            <title>I grab text from "//tbody"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445019981' status='passed' stop='1605445019981'>
+                    <name>No data returned</name>
+                    <title>No data returned</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+        <test-case start='1605445020128' status='passed' stop='1605445037231'>
+            <name>I can filter the request log using the time interval {"timeInterval":"24 Hours","datetimeFrom":"24","datetimeTo":"current time"} @functional @smoke @TEST-167</name>
+            <title>I can filter the request log using the time interval {"timeInterval":"24 Hours","datetimeFrom":"24","datetimeTo":"current time"} @functional @smoke @TEST-167</title>
+            <labels>
+                <label name='tag' value='@request-history-filtering-by-date'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-167'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445032507' status='passed' stop='1605445034948'>
+                    <name>requesthistoryPage: openDatePicker </name>
+                    <title>requesthistoryPage: openDatePicker </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445032507' status='passed' stop='1605445034847'>
+                            <name>I click "div[id*='reportrange']"</name>
+                            <title>I click "div[id*='reportrange']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445034948' status='passed' stop='1605445037204'>
+                    <name>requesthistoryPage: selectTimePeriod "24 Hours"</name>
+                    <title>requesthistoryPage: selectTimePeriod "24 Hours"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445034948' status='passed' stop='1605445037204'>
+                            <name>I click "$24 Hours"</name>
+                            <title>I click "$24 Hours"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445037204' status='passed' stop='1605445037210'>
+                    <name>requesthistoryPage: isTimeApplied "24", "current time"</name>
+                    <title>requesthistoryPage: isTimeApplied "24", "current time"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445037204' status='passed' stop='1605445037210'>
+                            <name>I see element "//span[contains(.,'14/11/2020 12:57 PM - 15/11/2020 12:57 PM')]"</name>
+                            <title>I see element "//span[contains(.,'14/11/2020 12:57 PM - 15/11/2020 12:57 PM')]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445037210' status='passed' stop='1605445037218'>
+                    <name>And the files processed for the selected period are displayed </name>
+                    <title>And the files processed for the selected period are displayed </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445037210' status='passed' stop='1605445037218'>
+                            <name>I grab text from "div[id*='reportrange']"</name>
+                            <title>I grab text from "div[id*='reportrange']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445037218' status='passed' stop='1605445037231'>
+                    <name>requesthistoryPage: isDataInRange "14/11/2020 12:57 PM - 15/11/2020 12:57 PM", 1</name>
+                    <title>requesthistoryPage: isDataInRange "14/11/2020 12:57 PM - 15/11/2020 12:57 PM", 1</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445037218' status='passed' stop='1605445037231'>
+                            <name>I grab text from "//tbody"</name>
+                            <title>I grab text from "//tbody"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445037233' status='passed' stop='1605445037233'>
+                    <name>No data returned</name>
+                    <title>No data returned</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

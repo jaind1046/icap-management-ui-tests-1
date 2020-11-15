@@ -1,0 +1,440 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1605444985165' stop='1605445139189'>
+    <name>Content Management Policy Editing @content-management-policy-editing</name>
+    <title>Content Management Policy Editing @content-management-policy-editing</title>
+    <test-cases>
+        <test-case start='1605444985168' status='passed' stop='1605445009712'>
+            <name>A user can cancel any updates that they have done to the policy by pressing cancel {"FileType":"word","ContentFlags":"embeddedFiles","CurrentFlagType":"disallow","ChangedFlagType":"sanitise"} @functional @smoke @TEST-188</name>
+            <title>A user can cancel any updates that they have done to the policy by pressing cancel {"FileType":"word","ContentFlags":"embeddedFiles","CurrentFlagType":"disallow","ChangedFlagType":"sanitise"} @functional @smoke @TEST-188</title>
+            <labels>
+                <label name='tag' value='@content-management-policy-editing'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-188'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445004983' status='passed' stop='1605445007438'>
+                    <name>policyPage: setFlagTypeForGivenContentFlagsForGivenDocType "embeddedFiles", "word", "sanitise"</name>
+                    <title>policyPage: setFlagTypeForGivenContentFlagsForGivenDocType "embeddedFiles", "word", "sanitise"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445004983' status='passed' stop='1605445007337'>
+                            <name>I click "label[for='word-id-2sanitise']"</name>
+                            <title>I click "label[for='word-id-2sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445007438' status='passed' stop='1605445009677'>
+                    <name>policyPage: clickCancelChanges </name>
+                    <title>policyPage: clickCancelChanges </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445007438' status='passed' stop='1605445009676'>
+                            <name>I click "//button[text()='Cancel Changes']"</name>
+                            <title>I click "//button[text()='Cancel Changes']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445009677' status='passed' stop='1605445009712'>
+                    <name>policyPage: assertElementChecked "input[id='word-id-2disallow']"</name>
+                    <title>policyPage: assertElementChecked "input[id='word-id-2disallow']"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445009677' status='passed' stop='1605445009712'>
+                            <name>I see attributes on elements "input[id='word-id-2disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-2disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+        <test-case start='1605445009894' status='passed' stop='1605445033463'>
+            <name>I can edit policy content flags {"FileType":"word","ContentFlags":"embeddedFiles","FlagType":"sanitise"} @functional @smoke @TEST-155</name>
+            <title>I can edit policy content flags {"FileType":"word","ContentFlags":"embeddedFiles","FlagType":"sanitise"} @functional @smoke @TEST-155</title>
+            <labels>
+                <label name='tag' value='@content-management-policy-editing'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-155'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445028746' status='passed' stop='1605445031209'>
+                    <name>policyPage: setFlagTypeForGivenContentFlagsForGivenDocType "embeddedFiles", "word", "sanitise"</name>
+                    <title>policyPage: setFlagTypeForGivenContentFlagsForGivenDocType "embeddedFiles", "word", "sanitise"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445028746' status='passed' stop='1605445031109'>
+                            <name>I click "label[for='word-id-2sanitise']"</name>
+                            <title>I click "label[for='word-id-2sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445031210' status='passed' stop='1605445033448'>
+                    <name>policyPage: clickSaveChanges </name>
+                    <title>policyPage: clickSaveChanges </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445031210' status='passed' stop='1605445033447'>
+                            <name>I click "//button[text()='Save Changes']"</name>
+                            <title>I click "//button[text()='Save Changes']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445033449' status='passed' stop='1605445033463'>
+                    <name>policyPage: assertElementChecked "input[id='word-id-2sanitise']"</name>
+                    <title>policyPage: assertElementChecked "input[id='word-id-2sanitise']"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445033449' status='passed' stop='1605445033463'>
+                            <name>I see attributes on elements "input[id='word-id-2sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-2sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+        <test-case start='1605445033646' status='passed' stop='1605445057005'>
+            <name>I can edit policy content flags {"FileType":"excel","ContentFlags":"externalHyperlinks","FlagType":"disallow"} @functional @smoke @TEST-155</name>
+            <title>I can edit policy content flags {"FileType":"excel","ContentFlags":"externalHyperlinks","FlagType":"disallow"} @functional @smoke @TEST-155</title>
+            <labels>
+                <label name='tag' value='@content-management-policy-editing'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-155'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445052255' status='passed' stop='1605445054740'>
+                    <name>policyPage: setFlagTypeForGivenContentFlagsForGivenDocType "externalHyperlinks", "excel", "disallow"</name>
+                    <title>policyPage: setFlagTypeForGivenContentFlagsForGivenDocType "externalHyperlinks", "excel", "disallow"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445052255' status='passed' stop='1605445054640'>
+                            <name>I click "label[for='excel-id-4disallow']"</name>
+                            <title>I click "label[for='excel-id-4disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445054740' status='passed' stop='1605445056989'>
+                    <name>policyPage: clickSaveChanges </name>
+                    <title>policyPage: clickSaveChanges </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445054741' status='passed' stop='1605445056988'>
+                            <name>I click "//button[text()='Save Changes']"</name>
+                            <title>I click "//button[text()='Save Changes']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445056989' status='passed' stop='1605445057005'>
+                    <name>policyPage: assertElementChecked "input[id='excel-id-4disallow']"</name>
+                    <title>policyPage: assertElementChecked "input[id='excel-id-4disallow']"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445056989' status='passed' stop='1605445057004'>
+                            <name>I see attributes on elements "input[id='excel-id-4disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='excel-id-4disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+        <test-case start='1605445057181' status='passed' stop='1605445098046'>
+            <name>A user is able to change all content flags for all file type in policy page {"FileType":"word","FlagType":"sanitise"} @functional @smoke @TEST-Change-all-content-flag-for-all-doc-type</name>
+            <title>A user is able to change all content flags for all file type in policy page {"FileType":"word","FlagType":"sanitise"} @functional @smoke @TEST-Change-all-content-flag-for-all-doc-type</title>
+            <labels>
+                <label name='tag' value='@content-management-policy-editing'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-Change-all-content-flag-for-all-doc-type'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445075905' status='passed' stop='1605445095709'>
+                    <name>policyPage: clickSanitiseForAllFlag "word"</name>
+                    <title>policyPage: clickSanitiseForAllFlag "word"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445075905' status='passed' stop='1605445078265'>
+                            <name>I click "label[for='word-id-1sanitise']"</name>
+                            <title>I click "label[for='word-id-1sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445078368' status='passed' stop='1605445080745'>
+                            <name>I click "label[for='word-id-2sanitise']"</name>
+                            <title>I click "label[for='word-id-2sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445080846' status='passed' stop='1605445083256'>
+                            <name>I click "label[for='word-id-3sanitise']"</name>
+                            <title>I click "label[for='word-id-3sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445083357' status='passed' stop='1605445085731'>
+                            <name>I click "label[for='word-id-4sanitise']"</name>
+                            <title>I click "label[for='word-id-4sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445085831' status='passed' stop='1605445088225'>
+                            <name>I click "label[for='word-id-5sanitise']"</name>
+                            <title>I click "label[for='word-id-5sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445088326' status='passed' stop='1605445090683'>
+                            <name>I click "label[for='word-id-6sanitise']"</name>
+                            <title>I click "label[for='word-id-6sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445090783' status='passed' stop='1605445093107'>
+                            <name>I click "label[for='word-id-7sanitise']"</name>
+                            <title>I click "label[for='word-id-7sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445093208' status='passed' stop='1605445095609'>
+                            <name>I click "label[for='word-id-8sanitise']"</name>
+                            <title>I click "label[for='word-id-8sanitise']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445095709' status='passed' stop='1605445097966'>
+                    <name>policyPage: clickSaveChanges </name>
+                    <title>policyPage: clickSaveChanges </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445095709' status='passed' stop='1605445097966'>
+                            <name>I click "//button[text()='Save Changes']"</name>
+                            <title>I click "//button[text()='Save Changes']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445097966' status='passed' stop='1605445098046'>
+                    <name>policyPage: assertElementChecked "input[id='word-id-8sanitise']"</name>
+                    <title>policyPage: assertElementChecked "input[id='word-id-8sanitise']"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445097966' status='passed' stop='1605445098009'>
+                            <name>I see attributes on elements "input[id='word-id-1sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-1sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445098010' status='passed' stop='1605445098022'>
+                            <name>I see attributes on elements "input[id='word-id-2sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-2sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445098023' status='passed' stop='1605445098027'>
+                            <name>I see attributes on elements "input[id='word-id-3sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-3sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445098027' status='passed' stop='1605445098032'>
+                            <name>I see attributes on elements "input[id='word-id-4sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-4sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445098032' status='passed' stop='1605445098036'>
+                            <name>I see attributes on elements "input[id='word-id-5sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-5sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445098036' status='passed' stop='1605445098040'>
+                            <name>I see attributes on elements "input[id='word-id-6sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-6sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445098040' status='passed' stop='1605445098043'>
+                            <name>I see attributes on elements "input[id='word-id-7sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-7sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445098043' status='passed' stop='1605445098046'>
+                            <name>I see attributes on elements "input[id='word-id-8sanitise']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='word-id-8sanitise']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+        <test-case start='1605445098188' status='passed' stop='1605445139052'>
+            <name>A user is able to change all content flags for all file type in policy page {"FileType":"pdf","FlagType":"disallow"} @functional @smoke @TEST-Change-all-content-flag-for-all-doc-type</name>
+            <title>A user is able to change all content flags for all file type in policy page {"FileType":"pdf","FlagType":"disallow"} @functional @smoke @TEST-Change-all-content-flag-for-all-doc-type</title>
+            <labels>
+                <label name='tag' value='@content-management-policy-editing'/>
+                <label name='tag' value='@functional'/>
+                <label name='tag' value='@smoke'/>
+                <label name='tag' value='@TEST-Change-all-content-flag-for-all-doc-type'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1605445116924' status='passed' stop='1605445136751'>
+                    <name>policyPage: clickDisallowForAllFlag "pdf"</name>
+                    <title>policyPage: clickDisallowForAllFlag "pdf"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445116924' status='passed' stop='1605445119343'>
+                            <name>I click "label[for='pdf-id-1disallow']"</name>
+                            <title>I click "label[for='pdf-id-1disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445119445' status='passed' stop='1605445121864'>
+                            <name>I click "label[for='pdf-id-2disallow']"</name>
+                            <title>I click "label[for='pdf-id-2disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445121966' status='passed' stop='1605445124346'>
+                            <name>I click "label[for='pdf-id-3disallow']"</name>
+                            <title>I click "label[for='pdf-id-3disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445124446' status='passed' stop='1605445126797'>
+                            <name>I click "label[for='pdf-id-4disallow']"</name>
+                            <title>I click "label[for='pdf-id-4disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445126898' status='passed' stop='1605445129318'>
+                            <name>I click "label[for='pdf-id-5disallow']"</name>
+                            <title>I click "label[for='pdf-id-5disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445129419' status='passed' stop='1605445131752'>
+                            <name>I click "label[for='pdf-id-6disallow']"</name>
+                            <title>I click "label[for='pdf-id-6disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445131861' status='passed' stop='1605445134192'>
+                            <name>I click "label[for='pdf-id-7disallow']"</name>
+                            <title>I click "label[for='pdf-id-7disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445134294' status='passed' stop='1605445136651'>
+                            <name>I click "label[for='pdf-id-8disallow']"</name>
+                            <title>I click "label[for='pdf-id-8disallow']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445136751' status='passed' stop='1605445138984'>
+                    <name>policyPage: clickSaveChanges </name>
+                    <title>policyPage: clickSaveChanges </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445136751' status='passed' stop='1605445138984'>
+                            <name>I click "//button[text()='Save Changes']"</name>
+                            <title>I click "//button[text()='Save Changes']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1605445138984' status='passed' stop='1605445139052'>
+                    <name>policyPage: assertElementChecked "input[id='pdf-id-8disallow']"</name>
+                    <title>policyPage: assertElementChecked "input[id='pdf-id-8disallow']"</title>
+                    <attachments/>
+                    <steps>
+                        <step start='1605445138984' status='passed' stop='1605445138994'>
+                            <name>I see attributes on elements "input[id='pdf-id-1disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-1disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445138994' status='passed' stop='1605445139004'>
+                            <name>I see attributes on elements "input[id='pdf-id-2disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-2disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445139004' status='passed' stop='1605445139014'>
+                            <name>I see attributes on elements "input[id='pdf-id-3disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-3disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445139014' status='passed' stop='1605445139024'>
+                            <name>I see attributes on elements "input[id='pdf-id-4disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-4disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445139024' status='passed' stop='1605445139034'>
+                            <name>I see attributes on elements "input[id='pdf-id-5disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-5disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445139034' status='passed' stop='1605445139041'>
+                            <name>I see attributes on elements "input[id='pdf-id-6disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-6disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445139041' status='passed' stop='1605445139047'>
+                            <name>I see attributes on elements "input[id='pdf-id-7disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-7disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1605445139047' status='passed' stop='1605445139052'>
+                            <name>I see attributes on elements "input[id='pdf-id-8disallow']", {"checked":true}</name>
+                            <title>I see attributes on elements "input[id='pdf-id-8disallow']", {"checked":true}</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
