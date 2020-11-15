@@ -5,7 +5,7 @@ const filedropPage = require("../pages/file-drop.page.js");
 
 const assert = require('assert');
 
-const env = require('../../credentials.js');
+const env = require('../data/credentials.js');
 require('dotenv').config({path: '.env'});
 
 

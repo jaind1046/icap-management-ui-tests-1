@@ -35,7 +35,7 @@ exports.config = {
   },
   include: {
     I: './src/utils/steps_file.js',
-    env: './credentials.js',
+    env: './src/data/credentials.js',
     homePage: './src/pages/home.page.js',
     loginPage: './src/pages/login.page.js',
     analyticsPage: './src/pages/analytics.page.js',
@@ -54,7 +54,7 @@ exports.config = {
   name: 'icap-management-ui-tests',
   plugins: {
     allure: {
-      outputDir: './allure-results'
+      outputDir: './allure/results'
     },
     pauseOnFail: {},
     retryFailedStep: {
