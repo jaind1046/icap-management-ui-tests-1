@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "report": "allure serve allure-results",
-        "test": "(npx codeceptjs run-multiple --grep  @functional --plugins allure)",
+        "test": "(npx codeceptjs run-multiple --grep  @functional --all --plugins allure)",
         "parallel": "(npx codeceptjs run-multiple --grep '@functional' --all --plugins allure)",
          "smoke": "npx codeceptjs run-multiple --grep '@smoke' --all --plugins allure",
         "codeceptjs": "codeceptjs run --steps",
