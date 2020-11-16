@@ -66,7 +66,6 @@ module.exports = function () {
         uploadFileWithNoSanitiseData: function (file) {
             this.attachFile(filedropPage.buttons.fileInput, file)
             this.waitForElement(filedropPage.buttons.refresh,60)
-            this.dontSeeElement(filedropPage.sections.analysisReportView)
         },
 
         uploadFileByType: function (fileType) {
