@@ -19,10 +19,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: |
+      
+      - name: Install dependencies  
+        run: |
           npm install    
           npm install -g allure-commandline --save-dev        
-          npx codeceptjs run-multiple --grep @smoke --all --plugins allure --override '{"helpers": {"Puppeteer":{"url": "https://k8-proxy.github.io/p-ui-wireframes/","show": false}}}' 
+          
+      - name: Run All tests
+          npx codeceptjs run-multiple --grep @smoke --all --plugins allure --override '{"helpers":{"Puppeteer":{"url":"https://k8-proxy.github.io/p-ui-wireframes/","show":false}}}' 
       
       - name: Get Allure history
         uses: actions/checkout@v2
