@@ -6,7 +6,8 @@ Feature: request-history-filtering-by-date
         Given I am logged into the ui
         Given I have navigated to the Request History page
 
-
+    @functional
+    @smoke
     @TEST-167
     Scenario Outline: I can filter the request log using the time interval
         When I open the date picker and select a <timeInterval>

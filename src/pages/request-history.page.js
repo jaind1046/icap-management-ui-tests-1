@@ -139,14 +139,15 @@ module.exports = {
             } else if (period === '12 Hours') {
                 I.click(this.buttons.time_12hours);
             } else if (period === '24 Hours') {
-               I.click(this.buttons.time_24hours);
+                I.click(this.buttons.time_24hours);
             } else {
                 I.say("Unable to find the required option");
-            }}catch (e) {
+            }
+        } catch (e) {
             I.say('Action unsuccessful')
             console.warn(e);
         }
-       }, 
+    },
 
     async getTimeFrom() {
         let startime = null;
@@ -173,15 +174,15 @@ module.exports = {
         })
     },
 
-   async  isCustomRangeApplied(dateFrom, dateTo) {
-       // const element = null;
-      const range = (dateFrom + " - " + dateTo).toString();
-      const newrange = await I.grabTextFrom(this.calendar.reportRange)
-        if (newrange ===range){
-            I.say('The required range is applied ' + newrange + ' as selected '+range)
-    }else{
-        I.say('The required range is not applied-- displayed range is ' + newrange + ' different to selected ' + range)
-    }
+    async isCustomRangeApplied(dateFrom, dateTo) {
+        // const element = null;
+        const range = (dateFrom + " - " + dateTo).toString();
+        const newrange = await I.grabTextFrom(this.calendar.reportRange)
+        if (newrange === range) {
+            I.say('The required range is applied ' + newrange + ' as selected ' + range)
+        } else {
+            I.say('The required range is not applied-- displayed range is ' + newrange + ' different to selected ' + range)
+        }
     },
 
     setCustomRange(dateFrom, dateTo) {
@@ -206,7 +207,7 @@ module.exports = {
         const currentTime = time.subtract(0, 'h').format('DD/MM/YYYY H:mm A')
         const timeFrom = time.subtract(start, 'h').format('DD/MM/YYYY H:mm A');
         //const range = (timeFrom + " - " + currentTime).toString();
-        I.seeElement(`//span[contains(.,'` + timeFrom + ` - ` + currentTime +`')]`)
+        I.seeElement(`//span[contains(.,'` + timeFrom + ` - ` + currentTime + `')]`)
     },
 
 
@@ -252,14 +253,14 @@ module.exports = {
     },
 
     async isDataInRange(range, col) {
-           try {
+        try {
             const text = await I.grabTextFrom(`//tbody`);
             if (text == 'No Transaction Data Found') {
                 I.say('No data returned')
-                 } else {
+            } else {
                 I.say("Data is available")
                 I.checkIfReturnedFilesInDateRange(range, col)
-           }
+            }
         } catch (e) {
             I.say('errors')
             console.warn(e);
@@ -286,7 +287,7 @@ module.exports = {
         const mainEl = this.popup.filterMenu;
         try {
             within(mainEl, () => {
-                I.retry(2).click(this.popup.filterFileOutcomes);
+                I.retry(2).click(this.popup.riskByCss);
             })
         } catch (e) {
             I.say('Unable to click on locator')
@@ -312,7 +313,7 @@ module.exports = {
         this.clickFileOutcomeAdd();
         try {
             I.say('Filter to set is: ' + value)
-            let element = `//span[text()='`+value+`']`;
+            let element = `//span[text()='` + value + `']`;
             I.click(element);
             this.closeFilterPopup();
             I.wait(5);
@@ -322,14 +323,35 @@ module.exports = {
         }
     },
 
-    async checkFileTypeValues(filteredFile, col) {
-        I.checkRow(filteredFile, col)
+    async checkResultFileTypesAreAccurate(filteredFile, col) {
+        try {
+            const text = await I.grabTextFrom(`//tbody`);
+            if (text == 'No Transaction Data Found') {
+                I.say('No data returned')
+            } else {
+                I.say("Data is available")
+                I.checkRow(filteredFile, col)
+            }
+        } catch (e) {
+            I.say('errors')
+            console.warn(e);
+        }
     },
 
 
-    async verifyResultIsAccurate(filter) {
+   async verifyResultIsAccurate(filter) {
+         try {
+             const text = await I.grabTextFrom(`//tbody`);
+             if (text == 'No Transaction Data Found') {
+                 I.say('No data returned')
+             } else {
+                 I.say("Data is available")
         let col = this.getAppliedFilter(filter);
-            await I.checkRow(filter, col);
+        I.checkRow(filter, col);
+        }} catch (e) {
+            I.say('errors')
+            console.warn(e);
+        }
     },
 
 
@@ -358,15 +380,14 @@ module.exports = {
     },
 
     async checkFileTypeValues(filteredFile) {
-        const table = locate('tbody');
         I.checkRow(filteredFile, 3)
     },
     async checkFileOutcomeValues(filteredFile) {
-     I.checkRow(filteredFile, 4);
+        I.checkRow(filteredFile, 4);
 
     },
 
-    applyMultipleFilters(riskFilter, typeFilter){
+    applyMultipleFilters(riskFilter, typeFilter) {
         this.clickMoreFiltersButton();
         this.clickAddFilterButton();
         this.selectFileOutcome(riskFilter);
@@ -398,7 +419,7 @@ module.exports = {
         I.click(this.buttons.fileIdAdd);
     },
     async checkFileIdValues(filteredFile) {
-     I.checkRow(filteredFile, 2)
+        I.checkRow(filteredFile, 2)
     },
 
     /*
@@ -455,10 +476,9 @@ module.exports = {
     },
     getAppliedFilter(res) {
         let col;
-        if (res === 'Safe'){
-            col= 4;
-        }
-        else col= 3;
+        if (res === 'Safe') {
+            col = 4;
+        } else col = 3;
         return col;
     }
 };

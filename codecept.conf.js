@@ -15,15 +15,15 @@ exports.config = {
     },
     Puppeteer: {
       windowSize: '1536 x 826',
-      url: 'http://localhost:8080',
+      url: 'http://management-ui-main.northeurope.cloudapp.azure.com',
       show: true,
       chrome: {
-        args: ['--no-sandbox', '--window-size=1536,826'],
+        args: ['--headless', '--no-sandbox', '--window-size=1536,826'],
       },
       waitForNavigation: ["domcontentloaded", "networkidle0"],
       waitForTimeout: 60000,
       waitForAction: 2000,
-     
+
     },
     FileSystem: {},
     AssertWrapper: {
@@ -35,7 +35,7 @@ exports.config = {
   },
   include: {
     I: './src/utils/steps_file.js',
-    env: './credentials.js',
+    env: './src/data/credentials.js',
     homePage: './src/pages/home.page.js',
     loginPage: './src/pages/login.page.js',
     analyticsPage: './src/pages/analytics.page.js',
@@ -54,7 +54,7 @@ exports.config = {
   name: 'icap-management-ui-tests',
   plugins: {
     allure: {
-      outputDir: './allure-results'
+      outputDir: './allure/results'
     },
     pauseOnFail: {},
     retryFailedStep: {
@@ -62,13 +62,13 @@ exports.config = {
     },
     customLocator: {
       enabled: true,
-      attribute: 'data-test-id'  
+      attribute: 'data-test-id'
     },
     customLocator: {
       enabled: true,
       attribute: 'data-range-key'
     },
-    
+
     screenshotOnFail: {
       enabled: true
     },
@@ -76,7 +76,12 @@ exports.config = {
       enabled: true,
       // delayBefore: 300,
       // delayAfter: 200
-    },
-
-  }
+    }
+  },
+  multiple: {
+    parallel: {
+      chunks: 10,
+      browsers: ['puppeteer']
+    }
+  },
 }
