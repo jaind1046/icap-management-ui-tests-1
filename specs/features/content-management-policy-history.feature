@@ -9,10 +9,10 @@ Feature: content-management-policy-history
     @smoke
     @TEST-217
     Scenario Outline: I can change the number of items displayed on a page
-        Given I have navigated to the Policy History page and there are more than <availableRecords> policies in the history
+        Given I have navigated to the Policy History page
         When Items Shown is changed to <itemCount>
-        Then up to <fileCount> previous policies are displayed
+        Then Up to <itemCount> previous policies are displayed
         Examples:
-            | itemCount | fileCount     | availableRecords  |
-            | 25        |   1           |         1         |
-            | 50        |   1           |         1         |
+            | itemCount |
+            | 25        |
+            | 50        |

@@ -3,6 +3,8 @@ const {
     policyPage
 } = inject();
 
+let availablePolicyRecords;
+
 Given('the user clicks on Policy History in the navigation panel', () => {
     I.goToPolicy()
     I.wait(1)
@@ -25,15 +27,15 @@ Then('the user is taken to the Policy History page', () => {
     policyPage.assertHistoryPolicyPage()
 });
 
-Given('I have navigated to the Policy History page and there are more than {int} policies in the history', (count) => {
+Given('I have navigated to the Policy History page', () => {
     policyPage.clickOnHistoryPolicyTab()
-    policyPage.assertNumberOfRecordsOfPolicy(count)
+    availablePolicyRecords = policyPage.getTotalNumberOfRecordsOfPolicy()
 });
 
 When(/^Items Shown is changed to (.*)$/, (itemCount) => {
     policyPage.selectCountOfPolicies(itemCount)
 });
 
-Then('up to {int} previous policies are displayed', (itemCount) => {
-    policyPage.assertPoliciesItemShownCount(itemCount)
+Then('Up to {int} previous policies are displayed', (itemCount) => {
+    policyPage.assertPoliciesItemShownCount(itemCount, availablePolicyRecords)
 });

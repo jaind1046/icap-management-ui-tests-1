@@ -370,11 +370,9 @@ module.exports = {
     })
   },
 
-  assertNumberOfRecordsOfPolicy(count) {
-    const numberOfRowsInTable = I.grabNumberOfVisibleElements(this.table.tableRows)
-    numberOfRowsInTable.then((numberOfRows) => {
-      I.assert((numberOfRows >= count), true)
-    })
+  async getTotalNumberOfRecordsOfPolicy() {
+    const numberOfRecordsOfPolicy = await I.grabNumberOfVisibleElements(this.table.tableRows);
+    return numberOfRecordsOfPolicy
   },
 
   selectCountOfPolicies(itemCount) {
@@ -382,8 +380,12 @@ module.exports = {
     I.selectOption(element, itemCount);
   },
 
-  assertPoliciesItemShownCount(itemCount) {
-    I.seeNumberOfElements(this.table.tableRows, itemCount)
+  assertPoliciesItemShownCount(itemCount, availableRecords) {
+    availableRecords.then((records) => {
+      if (records > itemCount) {
+        I.seeNumberOfElements(this.table.tableRows, itemCount)
+      }
+    })
   },
 
   clickOnHistoryPolicyTab() {
