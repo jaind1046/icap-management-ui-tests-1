@@ -7,8 +7,9 @@ Feature: file-drop-file-processing
         Given I am logged into the ui
         And I have navigated to the FileDrop page
 
+    
     @smoke
-    @TEST-176
+    @TEST-230
     Scenario Outline: I can process a file through the file drop service
         When I click Select a file and choose a supported file <supportedFile>
         Then the File is processed with the process status displayed as <processStatus>
@@ -18,13 +19,16 @@ Feature: file-drop-file-processing
             | src/data/input/issues.docx           | issues.docx           | docx     | Your file has been processed |
             | src/data/input/structuralIssues.xlsx | structuralIssues.xlsx | xlsx     | Your file has been processed |
 
+    
     @smoke
-    @TEST-182
+    @TEST-231
     Scenario Outline: An error message is produced when file drop is unable to process a file
         When I click Select a file and choose non processable file <file>
         Then the expected validation error is displayed as <error>
         Examples:
             | file                        | error                                                                  |
             | src/data/input/icaptest.ps1 | Please use a supported file type                                       |
-            | src/data/input/test2.pdf | This free service is currently limited to a maximum file size of 3.5MB |
+            | src/data/input/test2.pdf    | This free service is currently limited to a maximum file size of 3.5MB |
 
+    @TEST-232
+    Scenario: A file processed through file drop is sanitised independent of set UI policy

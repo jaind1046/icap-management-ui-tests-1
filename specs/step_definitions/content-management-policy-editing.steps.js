@@ -74,6 +74,6 @@ When('the save button is selected', () => {
     policyPage.clickSaveApiUrl()
 });
 
-Then(/^(.*) for file types (.*) defaults to (.*)$/, (contentFlag, fileType, flagType) => {
+Then(/^The (.*) for file types (.*) defaults to (.*)$/, (contentFlag, fileType, flagType) => {
     policyPage.assertFlagTypeForGivenContentFlagsForGivenDocType(contentFlag, fileType, flagType)
 });

@@ -22,7 +22,7 @@ module.exports = {
         pdf: `div[class*='RenderResults_buttons__1XTWu'] > button:nth-of-type(1)`,
         xml: `div[class*='RenderResults_buttons__1XTWu'] > button:nth-of-type(2)`,
         refresh: `button[class*='FileDrop_buttonRefresh']`,
-        downloadAnalysisReport: `button[class*='DownloadAnalysisReport_button__1Uy0T']`,
+        downloadAnalysisReport: `button[class*='DownloadAnalysisReport_button']`,
         viewresult: `button[class*='FileDrop_button__']`,
         fileInput: `input[type = file]`,
         downloadFile: ''
@@ -109,5 +109,10 @@ module.exports = {
       getFileType() {
           const element = this.table.cell.fileType;
          I.grabTextFrom(element)
-      }
+      },
+
+    assertAnalysisReportDownload(analysisReport) {
+        I.amInPath('output/downloads');
+        I.seeFileNameMatching(analysisReport);
+    }
 }

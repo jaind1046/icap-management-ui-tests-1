@@ -7,7 +7,7 @@ Feature: dashboard-requests-metrics-display
         And I have navigated to the Analytics page
 
 
-    @TEST-
+    @TEST-223
     Scenario Outline: The file risk count is updated for every file processed based on the outcome
         Given I have confirmed the current risks counts for '<risk>'
         When I process a '<file>' through the icap server
@@ -19,7 +19,7 @@ Feature: dashboard-requests-metrics-display
             | Dangerous    | Malware_file      | 1              |
             | Unclassified | Unclassified_file | 1              |
 
-
+    @TEST-224
     Scenario Outline: The count of files requests processed is updated based on processing status
         Given I have confirmed the concurrent counts of total files requests processed
         When I process a '<file>' through the icap server with an outcome as '<fileOutcome>'

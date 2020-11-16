@@ -2,7 +2,8 @@ const {
     I,
     icapProxyPage,
     policyPage,
-    homePage
+    homePage,
+    filedropPage
 } = inject();
 
 
@@ -26,4 +27,9 @@ Then(/^The (.*) processing outcome is (.*)$/, (file, fileOutcome) => {
     homePage.clickFileDrop()
     I.uploadFileWithNoSanitiseData(`output/downloads/${file.trim()}`)
     I.wait(5)
+    filedropPage.clickViewResult();
+    I.handleDownloads();
+    filedropPage.clickDownloadAnalysisReport();
+    filedropPage.assertAnalysisReportDownload(file.trim())
+
 })

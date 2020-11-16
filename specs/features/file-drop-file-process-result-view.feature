@@ -5,9 +5,10 @@ Feature: file-drop-file-process-result-view
     Background:
         Given I am logged into the ui
         And I have navigated to the File Drop page
-    
+
+   
     @smoke
-    @TEST-177
+    @TEST-227
     Scenario Outline: I can download the full analysis report of a processed file
         Given I have processed a supported file <supportedFile>
         When I view result and click on Download Analysis Report
@@ -16,8 +17,9 @@ Feature: file-drop-file-process-result-view
             | supportedFile              | analysisReport  |
             | src/data/input/issues.docx | issues.docx.xml |
 
+    
     @smoke
-    @sanitisation
+    @TEST-228
     Scenario Outline: I can see the result of a repaired file with the issues removed
         When I process a supported sanitisation file <activeContentFile> with remedy items
         Then the notification message is displayed as <processStatus>
@@ -27,8 +29,9 @@ Feature: file-drop-file-process-result-view
             | activeContentFile         | activeContent                              | repairedObject      | processStatus                |
             | src/data/input/file1.docx | Internal Hyperlinks present in CT_Bookmark | APP segment removed | Your file has been processed |
 
+    
     @smoke
-    @noremedy
+    @TEST-229
     Scenario Outline: I can see the result of a unrepaired file with the list of structural issues not removed
         When I process a supported file <fileWithIssues> with structural Issues
         Then the notification message is displayed as <processStatus>
@@ -36,13 +39,3 @@ Feature: file-drop-file-process-result-view
         Examples:
             | fileWithIssues           | nonrepairedObject    | processStatus                |
             | src/data/input/file2.pdf | Non-conforming image | Your file has been processed |
-
- @fileDownload
- Scenario Outline: I can download successfully processed files
-     Given I have processed a supported file <supportedFile>
-     When I view result and click on Download Processed File
-     Then I have the file successfully downloaded as <downloadedFileName>
-     And I can successfully open the downloaded file
-     Examples:
-         | supportedFile              | downloadedFileName |
-         | src/data/input/issues.docx | issues.docx        |

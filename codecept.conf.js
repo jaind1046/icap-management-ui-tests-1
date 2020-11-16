@@ -14,15 +14,15 @@ exports.config = {
       require: "./src/utils/helper.js"
     },
     Puppeteer: {
-      url: 'http://localhost:5431',
-      show: true,
       windowSize: '1536 x 826',
+      url: 'http://management-ui-main.northeurope.cloudapp.azure.com',
+      show: true,
       chrome: {
-        args: ['--no-sandbox', '--window-size=1536,826'],
+        args: ['--headless', '--no-sandbox', '--window-size=1536,826'],
       },
       waitForNavigation: ["domcontentloaded", "networkidle0"],
-      waitForAction: 2000,
-      waitForTimeout: 60000
+      waitForTimeout: 60000,
+      waitForAction: 2000
     },
     FileSystem: {},
     AssertWrapper: {
@@ -34,7 +34,7 @@ exports.config = {
   },
   include: {
     I: './src/utils/steps_file.js',
-    env: './credentials.js',
+    env: './src/data/credentials.js',
     homePage: './src/pages/home.page.js',
     loginPage: './src/pages/login.page.js',
     analyticsPage: './src/pages/analytics.page.js',
@@ -53,7 +53,9 @@ exports.config = {
   mocha: {},
   name: 'icap-management-ui-tests',
   plugins: {
-    allure: {},
+    allure: {
+      outputDir: './allure/results'
+    },
     pauseOnFail: {},
     retryFailedStep: {
       enabled: false
@@ -72,9 +74,14 @@ exports.config = {
     },
     autoDelay: {
       enabled: true,
-      delayBefore: 300,
-      delayAfter: 200
-    },
-
-  }
+      // delayBefore: 300,
+      // delayAfter: 200
+    }
+  },
+  multiple: {
+    parallel: {
+      chunks: 10,
+      browsers: ['puppeteer']
+    }
+  },
 }
