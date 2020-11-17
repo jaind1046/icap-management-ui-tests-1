@@ -384,6 +384,8 @@ module.exports = {
     availableRecords.then((records) => {
       if (records > itemCount) {
         I.seeNumberOfElements(this.table.tableRows, itemCount)
+      } else {
+        I.seeNumberOfElements(this.table.tableRows, records)
       }
     })
   },

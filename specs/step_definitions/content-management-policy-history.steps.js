@@ -5,12 +5,6 @@ const {
 
 let availablePolicyRecords;
 
-Given('the user clicks on Policy History in the navigation panel', () => {
-    I.goToPolicy()
-    I.wait(1)
-    policyPage.clickOnHistoryPolicyTab()
-});
-
 Given('I am on the Policy History page', () => {
     policyPage.clickOnHistoryPolicyTab()
 });
@@ -29,10 +23,10 @@ Then('the user is taken to the Policy History page', () => {
 
 Given('I have navigated to the Policy History page', () => {
     policyPage.clickOnHistoryPolicyTab()
-    availablePolicyRecords = policyPage.getTotalNumberOfRecordsOfPolicy()
 });
 
 When(/^Items Shown is changed to (.*)$/, (itemCount) => {
+    availablePolicyRecords = policyPage.getTotalNumberOfRecordsOfPolicy()
     policyPage.selectCountOfPolicies(itemCount)
 });
 
