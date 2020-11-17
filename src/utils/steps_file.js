@@ -63,6 +63,11 @@ module.exports = function () {
             this.waitForElement(filedropPage.sections.analysisReportView,30)
         },
 
+        uploadFileWithNoSanitiseData: function (file) {
+            this.attachFile(filedropPage.buttons.fileInput, file)
+            this.waitForElement(filedropPage.buttons.refresh,60)
+        },
+
         uploadFileByType: function (fileType) {
             let path = null;
             switch (fileType) {
@@ -87,6 +92,12 @@ module.exports = function () {
 
         fail(message) {
             assert.fail(message);
-        }
+        },
+
+        onIcapProxyPage: function () {
+            this.amOnPage("https://engineering.glasswallsolutions.com.glasswall-icap.com/docs/products/cloud-sdk/sample-files/");
+            this.wait(5)
+        },
+
     });
 };
